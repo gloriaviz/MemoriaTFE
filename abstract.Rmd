@@ -2,4 +2,8 @@
 output: pdf_document
 ---
 
-Abstract...
+The evaluation of the relationship and its intensity between two or more random variables is an objective present in any statistical study. For this purpose, a wide range of statistical measures adapted to the nature of the variables analyzed have been proposed.  
+
+The aim of this project is to compile measures of association between nominal variables, including their theoretical definition and statistical inference.    
+
+Also, the report includes their implementation in R and/or the use of R libraries, with an illustration on real data. In addition, in order to illustrate their applicability, it includes references to recent scientific studies in which these measures have been used. 
