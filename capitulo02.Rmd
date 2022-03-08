@@ -760,6 +760,202 @@ Por lo tanto, posee una interpretación clara que se corresponde con el coeficie
 
 ## Medida de asociación $d^c_N$ de Leik y Gove
 
+En 1971, Robert Leik y Walter Gove propusieron una nueva medida de asociación nominal basada en comparaciones por pares de las diferencias entre las observaciones. Insatisfechos con las medidas existentes de asociación nominal, Leik y Gove sugirieron una medida de asociación de reducción proporcional en el error que fuese corregida para la cantidad máxima real de asociación, dadas las distribuciones de frecuencias marginales observadas. La nueva medida se denominó $d_N^c$, donde $d$ indicaba el índice, siguiendo otros índices como $d_{yx}$ y $d_{xy}$ de Somers; el subíndice $N$ indicaba la relevancia de $d$ para una variable dependiente nominal; y el superíndice $c$ indicaba que la medida estaba corregida por las restricciones impuestas por las distribuciones de frecuencia marginal.
+
+Al igual que $d_N^c$, muchas medidas de asociación para dos variables se han basado en comparaciones por pares de las diferencias entre las observaciones. Consideremos dos variables de nivel nominal que se han clasificado de forma cruzada en una tabla de contingencia $r×c$, donde $r$ y $c$ denotan el número de filas y columnas, respectivamente. Sean $n_{i.}$, $n_{.j}$, y $n_{ij}$ la frecuencia marginal de la fila $i$, la frecuencia marginal de la columna $j$ y el número de objetos en la celda ${ij}$, respectivamente, para $i = 1, . , r$ y $j = 1, . . . . c$, y sea $N$ el número total de objetos en la tabla de contingencia $r×c$. Si $y$ y $x$ representan las variables de fila y columna, respectivamente, hay $N(N - 1)/2$ pares de objetos en la tabla que pueden dividirse en cinco tipos de pares exhaustivos y mutuamente excluyentes:
+
+-   pares concordantes
+
+-   pares discordantes
+
+-   pares ¿vinculados? en la variable $y$ pero que difieren en la variable $x$
+
+-   pares ¿vinculados? en la variable $x$ pero que difieren en la variable $y$
+
+-   pares ¿vinculados? en ambas variables $x$ e $y$
+
+Para una tabla de contingencia $r×c$, los pares concordantes (pares de objetos que están clasificados en el mismo orden tanto en la variable $x$ como en la variable $y$) vienen dados por:
+
+$$
+C=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=i+1}^r\sum_{l=j+1}^cn_{kl})~,
+$$
+
+los pares discordantes (pares de objetos que se clasifican en un orden en la variable $x$ y en el orden inverso en la variable $y$) vienen dados por:
+
+$$
+D=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{i,c-j+1}(\sum_{k=i+1}^r\sum_{l=1}^{c-j}n_{kl})~,
+$$
+
+los pares de objetos ¿vinculados? en la variable $x$ pero que difieren en la variable $y$ vienen dados por:
+
+$$
+T_x=\sum_{i=1}^{r}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=j+1}^cn_{ik})~,
+$$
+
+los pares de objetos ¿vinculados? en la variable $y$ pero que difieren en la variable $x$ vienen dados por:
+
+$$
+T_y=\sum_{j=1}^{c}\sum_{i=1}^{r-1}n_{ij}(\sum_{k=i+1}^rn_{kj})~,
+$$
+
+y los pares de objetos ¿vinculados? en la variable $x$ y en la variable $y$ vienen dados por:
+
+$$
+T_{xy}=\frac{1}{2}\sum_{i=1}^{r}\sum_{j=1}^{c}n_{ij}(n_{ij}-1)~.
+$$
+
+Entonces,
+
+$$
+C+D+T_x+T_y+T_{xy}=\frac{N(N-1)}{2}~.
+$$
+
+### Tabla de Contingencia Observada
+
+A partir de la tabla de contingencia observada se obtienen los parámetros $C$, $D$, $T_x$, $T_y$ y $T_{xy}$.
+
+### Tabla de Contingencia Esperada
+
+Usando la tabla de contingencia observada, se contruye la tabla de contingencia esperada de la siguiente forma:
+
+$$
+E_{ij}=\frac{n_{i.}n_{.j}}{N} ~~~~~~ con ~~~ i=1,...,r ~~~ y ~~~j=1,..,c~.
+$$
+
+A partir de la tabla de contingencia esperada se obtienen los parámetros $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$.
+
+Afortunadamente, existe una forma más eficiente de calcular $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$ sin calcular primero los valores esperados. En primer lugar, dadas las distribuciones de frecuencias marginales de filas y columnas observadas se calcula el número de pares de valores esperados de frecuencia de celdas esperadas vinculados a las variables $x$ e $y$,
+
+$$
+T_{xy}'=\frac{1}{2N^2}(\sum_{i=1}^rn_{i.}^2)(\sum_{j=1}^cn_{.j}^2)-\frac{N}{2}
+$$
+
+A continuación, se calcula el número de pares de valores de frecuencia de celda esperados vinculados a la variable $y$,
+
+$$
+T_y'=\frac{1}{2}\sum_{i=1}^rn_{i.}^2-\frac{N}{2}-T_{xy}'
+$$
+
+Del mismo modo, se calcula el número de pares de valores de frecuencia de celda esperados vinculados a la variable $x$,
+
+$$
+T_x'=\frac{1}{2}\sum_{j=1}^cn_{.j}^2-\frac{N}{2}-T_{xy}'
+$$
+
+Por último, se calcula el número de pares concordantes y discordantes de valores de frecuencia de celdas esperados,
+
+$$
+C'=D'=\frac{1}{2}[\frac{N(N-1)}{2}-T_x'-T_y'-T_{xy}']
+$$
+
+Hay que tener en cuenta que $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$ se calculan sobre los totales de frecuencia marginal de la tabla de contingencia observada, que son invariantes bajo permutaciones.
+
+### Tabla de Contingencia Maximal
+
+El estadístico de prueba $d_N^c$ se basa en tres tablas de contingencia: la tabla de valores observados, la tabla de valores esperados y una tabla de valores máximos que se describirá a continuación.
+
+Un algoritmo para generar un ordenamiento de las frecuencias de las celdas en una tabla de contingencia $r×c$ que proporciona el valor máximo de un conjunto estadístico es:
+
+PASO 1: Mantener las frecuencias marginales observadas de una tabla de contingencia $r×c$ y eliminar los valores de frecuencias de celdas ($n_{ij}$).
+
+PASO 2: Si algún par de frecuencias marginales, uno de cada conjunto de marginales, son iguales entre sí, introducir ese valor en la tabla como $n_{ij}$ y restar el valor de los dos totales de frecuencia marginal. Repetir el PASO 2 hasta que no haya dos totales de frecuencia marginal iguales. Si todos los totales de frecuencia marginal se han reducido a cero, ir al PASO 5; de lo contrario, ir al PASO 3.
+
+PASO 3: Observar la frecuencia marginal más grande que queda en cada conjunto e introducir el menor de los dos valores en $n_{ij}$ . A continuación, restar ese valor (más pequeño) de los dos totales de frecuencias marginales.
+
+PASO 4: Si todos los totales de frecuencia marginal se han reducido a cero, ir al PASO 5; En caso contrario, ir al PASO 2.
+
+PASO 5: Establecer los valores $n_{ij}$ restantes como $0$, $i = 1, . . . , r$ y $j = 1, . . . , c$.
+
+Denotamos la doble comilla ('') como una suma de pares calculada sobre los valores de frecuencias de las celdas maximizadas. Entonces, el número de pares concordantes de valores de frecuencia de celda maximizada es
+
+$$
+C''=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=i+1}^r\sum_{l=j+1}^cn_{kl})~,
+$$
+
+el número de pares discordantes de valores de frecuencia celular maximizada es
+
+$$
+D''=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{i,c-j+1}(\sum_{k=i+1}^r\sum_{l=1}^{c-j}n_{kl})~,
+$$
+
+el número de pares de valores de frecuencia de celda maximizados vinculados a la variable $x$ es
+
+$$
+T_x''=\sum_{i=1}^{r}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=j+1}^cn_{ik})~,
+$$
+
+el número de pares de valores de frecuencia celular maximizados vinculados a la variable $y$ es
+
+$$
+T_y''=\sum_{j=1}^{c}\sum_{i=1}^{r-1}n_{ij}(\sum_{k=i+1}^rn_{kj})~,
+$$
+
+y el número de pares de valores de frecuencia celular maximizada empatados en ambas variables $x$ e $y$ es
+
+$$
+T_{xy}=\frac{1}{2}\sum_{i=1}^{r}\sum_{j=1}^{c}n_{ij}(n_{ij}-1)~.
+$$
+
+Entonces,
+
+$$
+C''+D''+T_x''+T_y''+T_{xy}''=\frac{N(N-1)}{2}~.
+$$
+
+### Cálculo de la $d_N^c$ de Leik y Gove
+
+Dados los valores observados, esperados y maximizados de $C$, $D$, $T_x$ , $T_y$ y $T_{xy}$, los errores del primer tipo ($E_1$) -la variación entre la independencia y la máxima asociación- vienen dados por:
+
+$$
+E_1=T_y'-T_y''
+$$
+
+y los errores del segundo tipo ($E_2$) -la variación entre la tabla observada y la tabla de máxima asociación- vienen dados por:
+
+$$
+E_2=T_y-T_y''
+$$
+
+Entonces, a la manera de las medidas de asociación de reducción proporcional en el error,
+
+$$
+d_N^c=\frac{E_1-E_2}{E_1}=\frac{(T_y'-T_y'')-(T_y-T_y'')}{T_y'-T_y''}=\frac{T_y'-T_y}{T_y'-T_y''}
+$$
+
+Dado que $d_N^c$ es una medida simétrica, el número de valores vinculados en la variable $x$ puede utilizarse en lugar del número de valores vinculados en la variable $y$. Así pues,
+
+$$
+d_N^c=\frac{T_x'-T_x}{T_x'-T_x''}
+$$
+
+Alternativamente, $d_N^c$ puede definirse en términos del número de valores vinculados tanto en $x$ como en $y$. Así,
+
+$$
+d_N^c=\frac{T_{xy}'-T_{xy}}{T_{xy}'-T_{xy}''}
+$$
+
+Como los datos son categóricos, $C$ y $D$ pueden considerarse agrupados. Por lo tanto,
+
+$$
+d_N^c=\frac{(C'+D')-(C+D)}{(C'-D')-(C''+D'')}
+$$
+
+Como señalan Leik y Gove, para ayudar a interpretar la relación entre las variables $x$ e $y$, sería preferible determinar explícitamente el número de pares perdidos por los requisitos marginales de la tabla de contingencia. La asociación puede entonces ser definida dentro de esos límites, permitiendo que el índice alcance la unidad si las frecuencias de las celdas están tan cerca de un patrón perfecto como lo permitan las distribuciones marginales. Así pues, la proporción de casos que se considera es
+
+$$
+1-\frac{2(T_x''+T_y'')}{N(N-1)}
+$$
+
+### Un test de permutación para $d_N^c$
+
+Leik y Gove no proporcionaron un error estándar para el estadístico de prueba $d_N^c$. Por otro lado, las pruebas de permutación no suponen ni requieren el conocimiento de los errores estándar. Consideremos la expresión
+
+$$
+d_N^c=\frac{T_y'-T_y}{T_y'-T_y''}
+$$
+
+Es evidente que $T_y'$ y $T_y''$ son invariantes bajo permutación. Por lo tanto la probabilidad de $d_N^c$ bajo la hipótesis nula puede determinarse por la distribución discreta de permutación de $T_y$ sólo, que se obtiene fácilmente de la tabla de contingencia observada. Los métodos estadísticos de permutación exacta son muy eficaces cuando sólo se calcula la parte variable del estadístico de prueba definido en cada uno de los $M$ ordenamientos posibles de los datos observados; en este caso, $T_y$.
+
 ## Un problema de ocupación de la matriz
 
 ## Prueba de probabilidad exacta de Fisher
