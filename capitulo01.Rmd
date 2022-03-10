@@ -74,23 +74,25 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 ```
 # Introducción
 
-ESTO TENGO QUE MEJORARLO CUANDO TENGA MAS IDEA DEL TEMA:
+ESTO TENGO QUE MEJORARLO/AMPLIARLO CUANDO TENGA UNA IDEA MÁS GLOBAL DEL TFG:
 
-(En este Trabajo Fin de Grado, se usará un enfoque de permutación para la medición de la asociación estadística, definida ampliamente para incluir medidas de correlación, asociación y ¿concordancia?(agreement).
-
-Aunque existe una gran cantidad de métodos para medir la magnitud de la asociación entre dos variables, existe una dificultad considerable para interpretar y comparar las distintas medidas, ya que a menudo difieren en su estructura, lógica e interpretación.
+(Aunque existen una gran cantidad de métodos para medir la magnitud de la asociación entre dos variables, hay grandes dificultades para interpretar y comparar las distintas medidas, ya que a menudo difieren en su estructura, lógica e interpretación.
 
 Así pues, las distintas medidas de asociación desarrolladas a lo largo de los años constituyen una mezcla de enfoques lógicos, estructurales y de interpretación.
 
-Es conveniente clasificar las distintas medidas de asociación por el nivel de medición para el que fueron diseñadas originalmente y para el que son más apropiadas, reconociendo que algunas medidas pueden ser adecuadas para más de un nivel de medición, especialmente las numerosas medidas originalmente diseñadas para el análisis de tablas de contingencia 2×2, en las que el nivel de medición es a menudo irrelevante.
+Es conveniente clasificar las distintas medidas de asociación por el nivel de medición para el que fueron diseñadas originalmente y para el que son más apropiadas, reconociendo que algunas medidas pueden ser adecuadas para más de un nivel de medición, especialmente las numerosas medidas originalmente diseñadas para el análisis de tablas de contingencia 2×2, en las que el nivel de medición es a veces irrelevante.
 
-Además de la consideración de la estructura, la lógica y la interpretación, un inconveniente importante de las medidas de asociación es la determinación de la probabilidad de la medida obtenida bajo la hipótesis nula.
+Además de la consideración de la estructura, la lógica y la interpretación, un inconveniente importante de las medidas de asociación es la determinación del p-valor de la medida obtenida bajo la hipótesis nula.
 
-Existen dos enfoques principales para determinar de probabilidad para las medidas de asociación: el modelo poblacional de Neyman-Pearson y el modelo de permutación de Fisher-Pitman.
+Existen dos enfoques principales para determinar los p-valores de las medidas de asociación: el modelo poblacional de Neyman-Pearson y el modelo de permutación de Fisher-Pitman.
 
-El modelo poblacional está plagado de suposiciones que rara vez se cumplen en la práctica y que a menudo son inapropiados para los niveles inferiores de medición, por ejemplo, independencia, normalidad, homogeneidad de la varianza...
+El modelo poblacional está plagado de suposiciones que rara vez se cumplen en la práctica y que, algunas veces, son inapropiadas; por ejemplo, independencia, normalidad, homogeneidad de la varianza...
 
-De aquí en adelante se usará casi exclusivamente el modelo de permutación ya que está libre de cualquier suposición de distribución, no requiere un muestreo aleatorio, es completamente dependiente de los datos, proporciona valores de probabilidad exactos y es ideal para el análisis de muestras pequeñas.)
+De aquí en adelante se usará casi exclusivamente el modelo de permutación ya que está libre de cualquier suposición de distribución, no requiere un muestreo aleatorio, es completamente dependiente de los datos, proporciona valores de probabilidad exactos y es ideal para el análisis de muestras pequeñas.
+
+Por tanto, en este Trabajo Fin de Grado, se usará el enfoque de permutación para la medición de la asociación estadística, definida ampliamente para incluir medidas de correlación, asociación y ¿concordancia?(agreement). )
+
+HASTA AQUÍ
 
 ## Definiciones
 
@@ -98,9 +100,9 @@ Dado que el título de este Trabajo de Fin de Grado es "Medidas de Asociación p
 
 ### Definición de Medición
 
-La mejor manera de describir con precisión los acontecimientos y las relaciones entre ellos es mediante la medición. La medición ha sido una característica fundamental de la civilización humana desde sus inicios. Así, la medición es la aplicación de las matemáticas a los acontecimientos, el uso de números para designar objetos y acontecimientos y sus relaciones.
+La mejor manera de describir con precisión los acontecimientos y las relaciones entre ellos es mediante la medición. La medición ha sido una característica fundamental de la civilización humana desde sus inicios. Así, la medición es la aplicación de las matemáticas a los acontecimientos, el uso de números para designar objetos y acontecimientos, y sus relaciones.
 
-Más formalmente, la medición es el proceso de la asignación de los fenómenos empíricos a un sistema numérico.
+Más formalmente, la medición es el proceso de la asignación a los fenómenos empíricos un sistema numérico.
 
 Se pueden distinguir cuatro niveles o escalas de medición: nominal, ordinal, de intervalo y de razón:
 
@@ -116,7 +118,7 @@ Desde el punto de vista estadístico, las mediciones a nivel de intervalo y de r
 
 ### Definición de Asociación
 
-Aunque hay muchas formas de definir la asociación, quizás la más sencilla y útil sea: se dice que dos variables están asociadas cuando la distribución de los valores de una variable difiere para diferentes valores de la otra variable.
+Aunque hay muchas formas de definir la asociación, quizás la más sencilla y útil sea: *se dice que dos variables están asociadas cuando la distribución de los valores de una variable difiere para diferentes valores de la otra variable*.
 
 Además, si un cambio en la distribución de los valores de una variable no provoca un cambio en la distribución de los valores de la otra variable, se dice que las variables son independientes. Hay que tener en cuenta que casi todas las discusiones sobre asociación implican una comparación de subgrupos.
 
@@ -162,7 +164,7 @@ Las medidas de **asociación** pueden medir de diversas maneras la correlación,
 
 -   El más general incluye todos los tipos de medidas de asociación entre dos variables en todos los niveles de medición.
 
--   El dominio más restrictivo está reservado a las medidas diseñadas específicamente para medir el grado de relación entre dos variables en los niveles de medición nominal y ordinal.
+-   El más restrictivo está reservado a las medidas diseñadas específicamente para medir el grado de relación entre dos variables en los niveles de medición nominal y ordinal.
 
 Así pues, en este trabajo, la asociación se usará de dos maneras. En primer lugar, como un concepto global que incluye medidas de correlación, asociación y concordancia; y en segundo lugar, se utilizará más específicamente como una medida de relación entre dos variables de nivel nominal, dos variables de nivel ordinal o alguna combinación de ambas.
 
@@ -173,6 +175,8 @@ Las medidas de **concordancia** intentan determinar la identidad de dos variable
 La correlación y la concordancia se suelen confurdir, a continuación se muestra un ejemplo para ententender las diferencias:
 
 Supongamos que un investigador desea establecer la relación entre los valores observados y los predichos por la regresión, $y$ e $\hat y$ , respectivamente. La concordancia implica que la relación funcional entre $y$ e $\hat y$ puede describirse mediante una la recta \$x=y\$. Si por ejemplo obtenemos los pares (1,1), (3,3), (8,8), el coeficiente de correlación de Pearson al cuadrado es $r^2_{ y,\hat y} = 1$ y el porcentaje de concordancia es del 100 %, es decir, los elementos de los tres pares $(y,\hat y)$ son iguales. En este contexto, el coeficiente de correlación de Pearson al cuadrado, $r^2_{ y,\hat y}$ , también se ha utilizado como medida de concordancia. Sin embargo, $r^2_{y,\hat y} = 1,00$ implica una relación lineal entre $y$ e $\hat y$ , donde tanto la el corte con el eje de ordenadas como la pendiente son arbitrarias. Así, aunque la concordancia perfecta se describe con un valor de 1,00, también es cierto que $r^2_ {y,\hat y} = 1,00$ describe una relación lineal que puede o no reflejar una concordancia perfecta, por ejemplo para los valores $(y,\hat y)$: (2, 4), (4, 5), (6, 6), (8, 7), y (10, 8), el coeficiente de correlación de Pearson es $r^2_{y,\hat y}= 1,00$, y el porcentaje de concordancia es del 20%, es decir, sólo un par valores coinciden.
+
+((aquí podría meter gráficos para visualizar el ejemplo))
 
 ## Criterios para las medidas de asociación
 
@@ -196,7 +200,7 @@ Las diferentes medidas de asociación evalúan el grado de asociación de divers
 
 -   [Desviación de la independencia:]{.ul} Las medidas de asociación que se basan en la desviación de la independencia plantean cómo serían los datos si las dos variables fueran independientes, es decir, que no hubiera asociación, y luego miden el grado en que los los datos observados se apartan de la independencia. Ejemplos de medidas de asociación basadas en la desviación de la independencia incluyen las medidas basadas en chi-cuadrado como la $\phi^2$ de Pearson, la $T^2$ de Tschuprov, la $V^2$ de Cramér y la $C$ de Pearson, así como otras, no basadas en chi-cuadrado, como las medidas de Goodman y Kruskal $\lambda_a$, $\lambda_b$, y las medidas de asociación nominal $t_a$ y $t_b$.
 
--   [Magnitud de las diferencias entre subgrupos:]{.ul} Dada alguna asociación existente, el grado de asociación puede medirse comparando las proporciones de los subgrupos. Ejemplos de medidas de asociación basadas en las diferencias de subgrupos son las diferencias porcentuales simples, así como otras medidas diseñadas para tablas de contingencia 2×2, como las medidas de asociación $Q$ ye $Y$ de Yule y los odds ratio.
+-   [Magnitud de las diferencias entre subgrupos:]{.ul} Dada alguna asociación existente, el grado de asociación puede medirse comparando las proporciones de los subgrupos. Ejemplos de medidas de asociación basadas en las diferencias de subgrupos son las diferencias porcentuales simples, así como otras medidas diseñadas para tablas de contingencia 2×2, como las medidas de asociación $Q$ e $Y$ de Yule y los odds ratio.
 
 -   [Comparaciones por pares:]{.ul} Algunas medidas de asociación se basan en comparaciones por pares donde las diferencias entre las medidas de respuesta se calculan entre todos los pares de mediciones posibles y se dividen en pares concordantes y discordantes. Un par concordante es aquel en el que la dirección de la diferencia con una variable coincide con la dirección de la diferencia con la segunda variable. Un par discordante es aquel en el que la dirección de la diferencia con una variable no es igual a la dirección de la diferencia con la segunda variable. Algunos ejemplos de medidas de asociación ordinal por pares son las medidas $\tau_a$ y $\tau_b$ de Kendall, la medida $\tau_c$ de Stuart, la medida $\gamma$ de asociación ordinal de Goodman y Kruskal y las medidas asimétricas $d_{yx}$ y $d_{xy}$ de asociación ordinal de Somers.
 

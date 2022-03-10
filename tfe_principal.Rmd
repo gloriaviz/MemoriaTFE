@@ -1,7 +1,7 @@
 ---
 documentclass: book
 principal: true
-forprint: true  # true: imprime a dos caras, false: libro digital
+forprint: false  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
 geometry: margin = 2.5cm 
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]

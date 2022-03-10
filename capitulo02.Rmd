@@ -78,38 +78,41 @@ Este capítulo se centra en las medidas de asociación diseñadas para las varia
 
 En primer lugar, se describen dos medidas asimétricas de asociación de nivel nominal propuestas por Goodman y Kruskal en 1954, $\lambda$ y $t$. A continuación, el coeficiente kappa no ponderado de Cohen, $\kappa$, que proporciona una introducción a la medición de la concordancia, en contraste con las medidas de asociación. También se incluyen en el capítulo las pruebas $Q$ de McNemar y Cochran, que miden el grado en que las medidas de respuesta cambian con el tiempo, la medida $d^c_N$ de Leik y Gove de asociación nominal, y una solución al problema de ocupación de la matriz propuesta por Mielke y Siddiqui.
 
-La prueba de probabilidad exacta de Fisher es la prueba de permutación ideal para las tablas de contingencia. Mientras que la prueba exacta de Fisher suele limitarse a las tablas de contingencia de 2×2, para las que se concibió originalmente, en este capítulo la prueba exacta de Fisher se extiende a las tablas de contingencia de 2×c, 3×3, 2×2×2 y otras más grandes.
+La prueba de probabilidad exacta de Fisher es la prueba de permutación ideal para las tablas de contingencia. Mientras que la prueba exacta de Fisher suele limitarse a las tablas de contingencia de $2\times2$, para las que se concibió originalmente, en este capítulo la prueba exacta de Fisher se extiende a las tablas de contingencia de $2\times c$, $3\times3$, $2\times2\times2$ y otras más grandes.
 
-Algunas medidas diseñadas para variables de nivel ordinal también sirven como medidas de asociación para variables de nivel nominal cuando r (número de filas) = 2 y c (número de columnas) = 2, es decir, una tabla de contingencia 2×2. Otras medidas se diseñaron originalmente para tablas de contingencia 2×2 con variables de nivel nominal, entre estas medidas de asociación están las diferencias porcentuales, las medidas $Q$ e $Y$ de Yule, los odds ratio y las medidas asimétricas de Somers, $d_{yx}$ y $d_{xy}$.
+Algunas medidas diseñadas para variables de nivel ordinal también sirven como medidas de asociación para variables de nivel nominal cuando $r$ (número de filas) $= 2$ y $c$ (número de columnas) $= 2$, es decir, una tabla de contingencia $2\times2$. Otras medidas se diseñaron originalmente para tablas de contingencia $2\times2$ con variables de nivel nominal, entre estas medidas de asociación están las diferencias porcentuales, las medidas $Q$ e $Y$ de Yule, los odds ratio y las medidas asimétricas de Somers, $d_{yx}$ y $d_{xy}$.
 
 ## Valores de probabilidad hipergeométrica
 
-Los métodos estadísticos de permutación exacta, especialmente cuando se aplican a las tablas de contingencia, dependen en gran medida de los valores de probabilidad hipergeométricos. En esta sección, se hace una breve introducción a los valores de probabilidad hipergeométricos ilustrando su cálculo e interpretación. Para las tablas de contingencia de $2×2$, el cálculo de los valores de probabilidad hipergeométricos es fácil de demostrar. Consideremos la siguiente tabla de contingencia 2×2:
+Los métodos estadísticos de permutación exacta, especialmente cuando se aplican a las tablas de contingencia, dependen en gran medida de los valores de probabilidad hipergeométricos. En esta sección, se hace una breve introducción a los valores de probabilidad hipergeométricos ilustrando su cálculo e interpretación. Para las tablas de contingencia de $2\times2$, el cálculo de los valores de probabilidad hipergeométricos es fácil de demostrar. Consideremos la siguiente tabla de contingencia $2\times2$:
 
-|           |          |          |           |
-|-----------|----------|----------|-----------|
 |           | $A_1$    | $A_2$    | **Total** |
+|-----------|----------|----------|-----------|
 | $B_1$     | $n_{11}$ | $n_{12}$ | $R_1$     |
 | $B_2$     | $n_{21}$ | $n_{22}$ | $R_2$     |
 | **Total** | $C_1$    | $C_2$    | $N$       |
 
-: Tabla 1: Notación tablas de contingencia 2x2
+: Notación tablas de contingencia 2x2
 
 donde $n_{11}$, . . . , $n_{22}$ denotan las cuatro frecuencias absolutas, $R_1$ y $R_2$ denotan los totales de las frecuencias marginales de cada fila, $C_1$ y $C_2$ denotan los totales de las frecuencias marginales de cada columna y $$
 N=\sum_{i=1}^2\sum_{j=1}^2 n_{ij}
 $$
 
-Dado que la tabla de contingencia que aparece en la *Tabla 1* es una tabla 2×2 y, en consecuencia tiene sólo un grado de libertad, la probabilidad de cualquier frecuencia de celda constituye la probabilidad de toda la tabla de contingencia. Por lo tanto, el valor de la probabilidad del punto hipergeométrico para la celda que contiene $n_{11}$ viene dada por:
+Dado que la tabla de contingencia que aparece en la *Tabla 2.1* es una tabla $2\times2$ y, en consecuencia tiene sólo un grado de libertad, la probabilidad de cualquier frecuencia de celda constituye la probabilidad de toda la tabla de contingencia. Por lo tanto, el valor de la probabilidad del punto hipergeométrico para la celda que contiene $n_{11}$ viene dada por:
 
 $$
-p(n_{11}|R_1,C_1,N)=\left(\begin{array}{c}C_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}C_2\\ n_{12}\end{array}\right)\left(\begin{array}{c}N\\ R_1\end{array}\right)^{-1}=\left(\begin{array}{c}R_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}R_2\\ n{21}\end{array}\right)\left(\begin{array}{c}N\\ C_1\end{array}\right)^{-1}=\frac{R_1!R_2!C_1!C_2!}{N!n_{11}!n_{12}!n_{21}!n_{22}!}
+p(n_{11}|R_1,C_1,N)=\left(\begin{array}{c}C_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}C_2\\ n_{12}\end{array}\right)\left(\begin{array}{c}N\\ R_1\end{array}\right)^{-1}=
 $$
 
-El cálculo de los valores de probabilidad hipergeométricos para las tablas de contingencia $r×c$ es más complejo que para las tablas de contingencia simples de $2×2$. Consideremos la tabla de contingencia $4×3$:
+$$
+=\left(\begin{array}{c}R_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}R_2\\ n{21}\end{array}\right)\left(\begin{array}{c}N\\ C_1\end{array}\right)^{-1}=\frac{R_1!R_2!C_1!C_2!}{N!n_{11}!n_{12}!n_{21}!n_{22}!}
+$$
+
+El cálculo de los valores de probabilidad hipergeométricos para las tablas de contingencia $r\times c$ es más complejo que para las tablas de contingencia simples de $2\times2$. Consideremos la tabla de contingencia $4\times3$:
 
 +-------------+-------------+-------------+-------------+-------------+
 |             | $A_1$       | $A_2$       | $A_3$       | **Total**   |
-+-------------+-------------+-------------+-------------+-------------+
++=============+=============+=============+=============+=============+
 | $B_1$       | $n_{11}$    | $n_{12}$    | $n_{13}$    | $R_1$       |
 +-------------+-------------+-------------+-------------+-------------+
 | $B_2$       | $n_{21}$    | $n_{22}$    | $n_{23}$    | $R_2$       |
@@ -121,39 +124,51 @@ El cálculo de los valores de probabilidad hipergeométricos para las tablas de 
 | **Total**   | $C_1$       | $C_2$       | $C_3$       | $N$         |
 +-------------+-------------+-------------+-------------+-------------+
 
-: Tabla 2: Notación tablas de contingencia 4x3
+: Notación tablas de contingencia 4x3
 
-donde $n_{11}$, . . . , $n_{43}$ denotan las $12$ frecuencias de las celdas frecuencias absolutas, $R_1$, . . . , $R_4$ denotan los totales de frecuencia marginal de las cuatro filas, $C_1$, $C_2$, y $C_3$ denotan los totales de las frecuencias marginales de las tres columna y$$
+donde $n_{11}$, . . . , $n_{43}$ denotan las $12$ frecuencias de las celdas frecuencias absolutas, $R_1 . . . , R_4$ denotan los totales de frecuencia marginal de las cuatro filas, $C_1$, $C_2$, y $C_3$ denotan los totales de las frecuencias marginales de las tres columna y$$
 N=\sum_{i=1}^4\sum_{j=1}^3 n_{ij}   
 $$
 
-Cuando sólo hay dos filas, como en el ejemplo anterior de $2×2$, cada valor de probabilidad de columna es binomial, pero con cuatro filas cada valor de probabilidad de columna es multinomial. Es bien sabido que un valor de probabilidad multinomial puede obtenerse de una serie interconectada de expresiones binomiales. Por ejemplo, para la columna $A_1$ de la *Tabla 2*:
+Cuando sólo hay dos filas, como en el ejemplo anterior de $2\times2$, cada valor de probabilidad de columna es binomial, pero con cuatro filas cada valor de probabilidad de columna es multinomial. Es bien sabido que un valor de probabilidad multinomial puede obtenerse de una serie interconectada de expresiones binomiales. Por ejemplo, para la columna $A_1$ de la *Tabla 2.2*:
 
 $$
-\left(\begin{array}{c}C_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}C_1-n_{11}\\ n_{21}\end{array}\right)\left(\begin{array}{c}C_1-n_{11}-n_{21}\\ n_{31}\end{array}\right)=\\ \\=\frac{C_1!}{n_{11}!(C_1-n_{11})!}·\frac{(C_1-n_{11})!}{n_{21}!(C_1-n_{11}-n_{21})!}·\frac{(C_1-n_{11}-n_{21})!}{n_{31}(C_1-n_{11}-n_{21}-n_{31})!}=\frac{C_1!}{n_{11}!n_{21}!n_{31}!n_{42}!}
+\left(\begin{array}{c}C_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}C_1-n_{11}\\ n_{21}\end{array}\right)\left(\begin{array}{c}C_1-n_{11}-n_{21}\\ n_{31}\end{array}\right)=
+$$
+
+$$
+=\frac{C_1!}{n_{11}!(C_1-n_{11})!}\times\frac{(C_1-n_{11})!}{n_{21}!(C_1-n_{11}-n_{21})!}\times\frac{(C_1-n_{11}-n_{21})!}{n_{31}(C_1-n_{11}-n_{21}-n_{31})!}=\frac{C_1!}{n_{11}!n_{21}!n_{31}!n_{42}!}
 $$
 
 Para la columna $A_2$:
 
 $$
-\left(\begin{array}{c}C_2\\ n_{12}\end{array}\right)\left(\begin{array}{c}C_2-n_{12}\\ n_{22}\end{array}\right)\left(\begin{array}{c}C_2-n_{12}-n_{22}\\ n_{32}\end{array}\right)=\\ \\=\frac{C_2!}{n_{12}!(C_2-n_{12})!}·\frac{(C_2-n_{12})!}{n_{22}!(C_2-n_{12}-n_{22})!}·\frac{(C_2-n_{12}-n_{22})!}{n_{32}(C_2-n_{12}-n_{22}-n_{32})!}=\frac{C_2!}{n_{12}!n_{22}!n_{32}!n_{42}!}
+\left(\begin{array}{c}C_2\\ n_{12}\end{array}\right)\left(\begin{array}{c}C_2-n_{12}\\ n_{22}\end{array}\right)\left(\begin{array}{c}C_2-n_{12}-n_{22}\\ n_{32}\end{array}\right)=
+$$
+
+$$
+=\frac{C_2!}{n_{12}!(C_2-n_{12})!}\times\frac{(C_2-n_{12})!}{n_{22}!(C_2-n_{12}-n_{22})!}\times\frac{(C_2-n_{12}-n_{22})!}{n_{32}(C_2-n_{12}-n_{22}-n_{32})!}=\frac{C_2!}{n_{12}!n_{22}!n_{32}!n_{42}!}
 $$
 
 y para la distribución de frecuencias marginales de las filas:
 
 $$
-\left(\begin{array}{c}N\\ R_1\end{array}\right)\left(\begin{array}{c}N-R_1\\ R_2\end{array}\right)\left(\begin{array}{c}N-R_1-R_2\\ R_3\end{array}\right)=\\ \\=\frac{N!}{R_1!(N-R_1)!}·\frac{(N-R_1)!}{R_2!(N-R_1-R_2)!}·\frac{(N-R_1-R_2)!}{R_3!(N-R_1-R_2-R_3)!}=\frac{N!}{R_1!R_2!R_3!R_4!}
+\left(\begin{array}{c}N\\ R_1\end{array}\right)\left(\begin{array}{c}N-R_1\\ R_2\end{array}\right)\left(\begin{array}{c}N-R_1-R_2\\ R_3\end{array}\right)=
+$$
+
+$$
+=\frac{N!}{R_1!(N-R_1)!}\times\frac{(N-R_1)!}{R_2!(N-R_1-R_2)!}\times\frac{(N-R_1-R_2)!}{R_3!(N-R_1-R_2-R_3)!}=\frac{N!}{R_1!R_2!R_3!R_4!}
 $$
 
 Por consiguiente, para tablas de contingencia $r$x$c$ se tiene:
 
 $$
-p(n_{ij}|R_i,C_j,N)=\frac{(\prod_{i=1}^rR_i!)(\prod_{j=1}^cC_j!)}{N!\prod_{i=1}^r\prod_{j=1}^cn_{ij}!}
+p(n_{ij}|R_i,C_j,N)=\frac{(\displaystyle\prod_{i=1}^rR_i!)(\prod_{j=1}^cC_j!)}{N!\displaystyle\prod_{i=1}^r\prod_{j=1}^cn_{ij}!}
 $$
 
 De esta forma, la ecuación anterior puede generalizarse fácilmente a tablas de contingencia multidireccionales más complejas.
 
-Mientras que esta sección ilustra el cálculo de un valor de probabilidad puntual hipergeométrico, para una prueba de permutación exacta de una tabla de contingencia $r×c$ es necesario calcular la medida de asociación seleccionada para las frecuencias de celdas observadas y, a continuación, enumerar exhaustivamente todos los posibles ordenamientos igualmente probables de los N objetos en las $rc$celdas, dadas las distribuciones de frecuencia marginal observadas.
+Mientras que esta sección ilustra el cálculo de un valor de probabilidad puntual hipergeométrico, para una prueba de permutación exacta de una tabla de contingencia $r\times c$ es necesario calcular la medida de asociación seleccionada para las frecuencias de celdas observadas y, a continuación, enumerar exhaustivamente todos los posibles ordenamientos igualmente probables de los N objetos en las $rc$celdas, dadas las distribuciones de frecuencia marginal observadas.
 
 Para cada ordenamiento en el conjunto de referencia de todas las permutaciones de las frecuencias de las celdas, se calcula una medida de asociación, $T$ , y el valor exacto de la probabilidad puntual hipergeométrica, $p(n_{ij} |R_i,C_j,N)$ para $i = 1$,... ,$r$ y $j = 1$, ... ,$c$. Sea $T_0$ el valor del estadístico de prueba observado, es decir, la medida de asociación, entonces, el valor de probabilidad exacto de $T_0$ es la suma de la probabilidad de los puntos hipergeométricos asociados a los valores de $T$ calculados en todos los posibles ordenamientos de las frecuencias de las celdas que son iguales o mayores que $T_0$.
 
@@ -165,25 +180,24 @@ Un problema común al que se enfrentan muchos investigadores es el análisis de 
 
 En 1954, Leo Goodman y William Kruskal propusieron varias medidas nuevas de asociación. Entre las medidas se encontraban dos medidas de predicción asimétricas de reducción proporcional en el error para los análisis de una muestra aleatoria de dos variables categóricas: $\lambda_a$, para cuando se considera que $A$ es la variable dependiente, y $\lambda_b$, para cuando se considera que $B$ es la variable dependiente.
 
-Sea una tabla de contingencia $r×c$ como la representada a continuación:
+Sea una tabla de contingencia $r\times c$ como la representada a continuación:
 
-|       |          |          |     |          |          |
-|-------|----------|----------|-----|----------|----------|
-| B\\A  | $A_1$    | $A_2$    | ... | $A_c$    | Total    |
-| $B_1$ | $n_{11}$ | $n_{12}$ | ... | $n_{1c}$ | $n_{1.}$ |
-| $B_2$ | $n_{21}$ | $n_{22}$ | ... | $n_{2c}$ | $n_{2.}$ |
-| ...   | ...      | ...      | ... | ...      | ...      |
-| $B_r$ | $n_{r1}$ | $n_{r2}$ | ... | $n_{rc}$ | $n_{r.}$ |
-| Total | $n_{.1}$ | $n_{.2}$ | ... | $n_{.c}$ | $N$      |
+| B\\A      | $A_1$    | $A_2$    | ... | $A_c$    | Total    |
+|-----------|----------|----------|-----|----------|----------|
+| $B_1$     | $n_{11}$ | $n_{12}$ | ... | $n_{1c}$ | $n_{1.}$ |
+| $B_2$     | $n_{21}$ | $n_{22}$ | ... | $n_{2c}$ | $n_{2.}$ |
+| ...       | ...      | ...      | ... | ...      | ...      |
+| $B_r$     | $n_{r1}$ | $n_{r2}$ | ... | $n_{rc}$ | $n_{r.}$ |
+| **Total** | $n_{.1}$ | $n_{.2}$ | ... | $n_{.c}$ | $N$      |
 
-: Tabla 3: Notación para la clasificación cruzada de dos variables categóricas, A_j con j=1,...,c y B_i con i=1,...,r
+: Notación para la clasificación cruzada de dos variables categóricas, A_j con j=1,...,c y B_i con i=1,...,r
 
-donde $A_j$ con $j = 1,...,c$ representan las $c$ categorías de la variable dependiente $A$, $B_i$ con $i = 1, . . . , r$ denotan las $r$ categorías para la variable independiente $B$, $n_{ij}$ la frecuencia absoluta de celda para $i = 1, . . . r$ y $j = 1, . . . . c$, y $N$ es el total observaciones. Denotamos por un punto (·) la suma parcial de todas las filas o todas las columnas, según la posición del (·) en la lista de subíndices. Si el (·) está en la primera posición del subíndice la suma es sobre todas las filas y si el (·) está en la segunda posición de subíndice, la suma es sobre todas las columnas. Por lo tanto, $n_{i.}$ denota el total de la frecuencia marginal de la i-ésima fila, $i = 1, . . . r$, sumada en todas las columnas, y $n_{.j}$ indica la frecuencia marginal de la j-ésima columna, $j = 1, . . . . c$, sumada en todas las filas.
+donde $A_j$ con $j = 1,...,c$ representan las $c$ categorías de la variable dependiente $A$, $B_i$ con $i = 1, . . . , r$ denotan las $r$ categorías para la variable independiente $B$, $n_{ij}$ la frecuencia absoluta de celda para $i = 1, . . . r$ y $j = 1, . . . . c$, y $N$ es el total observaciones. Denotamos por un punto ($.$) la suma parcial de todas las filas o todas las columnas, según la posición del ($·$) en la lista de subíndices. Si el ($·$) está en la primera posición del subíndice la suma es sobre todas las filas y si el ($·$) está en la segunda posición de subíndice, la suma es sobre todas las columnas. Por lo tanto, $n_{i.}$ denota el total de la frecuencia marginal de la i-ésima fila, $i = 1, . . . r$, sumada en todas las columnas, y $n_{.j}$ indica la frecuencia marginal de la j-ésima columna, $j = 1, . . . . c$, sumada en todas las filas.
 
 Teniendo en cuenta la notación de la *tabla 3*, se definen
 
 $$
-W=\sum_{i=1}^rmax(n_{i1},n_{i2},...,n_{ic})  ~~~~~; ~~~~~ X=max(n_{.1},n_{.2},...,n_{.c})
+W=\sum_{i=1}^rmax(n_{i1},n_{i2},...,n_{ic})  ~~~~~~y~~~~~~ X=max(n_{.1},n_{.2},...,n_{.c})
 $$
 
 Entonces, $\lambda_a$ (siendo A la variable dependiente) viene dado por:
@@ -195,7 +209,7 @@ $$
 De la misma manera, se definen
 
 $$
-Y=\sum_{j=1}^cmax(n_{1j},n_{2j},...,n_{rj})  ~~~~~; ~~~~~ Z=max(n_{1.},n_{2.},...,n_{r.})
+Y=\sum_{j=1}^cmax(n_{1j},n_{2j},...,n_{rj})  ~~~~~~y ~~~~~~ Z=max(n_{1.},n_{2.},...,n_{r.})
 $$
 
 E igualmente, $\lambda_b$ (siendo B la variable dependiente) viene dado por:
@@ -240,7 +254,7 @@ Así, como explicaron Goodman y Kruskal en 1954:
 
 ## Medidas $t_a$ y $t_b$ de Goodman y Kruskal
 
-Como se ha señalado anteriormente, en 1954 Leo Goodman y William Kruskal propusieron varias medidas de asociación nuevas. Entre las medidas había una medida de predicción asimétrica de reducción proporcional del error, $t_a$, para el análisis de una muestra aleatoria de dos variables categóricas. Considere dos variables desordenadas cruzadas, $A$ y $B$, con la variable $A$ como variable dependiente y la variable $B$ como variable independiente. La *tabla 3* proporcionaba la notación para la clasificación cruzada.
+Como se ha señalado anteriormente, en 1954 Leo Goodman y William Kruskal propusieron varias medidas de asociación nuevas. Entre las medidas había una medida de predicción asimétrica de reducción proporcional del error, $t_a$, para el análisis de una muestra aleatoria de dos variables categóricas. Considere dos variables desordenadas cruzadas, $A$ y $B$, con la variable $A$ como variable dependiente y la variable $B$ como variable independiente. La *tabla 2.3* proporcionaba la notación para la clasificación cruzada.
 
 El estadístico $t_a$ de Goodman y Kruskal es una medida de la reducción relativa del error de predicción en la que se definen dos tipos de errores. El primer tipo es el error de predicción basado únicamente en el conocimiento de la distribución de la variable dependiente, denominado "error del primer tipo" ($E_1$) y que consiste en el número esperado de errores al predecir las $c$ categorías de la variable dependiente$(a_1, . . . , a_c)$ a partir de la distribución observada de las marginales de la variable dependiente $(n_{.1}, . . . , n_{.c})$. El segundo tipo es el error de predicción basado en el conocimiento de las distribuciones de las de la variable independiente y de la dependiente, denominado "error del segundo tipo" ($E_2$) y que consiste en el número o los errores esperados al predecir las $c$ categorías de la variable dependiente $(a_1, . . . , a_c)$ a partir del conocimiento de las $r$ categorías de la variable independiente $(b_1, . . . , b_r)$.
 
@@ -302,23 +316,23 @@ En 1971, Richard Light y Barry Margolin desarrollaron $R^2$, una técnica de an�
 
 ## Una prueba asimétrica de homogeneidad
 
-A veces, se necesita determinar si las proporciones de elementos en un conjunto de categorías mutuamente excluyentes son las mismas para dos o más grupos. Cuando se extraen muestras aleatorias independientes de cada uno de los $g \ge 2$ grupos y luego se clasifican en $r \ge 2$ categorías mutuamente excluyentes, la prueba adecuada es una prueba de homogeneidad de las distribuciones $g$. En una prueba de homogeneidad, una de las distribuciones marginales se conoce antes de recoger los datos, es decir, los totales de frecuencia marginal de fila o columna que indican 3l número de elementos de cada uno de los $g$ grupos. Esto se denomina muestreo multinomial de *producto*, ya que la distribución de muestreo es el producto de $g$ distribuciones multinomiales y la hipótesis nula es que las $g$ distribuciones multinomiales son idénticas.
+A veces, se necesita determinar si las proporciones de elementos en un conjunto de categorías mutuamente excluyentes son las mismas para dos o más grupos. Cuando se extraen muestras aleatorias independientes de cada uno de los $g \ge 2$ grupos y luego se clasifican en $r \ge 2$ categorías mutuamente excluyentes, la prueba adecuada es una prueba de homogeneidad de las distribuciones $g$. En una prueba de homogeneidad, una de las distribuciones marginales se conoce antes de recoger los datos, es decir, los totales de frecuencia marginal de fila o columna que indican el número de elementos de cada uno de los $g$ grupos. Esto se denomina muestreo multinomial de *producto*, ya que la distribución de muestreo es el producto de $g$ distribuciones multinomiales y la hipótesis nula es que las $g$ distribuciones multinomiales son idénticas.
 
 Una prueba de homogeneidad es bastante diferente de una prueba de independencia, en la que se extrae una única muestra y se clasifica en ambas variables. En una prueba de independencia, ambos conjuntos de totales de frecuencias marginales se conocen sólo después de que se hayan recogido los datos. Esto se denomina muestreo multinomial simple, ya que la distribución del muestreo es una distribución multinomial. La prueba de homogeneidad más utilizada es la prueba chi-cuadrado de Pearson con $gl = (r - 1)(g - 1)$ grados de libertad. La prueba chi-cuadrado de homogeneidad de Pearson supone la hipótesis nula de que no hay diferencia en las proporciones de sujetos en un conjunto de categorías mutuamente excluyentes entre dos o más poblaciones.
 
-La prueba de homogeneidad chi-cuadrado de Pearson es una prueba simétrica, que produce un solo valor para una tabla de contingencia $r×g$. Por el contrario, una prueba asimétrica arroja dos valores dependiendo de la variable que se considere dependiente. Como señala Berkson, si las diferencias son todas en una dirección, una prueba simétrica como la chi-cuadrado es insensible a este hecho.
+La prueba de homogeneidad chi-cuadrado de Pearson es una prueba simétrica, que produce un solo valor para una tabla de contingencia $r\times g$. Por el contrario, una prueba asimétrica arroja dos valores dependiendo de la variable que se considere dependiente. Como señala Berkson, si las diferencias son todas en una dirección, una prueba simétrica como la chi-cuadrado es insensible a este hecho.
 
 Una prueba simétrica de homogeneidad, por su naturaleza, excluye la información conocida sobre los datos: qué variable es la independiente y qué variable es la dependiente. Aunque a veces es necesario reducir el nivel de medición cuando no se pueden cumplir los requisitos de distribución, en general no es aconsejable utilizar una prueba estadística que descarte información importante.
 
 Se consideran las variables $A$ y $B$, con $B$ la variable dependiente. Sean $B_1, . . . ,B_r$ las $r\ge 2$ categorías de la variable dependiente, $A_1, . . . , A_g$ las $g \ge 2$ categorías de la variable independiente, $n_{ij}$ la frecuencia de celda en la i-ésima fila y j-ésima columna, $i = 1, . , r$ y $j = 1, . . . , g$, y $N$ el tamaño total de la muestra. Sean $n_{1.}, . . . . n_{r.}$ las frecuencias marginales de la variable $B$ y $n_{.1}, … , n_{.g}$ las frecuencias marginales totales de la variable $A$. La clasificación cruzada de las variables A y B se muestra en la tabla siguiente:
 
-| B\\A  | $A_1$    | $A_2$    | ... | $A_g$    | Total    |
-|-------|----------|----------|-----|----------|----------|
-| $B_1$ | $n_{11}$ | $n_{12}$ | ... | $n_{1g}$ | $n_{1.}$ |
-| $B_2$ | $n_{21}$ | $n_{22}$ | ... | $n_{2g}$ | $n_{2.}$ |
-| ...   | ...      | ...      | ... | ...      | ...      |
-| $B_r$ | $n_{r1}$ | $n_{r2}$ | ... | $n_{rg}$ | $n_{r.}$ |
-| Total | $n_{.1}$ | $n_{.2}$ | ... | $n_{.g}$ | $N$      |
+| B\\A      | $A_1$    | $A_2$    | ... | $A_g$    | Total    |
+|-----------|----------|----------|-----|----------|----------|
+| $B_1$     | $n_{11}$ | $n_{12}$ | ... | $n_{1g}$ | $n_{1.}$ |
+| $B_2$     | $n_{21}$ | $n_{22}$ | ... | $n_{2g}$ | $n_{2.}$ |
+| ...       | ...      | ...      | ... | ...      | ...      |
+| $B_r$     | $n_{r1}$ | $n_{r2}$ | ... | $n_{rg}$ | $n_{r.}$ |
+| **Total** | $n_{.1}$ | $n_{.2}$ | ... | $n_{.g}$ | $N$      |
 
 : Notación para la clasificación cruzada de dos variables categóricas, A_j para j=1,...,g y B_i para i=1,...,r
 
@@ -424,7 +438,7 @@ De las expresiones anteriores se observa que el valor del coeficiente intraclase
 
 ### Medida de concordancia $\pi$ de Scott
 
-Una de las primeras medidas de concordancia corregida por el azar fue introducida por William Scott en 1955. Supongamos que dos jueces o calificadores clasifican independientemente cada una de las $N$ observaciones en una de las $c$ categorías. Las clasificaciones resultantes pueden mostrarse en una tabla de contingencia $c×c$, con las frecuencias absolutas en cada celda. Sea $n_{i.}$ la frecuencia marginal de la i-ésima fila, $i = 1, . . . r$; sea $n_{.j}$ la frecuencia marginal de la j-ésima columna, $j = 1, . . . . c$ y sea
+Una de las primeras medidas de concordancia corregida por el azar fue introducida por William Scott en 1955. Supongamos que dos jueces o calificadores clasifican independientemente cada una de las $N$ observaciones en una de las $c$ categorías. Las clasificaciones resultantes pueden mostrarse en una tabla de contingencia $c\times c$, con las frecuencias absolutas en cada celda. Sea $n_{i.}$ la frecuencia marginal de la i-ésima fila, $i = 1, . . . r$; sea $n_{.j}$ la frecuencia marginal de la j-ésima columna, $j = 1, . . . . c$ y sea
 
 $$
 N=\sum_{i=1}^r\sum_{j=1}^cn_{ij}
@@ -452,21 +466,21 @@ Actualmente, la medida más popular de concordancia entre dos jueces o calificad
 
 Tanto en el caso no ponderado como en el ponderado, kappa es igual a $+1$ cuando se produce una concordancia perfecta entre dos o más jueces, $0$ cuando la concordancia es igual a la esperada en condiciones de independencia, y negativo cuando la concordancia es inferior a la esperada por azar. En esta sección se estudiará únicamente la kappa no ponderada, ya que es la que se usa normalmente para datos categóricos no ordenados.
 
-Supongamos que dos jueces o calificadores clasifican independientemente cada una de las $N$ observaciones en una de las $c$ categorías desordenadas, exhaustivas y mutuamente excluyentes. Las clasificaciones resultantes pueden mostrarse en una clasificación cruzada $c×c$ con proporciones para las entradas de las celdas:
+Supongamos que dos jueces o calificadores clasifican independientemente cada una de las $N$ observaciones en una de las $c$ categorías desordenadas, exhaustivas y mutuamente excluyentes. Las clasificaciones resultantes pueden mostrarse en una clasificación cruzada $c\times c$ con proporciones para las entradas de las celdas:
 
-+---------------+----------+----------+----------+----------+----------+
-| Fila\\Columna | 1        | 2        | ...      | c        | Total    |
-+===============+==========+==========+==========+==========+==========+
-| **1**         | $p_{11}$ | $p_{12}$ | ...      | $p_{1c}$ | $p_{1.}$ |
-+---------------+----------+----------+----------+----------+----------+
-| **2**         | $p_{21}$ | $p_{22}$ | ...      | $p_{2c}$ | $p_{2.}$ |
-+---------------+----------+----------+----------+----------+----------+
-| **...**       | ...      | ...      | ...      | ...      | ...      |
-+---------------+----------+----------+----------+----------+----------+
-| **c**         | $p_{c1}$ | $p_{c2}$ | ...      | $p_{cc}$ | $p_{c.}$ |
-+---------------+----------+----------+----------+----------+----------+
-| **Total**     | $p_{.1}$ | $p_{.2}$ | ...      | $p_{.c}$ | $p_{..}$ |
-+---------------+----------+----------+----------+----------+----------+
++-------------------+----------+----------+----------+----------+-----------+
+| **Fila\\Columna** | **1**    | **2**    | **...**  | **c**    | **Total** |
++===================+==========+==========+==========+==========+===========+
+| **1**             | $p_{11}$ | $p_{12}$ | ...      | $p_{1c}$ | $p_{1.}$  |
++-------------------+----------+----------+----------+----------+-----------+
+| **2**             | $p_{21}$ | $p_{22}$ | ...      | $p_{2c}$ | $p_{2.}$  |
++-------------------+----------+----------+----------+----------+-----------+
+| **...**           | ...      | ...      | ...      | ...      | ...       |
++-------------------+----------+----------+----------+----------+-----------+
+| **c**             | $p_{c1}$ | $p_{c2}$ | ...      | $p_{cc}$ | $p_{c.}$  |
++-------------------+----------+----------+----------+----------+-----------+
+| **Total**         | $p_{.1}$ | $p_{.2}$ | ...      | $p_{.c}$ | $p_{..}$  |
++-------------------+----------+----------+----------+----------+-----------+
 
 : Clasificación cruzada cxc con proporciones en celdas
 
@@ -488,7 +502,7 @@ $$
 \kappa=\frac{\displaystyle\sum_{i=1}^cO_{ii}-\displaystyle\sum_{i=1}^cE_{ii}}{N-\displaystyle\sum_{i=1}^cE_{ii}},
 $$
 
-donde $O_{ii}$ denota el valor de frecuencia de celda observado en la diagonal principal de la tabla de concordancia $c×c$, $E_{ii}$ denota un valor de frecuencia de celda esperado en la diagonal principal, y
+donde $O_{ii}$ denota el valor de frecuencia de celda observado en la diagonal principal de la tabla de concordancia $c\times c$, $E_{ii}$ denota un valor de frecuencia de celda esperado en la diagonal principal, y
 
 $$
 E_{ii}=\frac{n_{i.}n_{.i}}{N}, ~~~~~i=1,..,c .
@@ -500,7 +514,7 @@ En la configuración de la tabla anterior, $p_o$ es la proporción observada de 
 
 La medida $\kappa$ de Cohen de la concordancia entre evaluadores corregida por el azar fue originalmente diseñada sólo para $b = 2$ jueces. En esta sección, se introduce un procedimiento para calcular $\kappa$ no ponderado con múltiples jueces. Aunque el procedimiento es apropiado para cualquier número de $c \ge 2$ categorías disjuntas y desordenadas y $b \ge 2$ jueces, la descripción del procedimiento se limita a $b = 3$ jueces independientes.
 
-Sean $b = 3$ jueces que clasifican independientemente $N$ objetos en $c$ categorías disjuntas y desordenadas. La clasificación puede conceptualizarse como una tabla de contingencia $c×c×c$ con $c$ filas, $c$ columnas y $c$ cortes. Sean $n_{ijk}$ , $R_i$ , $C_j$ y $S_k$ las frecuencias esperadas de las celdas y las frecuencias marginales de las filas, las columnas y los cortes para $i, j, k = 1, . . . , c$. La frecuencia total viene dada por:
+Sean $b = 3$ jueces que clasifican independientemente $N$ objetos en $c$ categorías disjuntas y desordenadas. La clasificación puede conceptualizarse como una tabla de contingencia $c\times c\times c$ con $c$ filas, $c$ columnas y $c$ ¿cortes?. Sean $n_{ijk}$ , $R_i$ , $C_j$ y $S_k$ las frecuencias esperadas de las celdas y las frecuencias marginales de las filas, las columnas y los ¿cortes? para $i, j, k = 1, . . . , c$. La frecuencia total viene dada por:
 
 $$
 N=\sum_{i=1}^c\sum_{j=1}^c\sum_{k=1}^cn_{ijk}~.
@@ -518,7 +532,7 @@ $$
 w_{ijk}=\begin{cases}0 & i = j=k\\1 & c.c\end{cases}.
 $$
 
-Dada una tabla de contingencia $c×c×c$ con $N$ objetos clasificados de forma cruzada por $b = 3$ jueces independientes, una prueba de permutación exacta consiste en generar todos los ordenamientos posibles, igualmente probables, de los $N$ objetos en las $c^3$ celdas, preservando las distribuciones marginales de frecuencia. Para cada ordenamiento de las frecuencias de las celdas, se calcula el estadístico kappa no ponderado, $\kappa$, y el valor exacto de la probabilidad puntual hipergeométrica bajo la hipótesis nula, $p(n_{ijk} |R_i,C_j, S_k,N)$, donde
+Dada una tabla de contingencia $c\times c\times c$ con $N$ objetos clasificados de forma cruzada por $b = 3$ jueces independientes, una prueba de permutación exacta consiste en generar todos los ordenamientos posibles, igualmente probables, de los $N$ objetos en las $c^3$ celdas, preservando las distribuciones marginales de frecuencia. Para cada ordenamiento de las frecuencias de las celdas, se calcula el estadístico kappa no ponderado, $\kappa$, y el valor exacto de la probabilidad puntual hipergeométrica bajo la hipótesis nula, $p(n_{ijk} |R_i,C_j, S_k,N)$, donde
 
 $$
 p(n_{ijk} |R_i,C_j, S_k,N)=\frac{(\displaystyle\prod_{i=1}^cR_i!)(\prod_{j=1}^cC_j!)(\prod_{k=1}^cS_k!)}{(N!)^{b-1}\displaystyle\prod_{i=1}^c\prod_{j=1}^c\prod_{k=1}^cn_{ijk}!}~.
@@ -538,9 +552,9 @@ $$
 
 y $M$ denota el número total de posibles ordenamientos de frecuencia de celdas igualmente probables en el conjunto de referencia de todos los ordenamientos posibles de las frecuencias de las celdas, dado las distribuciones de frecuencias marginales observadas. Cuando $M$ es muy grande, como es típico de contingencia multidireccional, las pruebas exactas no son prácticas y es necesario recurrir a los procedimientos de remuestreo de Monte Carlo. En estos casos, una muestra aleatoria de los $M$ posibles ordenamientos igualmente probables de las frecuencias de las celdas proporciona una comparación de los estadísticos de la prueba $\kappa$ calculados en $L$ tablas aleatorias multidireccionales con el estadístico de la prueba $\kappa$ calculado en la tabla de contingencia multidireccional observada.
 
-Un algoritmo eficiente de remuestreo de Monte Carlo para generar ordenaciones aleatorias de frecuencias de celdas para tablas de contingencia multidireccionales con distribuciones de frecuencias marginales fijas fue desarrollado por Mielke, Berry y Johnston en 2007. Para una tabla de contingencia de tres dimensiones con $r$ filas, $c$ columnas y $s$ cortes el algoritmo de remuestreo se presenta en 12 sencillos pasos:
+Un algoritmo eficiente de remuestreo de Monte Carlo para generar ordenaciones aleatorias de frecuencias de celdas para tablas de contingencia multidireccionales con distribuciones de frecuencias marginales fijas fue desarrollado por Mielke, Berry y Johnston en 2007. Para una tabla de contingencia de tres dimensiones con $r$ filas, $c$ columnas y $s$ ¿cortes? el algoritmo de remuestreo se presenta en 12 sencillos pasos:
 
-PASO 1. Construir una tabla de contingencia $r×c×s$ a partir de los datos observados.
+PASO 1. Construir una tabla de contingencia $r\times c\times s$ a partir de los datos observados.
 
 PASO 2. Obtener los totales de frecuencia marginal fija $R_1, . . . , R_r , C_1, . . . , C_c, S_1, . . . S_s$ , y el total de frecuencias $N$. Establecer un contador de remuestreo $JL = 0$, y fijar $L$ igual al número de muestras deseado.
 
@@ -548,11 +562,11 @@ PASO 3. Establecer el contador de remuestreo $JL = JL + 1$.
 
 PASO 4. Establecer los contadores de frecuencia marginal $JR_i = R_i$ para $i = 1, . , r$; $JC_j = C_j$ para $j = 1, . . . , c$; $JS_k = S_k$ para $k = 1, . . . . s$, y $M = N$.
 
-PASO 5. Establecer $n_{ijk} = 0$ para $i = 1, . . . , r, j = 1, . . . . c$, y $k = 1, . . . , s$, y establecer los contadores de filas, columnas y cortes $IR$, $IC$ e $IS$ iguales a cero.
+PASO 5. Establecer $n_{ijk} = 0$ para $i = 1, . . . , r, j = 1, . . . . c$, y $k = 1, . . . , s$, y establecer los contadores de filas, columnas y ¿cortes? $IR$, $IC$ e $IS$ iguales a cero.
 
 PASO 6. Crear las distribuciones de probabilidad acumulada $PR_i$ , $PC_j$ y $PS_k$ a partir de los totales de frecuencia marginal ajustados $JR_i$ , $JC_j$ y $JS_k$ para $i = 1, . , r, j = 1, . . . . c$, y $k = 1, . . . , s$, donde $PR_1 = JR_1/M$ y $PR_i = PR_{i-1} + JR_i/M$ para $i = 1, . . . , r$; $PC_1 = JC_1/M$ y $PC_j = PC_{j-1} + JC_j/M$ para $j = 1, . . . , c$ y $PS_1 = JS_1/M$ y $PS_k = PS_{k-1} + JS_k/M$ para $k = 1, . . . , s$.
 
-PASO 7. Generar tres números pseudoaleatorios uniformes $U_r$ , $U_c$ y $U_s$ sobre $[0, 1)$ y establecer los índices de fila, columna y cruce $i = j = k = 1$, respectivamente.
+PASO 7. Generar tres números pseudoaleatorios uniformes $U_r$ , $U_c$ y $U_s$ sobre $[0, 1)$ y establecer los índices de fila, columna y ¿corte? $i = j = k = 1$, respectivamente.
 
 PASO 8. Si $U_r \le PR_i$, entonces $IR = i$, $JR_i = JR_i - 1$, e ir al PASO 9; en caso contrario $i = i + 1$ y se repite el PASO 8.
 
@@ -714,9 +728,9 @@ $$
 V^2=\frac{\chi^2}{\chi_{max}^2}=\frac{\chi^2}{N[min(r-1,c-1)]}~,
 $$
 
-donde $r$ y $c$ denotan el número de filas y columnas de una tabla de contingencia $r×c$. Otros miembros de la familia $V$ son el $\phi^2$ de Pearson para tablas de contingencia $2×2$ y $T^2$ de Tschuprov para tablas de contingencia $r×c$ donde $r = c$. Las dificultades para interpretar $V^2$ se extienden a las de $\hat\eta_Q^2$.
+donde $r$ y $c$ denotan el número de filas y columnas de una tabla de contingencia $r\times c$. Otros miembros de la familia $V$ son el $\phi^2$ de Pearson para tablas de contingencia $2\times2$ y $T^2$ de Tschuprov para tablas de contingencia $r\times c$ donde $r = c$. Las dificultades para interpretar $V^2$ se extienden a las de $\hat\eta_Q^2$.
 
-Wickens observó que la $V^2$ de Cramér carece de una interpretación intuitiva que no sea como un escalado de chi-cuadrado, lo que limita su utilidad. Asimismo, Costner observó que $V^2$ y otras medidas basadas en la chi-cuadrado de Pearson carecen de interpretación para valores distintos de $0$ y $1$, o el máximo, dadas las distribuciones de frecuencia marginal observadas. Agresti y Finlay también señalaron que la $V^2$ de Cramér es muy difícil de interpretar y recomendaron otras medidas. Blalock señaló que "todas las medidas basadas en el chi cuadrado son de alguna manera arbitrarias por naturaleza, y sus interpretaciones dejan mucho que desear... todas ellas dan mayor peso a las columnas o filas que tienen las marginales más pequeñas en lugar de que a las que tienen las marginales más grandes". Ferguson discutió el problema de utilizar frecuencias marginales idealizadas, y Guilford señaló que medidas como la $phi^2$ de Pearson, la $T^2$ de Tschuprov y la $V^2$ de Cramér necesariamente subestiman la magnitud de la asociación presente. Berry, Martin y Olson consideraron estas cuestiones con respecto a las tablas de contingencia $2×2$, y Berry, Johnston y Mielke discutieron con cierto detalle los problemas de utilizar $\phi^2$ de Pearson, $T^2$ de Tschuprov y $V^2$ de Cramér como medidas del tamaño del efecto. Dado que $\hat\eta_Q^2$ es simplemente un caso especial del $V^2$ de Cramér, presenta los mismos problemas de interpretación.
+Wickens observó que la $V^2$ de Cramér carece de una interpretación intuitiva que no sea como un escalado de chi-cuadrado, lo que limita su utilidad. Asimismo, Costner observó que $V^2$ y otras medidas basadas en la chi-cuadrado de Pearson carecen de interpretación para valores distintos de $0$ y $1$, o el máximo, dadas las distribuciones de frecuencia marginal observadas. Agresti y Finlay también señalaron que la $V^2$ de Cramér es muy difícil de interpretar y recomendaron otras medidas. Blalock señaló que "todas las medidas basadas en el chi cuadrado son de alguna manera arbitrarias por naturaleza, y sus interpretaciones dejan mucho que desear... todas ellas dan mayor peso a las columnas o filas que tienen las marginales más pequeñas en lugar de que a las que tienen las marginales más grandes". Ferguson discutió el problema de utilizar frecuencias marginales idealizadas, y Guilford señaló que medidas como la $phi^2$ de Pearson, la $T^2$ de Tschuprov y la $V^2$ de Cramér necesariamente subestiman la magnitud de la asociación presente. Berry, Martin y Olson consideraron estas cuestiones con respecto a las tablas de contingencia $2\times2$, y Berry, Johnston y Mielke discutieron con cierto detalle los problemas de utilizar $\phi^2$ de Pearson, $T^2$ de Tschuprov y $V^2$ de Cramér como medidas del tamaño del efecto. Dado que $\hat\eta_Q^2$ es simplemente un caso especial del $V^2$ de Cramér, presenta los mismos problemas de interpretación.
 
 ### Una medida del Tamaño del Efecto corregida por el azar
 
@@ -762,7 +776,7 @@ Por lo tanto, posee una interpretación clara que se corresponde con el coeficie
 
 En 1971, Robert Leik y Walter Gove propusieron una nueva medida de asociación nominal basada en comparaciones por pares de las diferencias entre las observaciones. Insatisfechos con las medidas existentes de asociación nominal, Leik y Gove sugirieron una medida de asociación de reducción proporcional en el error que fuese corregida para la cantidad máxima real de asociación, dadas las distribuciones de frecuencias marginales observadas. La nueva medida se denominó $d_N^c$, donde $d$ indicaba el índice, siguiendo otros índices como $d_{yx}$ y $d_{xy}$ de Somers; el subíndice $N$ indicaba la relevancia de $d$ para una variable dependiente nominal; y el superíndice $c$ indicaba que la medida estaba corregida por las restricciones impuestas por las distribuciones de frecuencia marginal.
 
-Al igual que $d_N^c$, muchas medidas de asociación para dos variables se han basado en comparaciones por pares de las diferencias entre las observaciones. Consideremos dos variables de nivel nominal que se han clasificado de forma cruzada en una tabla de contingencia $r×c$, donde $r$ y $c$ denotan el número de filas y columnas, respectivamente. Sean $n_{i.}$, $n_{.j}$, y $n_{ij}$ la frecuencia marginal de la fila $i$, la frecuencia marginal de la columna $j$ y el número de objetos en la celda ${ij}$, respectivamente, para $i = 1, . , r$ y $j = 1, . . . . c$, y sea $N$ el número total de objetos en la tabla de contingencia $r×c$. Si $y$ y $x$ representan las variables de fila y columna, respectivamente, hay $N(N - 1)/2$ pares de objetos en la tabla que pueden dividirse en cinco tipos de pares exhaustivos y mutuamente excluyentes:
+Al igual que $d_N^c$, muchas medidas de asociación para dos variables se han basado en comparaciones por pares de las diferencias entre las observaciones. Consideremos dos variables de nivel nominal que se han clasificado de forma cruzada en una tabla de contingencia $r\times c$, donde $r$ y $c$ denotan el número de filas y columnas, respectivamente. Sean $n_{i.}$, $n_{.j}$, y $n_{ij}$ la frecuencia marginal de la fila $i$, la frecuencia marginal de la columna $j$ y el número de objetos en la celda ${ij}$, respectivamente, para $i = 1, . , r$ y $j = 1, . . . . c$, y sea $N$ el número total de objetos en la tabla de contingencia $r\times c$. Si $y$ y $x$ representan las variables de fila y columna, respectivamente, hay $N(N - 1)/2$ pares de objetos en la tabla que pueden dividirse en cinco tipos de pares exhaustivos y mutuamente excluyentes:
 
 -   pares concordantes
 
@@ -774,7 +788,7 @@ Al igual que $d_N^c$, muchas medidas de asociación para dos variables se han ba
 
 -   pares ¿vinculados? en ambas variables $x$ e $y$
 
-Para una tabla de contingencia $r×c$, los pares concordantes (pares de objetos que están clasificados en el mismo orden tanto en la variable $x$ como en la variable $y$) vienen dados por:
+Para una tabla de contingencia $r\times c$, los pares concordantes (pares de objetos que están clasificados en el mismo orden tanto en la variable $x$ como en la variable $y$) vienen dados por:
 
 $$
 C=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=i+1}^r\sum_{l=j+1}^cn_{kl})~,
@@ -854,9 +868,9 @@ Hay que tener en cuenta que $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$ se calculan s
 
 El estadístico de prueba $d_N^c$ se basa en tres tablas de contingencia: la tabla de valores observados, la tabla de valores esperados y una tabla de valores máximos que se describirá a continuación.
 
-Un algoritmo para generar un ordenamiento de las frecuencias de las celdas en una tabla de contingencia $r×c$ que proporciona el valor máximo de un conjunto estadístico es:
+Un algoritmo para generar un ordenamiento de las frecuencias de las celdas en una tabla de contingencia $r\times c$ que proporciona el valor máximo de un conjunto estadístico es:
 
-PASO 1: Mantener las frecuencias marginales observadas de una tabla de contingencia $r×c$ y eliminar los valores de frecuencias de celdas ($n_{ij}$).
+PASO 1: Mantener las frecuencias marginales observadas de una tabla de contingencia $r\times c$ y eliminar los valores de frecuencias de celdas ($n_{ij}$).
 
 PASO 2: Si algún par de frecuencias marginales, uno de cada conjunto de marginales, son iguales entre sí, introducir ese valor en la tabla como $n_{ij}$ y restar el valor de los dos totales de frecuencia marginal. Repetir el PASO 2 hasta que no haya dos totales de frecuencia marginal iguales. Si todos los totales de frecuencia marginal se han reducido a cero, ir al PASO 5; de lo contrario, ir al PASO 3.
 
@@ -958,6 +972,244 @@ Es evidente que $T_y'$ y $T_y''$ son invariantes bajo permutación. Por lo tanto
 
 ## Un problema de ocupación de la matriz
 
-## Prueba de probabilidad exacta de Fisher
+En muchas situaciones de investigación, es necesario examinar una secuencia de observaciones sobre un pequeño grupo de sujetos, donde cada observación se clasifica de una de dos maneras. Supongamos, por ejemplo, que se registra un Éxito ($1$) o un Fracaso ($0$) para cada uno de $N \ge 2$ sujetos en cada una de $k \ge 2$ tareas. La prueba estándar en estos casos es el [Test Q de Cochran para el cambio].
 
-## Análisis de tablas de 2×2×2
+Sin embargo, cuando el número de sujetos es pequeño, por ejemplo, $2 \le N \le 6$, y el número de tratamientos es grande, por ejemplo, $20 \le k \le 400$, puede ser preferible una prueba alternativa al test $Q$ de Cochran. Estas condiciones de investigación surgen por varias razones. En primer lugar, se propone un estudio de grupo a largo plazo, pero pocos sujetos están dispuestos a comprometerse con la investigación debido al tiempo prolongado de la misma. En segundo lugar, un estudio longitudinal comienza con un número adecuado de sujetos, pero hay una alta tasa de abandono y no se puede justificar el análisis de supervivencia. En tercer lugar, muy pocos sujetos satisfacen el protocolo de investigación. Cuarto, el coste de cada observación/tratamiento es caro para el investigador. Quinto, los sujetos también generan mucho gasto. Sexto, se puede realizar un estudio piloto con un número reducido de sujetos para establecer la validez de la investigación antes de solicitar financiación para un estudio más amplio.
+
+Consideremos una matriz de ocupación de $N\times k$ con $N$ sujetos (filas) y $k$ condiciones de tratamiento (columnas). Sea $x_{ij}$ la observación del i-ésimo sujeto ($i = 1, … , N$) en la j-ésima condición de tratamiento ($j = 1, … , k$), donde un éxito se codifica como $1$ y un fracaso como $0$. Para cualquier sujeto, un éxito puede ser resultado del tratamiento administrado o puede ser resultado de alguna otra causa o de una respuesta aleatoria, es decir, un falso positivo. Por lo tanto, una respuesta exitosa al tratamiento se cuenta sólo cuando todos los $N$ sujetos obtienen un éxito, es decir, una columna completa de valores $1$. Evidentemente, este enfoque no se generaliza bien a un gran número de sujetos, ya que no es realista que un gran número de sujetos responda de forma conjunta. El test $Q$ de Cochran es preferible cuando $N$ es grande.
+
+En 1965, Mielke y Siddiqui presentaron un procedimiento exacto de permutación para el problema de ocupación de la matriz en el "Journal of the American Statistical Association" que es apropiado para muestras pequeñas ($N$) y un gran número de tratamientos ($k$). Sean
+
+$$
+R_i=\sum_{j=1}^kx_{ij}
+$$
+
+para $i = 1, . . . N$, los totales de los sujetos (filas), sea
+
+$$
+M=\prod_{i=1}^N\left(\begin{array}{c}k\\ R_i\end{array}\right)
+$$
+
+el número de matrices de ocupación $N \times k$ igualmente distinguibles en el conjunto de referencia, bajo la hipótesis nula, y sea $\nu = min(R_1, . . . , R_N)$. La hipótesis nula estipula que cada una de las $M$ configuraciones de $1$s y $0$s dentro de cada una de las $N$ filas ocurre con igual probabilidad, dado que los valores $R_1, . . . , R_N$ son fijos. Si $U_g$ es el número de configuraciones distintas en las que exactamente $k$ condiciones de tratamiento (columnas) se llenan de aciertos ($1$s), entonces
+
+$$
+U_\nu=\left(\begin{array}{c}k\\ \nu\end{array}\right)\prod_{i=1}^N\left(\begin{array}{c}k-\nu\\ R_i-\nu\end{array}\right)
+$$
+
+es el valor inicial de la relación recursiva
+
+$$
+U_g=\left(\begin{array}{c}k\\ g\end{array}\right)[\prod_{i=1}^N\left(\begin{array}{c}k-g\\ R_i-g\end{array}\right)-\sum_{j=g+1}^\nu\left(\begin{array}{c}k-g\\ j-g\end{array}\right)\frac{U_j}{\left(\begin{array}{c}k\\ j\end{array}\right)}] ~,
+$$
+
+donde $0 \le g \le \nu - 1$. Si $g = 0$, entonces
+
+$$
+M=\sum_{g=0}^\nu U_g
+$$
+
+y la probabilidad exacta de observar $s$ o más condiciones de tratamiento (columnas) completamente llenas de éxitos ($1$s) viene dada por:
+
+$$
+P=\frac{1}{M}\sum_{g=s}^\nu U_g~,
+$$
+
+donde $0\le s \le v$.
+
+## Test exacto de Fisher
+
+Aunque el test de probabilidad exacta de Fisher no es, estrictamente hablando, una medida de asociación entre dos variables de nivel nominal, ha adquirido tal importancia en el análisis de las tablas de contingencia $2\times2$, que excluir la prueba exacta de Fisher de su consideración sería una grave omisión. Dicho esto, sin embargo, la prueba de probabilidad exacta de Fisher proporciona la probabilidad de asociación más que una medida de la fuerza de la asociación. La prueba de probabilidad exacta de Fisher fue desarrollada de forma independiente por R.A. Fisher, Frank Yates y Joseph Irwin a principios de la década de 1930. En consecuencia, la prueba se denomina a menudo test exacto de Fisher-Yates o test de probabilidad exacta de Fisher-Irwin.
+
+Aunque la prueba de probabilidad exacta de Fisher se diseñó originalmente para tablas de contingencia $2\times2$ y se utiliza casi exclusivamente para este fin, en esta sección la prueba se amplía para aplicarla a otras tablas de contingencia más grandes. Para facilitar el cálculo y evitar expresiones factoriales grandes, un procedimiento de recursión con un valor inicial arbitrario proporciona un método eficaz para obtener los valores exactos de la probabilidad.
+
+### Análisis exacto de Fisher con una tabla 2×2
+
+Considere una tabla de contingencia $2\times2$ con $N$ casos, donde $x_o$ denota la frecuencia observada de cualquier celda y $r$ y $c$ representan las frecuencias marginales de fila y columna, respectivamente, correspondientes a $x_o$. La siguiente tabla ilustra la notación de una tabla de contingencia $2\times2$:
+
++----------------+-----------------+-----------------+-----------------+
+|                | $A_1$           | $A_2$           | Total           |
++================+=================+=================+=================+
+| $B_1$          | $x$             | $r-x$           | $r$             |
++----------------+-----------------+-----------------+-----------------+
+| $B_2$          | $c-x$           | $N-r-c+x$       | $N-r$           |
++----------------+-----------------+-----------------+-----------------+
+| **Total**      | $c$             | $N-c$           | $N$             |
++----------------+-----------------+-----------------+-----------------+
+
+: Notación de una tabla de contingencia 2x2
+
+Si $H(x|r, c,N)$ es una función positiva definida recursivamente en la que
+
+$$
+H(x|r, c,N)=D\times\left(\begin{array}{c}r\\ x\end{array}\right)\left(\begin{array}{c}N-r\\ c-x\end{array}\right)\left(\begin{array}{c}N\\ c\end{array}\right)^{-1}=D\times\frac{r!c!(N-r)!(N-c)!}{N!x!(r-x)!(c-x)!(N-r-c+x)!}
+$$
+
+donde $D > 0$ es una constante desconocida, entonces resolviendo la relación recursiva
+
+$$
+H(x+1|r, c,N)=H(x|r, c,N)\times g(x)
+$$
+
+se obtiene
+
+$$
+g(x)=\frac{(r-x)(c-x)}{(x+1)(N-r-c+x+1)}~.
+$$
+
+El algoritmo puede emplearse entonces para enumerar todos los valores de $H(x|r, c,N)$, donde $a \le x \le b$, $a = max(0, r + c - N)$, $b = min(r, c)$, y $H(a|N, r, c)$ es inicialmente tomado como un valor positivo pequeño. El total sobre toda la distribución puede hallarse mediante:
+
+$$
+T=\sum_{k=a}^bH(x|r, c,N)~.
+$$
+
+Para calcular el valor de la probabilidad de $x_o$, dadas las distribuciones de frecuencias marginales observadas, se debe determinar la probabilidad puntual de la tabla observada. Este valor, designado por $U_2 = H(x|r, c,N)$, se encuentra recursivamente. A continuación, hay que identificar la cola de la distribución de probabilidad asociada a $U_2$. Sea
+
+$$
+U_1=\begin{cases}H(x_o-1|r,c,N) & si~~x_0 >a \\0 & si~~x_o = a\end{cases}
+$$
+
+y
+
+$$
+U_3=\begin{cases}H(x_o+1|r,c,N) & si~~x_0 <b \\0 & si~~x_o = b\end{cases}~.
+$$
+
+Si $U_1 > U_3$, $U_2$ se encuentra en la cola derecha de la distribución; en caso contrario, se define que $U_2$ está en la cola izquierda de la distribución, y los subtotales de una cola ($S_1$) y de dos colas ($S_2$) pueden hallarse mediante:
+
+$$
+S_1(x_o|r,c,N)=\sum_{k=a}^bK_kH(k|r,c,N)
+$$
+
+y
+
+$$
+S_2(x_o|r,c,N)=\sum_{k=a}^bL_kH(k|r,c,N)~,
+$$
+
+respectivamente, donde
+
+$$
+K_k=\begin{cases}1 & si~~U_1 \le U_3 ~~y~~k\le x_o~~ó~~si~~U_1>U_2~~y~~ k\ge x_o \\0 & c.c\end{cases}
+$$
+
+y
+
+$$
+L_k=\begin{cases}1 & si~~H(k|r,c,N)\le U_2 \\0 & c.c\end{cases}
+$$
+
+para $k = a, . . . , b$. Los valores de la probabilidad exacta de una y dos colas vienen dados entonces por:
+
+$$
+P_1=\frac{S_1}{T}~~~~~y~~~~~P_2=\frac{S_2}{T}~,
+$$
+
+respectivamente.
+
+### Análisis exacto de Fisher con otras tablas de contigencia
+
+Aunque el test exacto de Fisher se ha limitado en gran medida al análisis de tablas de contingencia $2\times2$, no es difícil extenderel test exacto de Fisher a tablas de contingencia más grandes, aunque tales extensiones pueden generar un gran esfuero computacional. Consideremos un ejemplo de tabla de contingencia $2\times3$ con $N$ casos, donde $x_o$ denota la frecuencia observada de la celda en la primera fila y la primera columna, $y_o$ denota la frecuencia observada de la celda en la segunda fila y la primera columna, y $r_1$, $r_2$ y $c_1$ son las frecuencias marginales observadas en la primera fila, la segunda fila y la primera columna, respectivamente. Si $H(x, y)$, dados $N$, $r_1$,$r_2$ y $c_1$, es una función positiva definida recursivamente, la resolviendo de la relación recursiva
+
+$$
+H(x,y+1)=H(x,y)\times g_1(x,y)
+$$
+
+se obtiene
+
+$$
+g_1(x,y)=\frac{(c_1-x-y)(r_2-y)}{(1+y)(N-r_1-r_2-c_1+1+x+y)}~.~~~~~~~~~~~~~~~(2.2)
+$$
+
+Si $y = min(r_2, c_1 - x)$, entonces $H(x + 1, y) = H(x, y) \times g_2(x, y)$ donde
+
+$$
+g_2(x,y)=\frac{(c_1-x-y)(r_1-x)}{(1+x)(N-r_1-r_2-c_1+1+x+y)}~,~~~~~~~~~~~~~~~~~(2.3)
+$$
+
+dado que $max(0, r_1 + r_2 + c_1 - N - x) = 0$. Sin embargo, si $y = min(r_2, c_1 - x)$ y $max(0, r_1 + r_2 + c_1 - N - x) > 0$, entonces $H(x + 1, y - 1) = H(x, y) \times g_3(x, y)$, donde
+
+$$
+g_3(x,y)=\frac{y(r_1-x)}{(1+x)(r_2+1-y)}~.~~~~~~~~~~~~~~~~~~~~~~~~~(2.4)
+$$
+
+Las tres expresiones recursivas dadas en las ecuaciones (2.2), (2.3) y (2.4) pueden emplearse para enumerar completamente la distribución de $H(x, y)$, donde $a \le x \le b$, $a = max(0, r_1 + c_1 - N)$, $b = min(r_1, c_1)$, $c(x)\le y \le d(x)$, $c(x) = max(0, r_1 + r_2 + c_1 - N + x)$, $d(x) = min(r_2, c_1 - x)$ y $H[a, c(x)]$ se fija inicialmente en algún valor positivo pequeño. El total sobre la distribución completamente enumerada se puede calcular mediante:
+
+$$
+T=\sum_{x=a}^b\sum_{y=c(x)}^{d(x)}H(x,y)~.
+$$
+
+Para calcular el valor de la probabilidad de ($x_o$, $y_o$), dadas las distribuciones marginales de frecuencia observadas, debe ser obtenido el valor de la probabilidad puntual hipergeométrica de la tabla de contingencia observada $2\times3$; este valor también puede hallarse recursivamente. A continuación, hay que hallar la probabilidad de un resultado tan o más extremo. El subtotal viene dado por:
+
+$$
+S=\sum_{x=a}^b\sum_{y=c(x)}^{d(x)}J_{x,y}H(x,y)~,
+$$
+
+donde
+
+$$
+J_{x,y}=\begin{cases}1 & si~~H(x,y)\le H(x_o,y_o) \\0 & c.c\end{cases}
+$$
+
+para $x = a, . . . , b$ e $y = c(x), . . . , d(x)$. El valor exacto de probabilidad para la independencia asociada a las frecuencias de celdas observadas, $x_o$ e $y_o$, viene dado por $P = \frac{S}{T}$ .
+
+### Análisis de tablas 2×2×2
+
+La prueba de probabilidad exacta de Fisher no se limita a las tablas de contingencia de dos dimensiones. Considere una tabla de contingencia de $2\times2\times2$, como la representada en la siguiente figura:
+
+```{r echo=FALSE,out.width='5cm',fig.align='center',fig.cap="\\label{fig:contingencia}Representación gráfica de una tabla de contingencia 2x2x2",fig.pos="H"}
+knitr::include_graphics("graficos/contingencia2x2x2.png")
+```
+
+donde $n_{ijk}$ denota la frecuencia de la celda de la i-ésima fila, j-ésima columna y k-ésimo ¿corte? para $i, j, k = 1, 2$. Sea $n_{i..}$ la frecuencia marginal de la i-ésima fila, $i = 1, . . . , r$; $n_{.j.}$ la frecuencia marginal de la j-ésima columna, $j = 1, . . . ,c$, y $n_{..k}$ la frecuencia marginal del ¿corte?-ésimo, $k = 1, . . . s$. Por lo tanto, $A = n_{1..}$, $B = n_{.1.}$, $C = n_{..1}$, y $N = n_{...}$ denotan los totales de frecuencia marginal observados de la primera fila, la primera columna, el primer ¿corte? y toda la tabla, respectivamente, de manera que $1 \le A \le B \le C \le N/2$. Además, sea $w = n_{111}$, $x = n_{112}$, $y = n_{121}$ y $z = n_{211}$ las frecuencias de las celdas de la tabla de contingencia $2\times2\times2$. Entonces, la probabilidad para cualquier $w$, $x$, $y$, y $z$ está dada por:
+
+$$
+P(w,x,y,z|A,B,C,N)=[A!(N-A)!B!(N-B)!C!(N-C)!]\times
+$$
+
+$$
+\times[(N!)^2w!x!y!z!(A-w-x-y)!(B-w-x-z)!(C-w-y-z)!(N-A-B-C+2w+x+y+z)!]^{-1}
+$$
+
+Un algoritmo para calcular la probabilidad exacta de Fisher implica una estructura de bucle anidado y requiere dos etapas. En la primera se obtiene la probabilidad exacta, $U$, de la tabla de contingencia $2\times2\times2$ observada. En la segunda etapa se obtiene el valor de la probabilidad exacta de todas las tablas con valores de probabilidad puntual hipergeométrica iguales o inferiores a la probabilidad puntual de la tabla de contingencia observada. Los cuatro bucles anidados dentro de cada etapa son sobre los índices de frecuencia de las celdas $w$, $x$, $y$ y $z$, respectivamente. Los límites de $w$, $x$, $y$ y $z$ son
+
+$$
+0\le w\le M_w,~~0\le x\le M_x,~~0\le y\le M_y~~~ y~~~ L_x\le z\le M_z,
+$$
+
+respectivamente, donde $M_w = A$, $M_x = A-w$, $M_y = A-w-x$, $M_z = min(B -w- x,C - w - y)$, y $L_z = max(0,A + B + C - N - 2w - x - y)$.
+
+El método de recursión puede ilustrarse con el cuarto bucle (interno) sobre $z$, dado $w$, $x$, $y$, $A$, $B$, $C$, y $N$ porque el bucle interno produce tanto $U$ en la primera etapa como el valor exacto de la probabilidad en la segunda etapa. Sea $H(w, x, y, z)$ una función recursiva positiva definida dados $A$, $B$, $C$ y $N$, que satisface
+
+$$
+H(w,x,y,z+1)=H(w,x,y,z)\times g(w,x,y,z)~,
+$$
+
+donde
+
+$$
+g(w,x,y,z)=\frac{(B-w-x-z)(C-w-z)}{(z+1)(N-A-B-C+2w+x+y+z+1)}~.
+$$
+
+Los tres bucles restantes de cada etapa inicializan $H(w, x, y, z)$. Sea $I_x = max(0,A + B + C - N)$ y se establece como valor inicial de $H(0, 0, 0, I_z)$ a una constante positiva arbitraria pequeña. Entonces, el total sobre la distribución completamente enumerada sería:
+
+$$
+T=\sum_{w=0}^{M_w}\sum_{x=0}^{M_x}\sum_{y=0}^{M_y}\sum_{z=L_x}^{M_x}H(w,x,y,z)~.
+$$
+
+Si $w_o$, $x_o$, $y_o$ y $z_o$ son los valores de $w$, $x$, $y$ y $z$ en la tabla de contingencia observada $2\times2\times2$, entonces $U$ y el valor exacto de la probabilidad ($P$) vienen dados por:
+
+$$
+U=H(w_o,x_o,y_o,z_o)/T
+$$
+
+y
+
+$$
+P=\sum_{w=0}^{M_w}\sum_{x=0}^{M_x}\sum_{y=0}^{M_y}\sum_{z=L_x}^{M_x}H(w,x,y,z)\psi(w,x,y,z)/T~,
+$$
+
+respectivamente, donde
+
+$$
+\psi(w,x,y,z)=\begin{cases}1 & si~~H(w,x,y,z)\le H(w_o,x_o,y_o,z_o) \\0 & si~~c.c.\end{cases} ~.
+$$
