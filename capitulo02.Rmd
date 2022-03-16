@@ -110,19 +110,13 @@ $$
 
 El cálculo de los valores de probabilidad hipergeométricos para las tablas de contingencia $r\times c$ es más complejo que para las tablas de contingencia simples de $2\times2$. Consideremos la tabla de contingencia $4\times3$:
 
-+-------------+-------------+-------------+-------------+-------------+
-|             | $A_1$       | $A_2$       | $A_3$       | **Total**   |
-+=============+=============+=============+=============+=============+
-| $B_1$       | $n_{11}$    | $n_{12}$    | $n_{13}$    | $R_1$       |
-+-------------+-------------+-------------+-------------+-------------+
-| $B_2$       | $n_{21}$    | $n_{22}$    | $n_{23}$    | $R_2$       |
-+-------------+-------------+-------------+-------------+-------------+
-| $B_3$       | $n_{31}$    | $n_{32}$    | $n_{33}$    | $R_3$       |
-+-------------+-------------+-------------+-------------+-------------+
-| $B_4$       | $n_{41}$    | $n_{42}$    | $n_{43}$    | $R_4$       |
-+-------------+-------------+-------------+-------------+-------------+
-| **Total**   | $C_1$       | $C_2$       | $C_3$       | $N$         |
-+-------------+-------------+-------------+-------------+-------------+
+|           | $A_1$    | $A_2$    | $A_3$    | **Total** |
+|-----------|----------|----------|----------|-----------|
+| $B_1$     | $n_{11}$ | $n_{12}$ | $n_{13}$ | $R_1$     |
+| $B_2$     | $n_{21}$ | $n_{22}$ | $n_{23}$ | $R_2$     |
+| $B_3$     | $n_{31}$ | $n_{32}$ | $n_{33}$ | $R_3$     |
+| $B_4$     | $n_{41}$ | $n_{42}$ | $n_{43}$ | $R_4$     |
+| **Total** | $C_1$    | $C_2$    | $C_3$    | $N$       |
 
 : Notación tablas de contingencia 4x3
 
@@ -366,7 +360,7 @@ Existen tres métodos para determinar el valor de la probabilidad del estadísti
 
 La medición de la concordancia es un caso especial de medición de la asociación entre dos o más variables. Una serie de problemas de investigación estadística requieren medir la concordancia, en lugar de la asociación o la correlación. Los índices de concordancia miden el grado en que un conjunto de medidas de respuesta son idénticas a otro conjunto, es decir, concuerdan.
 
-Su uso surge se asignan objetos a un conjunto de categorías desordenadas y disjuntas. En 1957, Robinson explicó que la concordancia estadística requiere que los valores emparejados sean idénticos, mientras que la correlación sólo requiere que los valores emparejados estén vinculados por alguna función matemática. Por tanto, la concordancia es una medida más restrictiva que la correlación. Robinson argumentó que la distinción entre acuerdo y correlación lleva a la conclusión de que una estimación lógicamente correcta de la fiabilidad de una prueba viene dada por el coeficiente de correlación intraclase en lugar del coeficiente de correlación de Pearson (interclase) y que el concepto de acuerdo, en lugar de correlación, es la base adecuada de la teoría de la fiabilidad.
+Su uso surge se asignan objetos a un conjunto de categorías desordenadas y disjuntas. En 1957, Robinson explicó que la concordancia estadística requiere que los valores emparejados sean idénticos, mientras que la correlación sólo requiere que los valores emparejados estén empatados por alguna función matemática. Por tanto, la concordancia es una medida más restrictiva que la correlación. Robinson argumentó que la distinción entre acuerdo y correlación lleva a la conclusión de que una estimación lógicamente correcta de la fiabilidad de una prueba viene dada por el coeficiente de correlación intraclase en lugar del coeficiente de correlación de Pearson (interclase) y que el concepto de acuerdo, en lugar de correlación, es la base adecuada de la teoría de la fiabilidad.
 
 Una medida de acuerdo entre evaluadores debería, como mínimo, incorporar siete atributos básicos:
 
@@ -468,19 +462,13 @@ Tanto en el caso no ponderado como en el ponderado, kappa es igual a $+1$ cuando
 
 Supongamos que dos jueces o calificadores clasifican independientemente cada una de las $N$ observaciones en una de las $c$ categorías desordenadas, exhaustivas y mutuamente excluyentes. Las clasificaciones resultantes pueden mostrarse en una clasificación cruzada $c\times c$ con proporciones para las entradas de las celdas:
 
-+-------------------+----------+----------+----------+----------+-----------+
-| **Fila\\Columna** | **1**    | **2**    | **...**  | **c**    | **Total** |
-+===================+==========+==========+==========+==========+===========+
-| **1**             | $p_{11}$ | $p_{12}$ | ...      | $p_{1c}$ | $p_{1.}$  |
-+-------------------+----------+----------+----------+----------+-----------+
-| **2**             | $p_{21}$ | $p_{22}$ | ...      | $p_{2c}$ | $p_{2.}$  |
-+-------------------+----------+----------+----------+----------+-----------+
-| **...**           | ...      | ...      | ...      | ...      | ...       |
-+-------------------+----------+----------+----------+----------+-----------+
-| **c**             | $p_{c1}$ | $p_{c2}$ | ...      | $p_{cc}$ | $p_{c.}$  |
-+-------------------+----------+----------+----------+----------+-----------+
-| **Total**         | $p_{.1}$ | $p_{.2}$ | ...      | $p_{.c}$ | $p_{..}$  |
-+-------------------+----------+----------+----------+----------+-----------+
+| **Fila\\Columna** | **1**    | **2**    | **...** | **c**    | **Total** |
+|-------------------|----------|----------|---------|----------|-----------|
+| **1**             | $p_{11}$ | $p_{12}$ | ...     | $p_{1c}$ | $p_{1.}$  |
+| **2**             | $p_{21}$ | $p_{22}$ | ...     | $p_{2c}$ | $p_{2.}$  |
+| **...**           | ...      | ...      | ...     | ...      | ...       |
+| **c**             | $p_{c1}$ | $p_{c2}$ | ...     | $p_{cc}$ | $p_{c.}$  |
+| **Total**         | $p_{.1}$ | $p_{.2}$ | ...     | $p_{.c}$ | $p_{..}$  |
 
 : Clasificación cruzada cxc con proporciones en celdas
 
@@ -594,15 +582,11 @@ $$
 
 En 1947, el psicólogo Quinn McNemar propuso una prueba de cambio derivada de la prueba $t$ de pares emparejados para proporciones. Una aplicación típica es analizar respuestas binarias, codificadas con 0s y 1s, en $g = 2$ periodos de tiempo para cada uno de los $N \ge 2$ sujetos, como Éxito y Fracaso, Sí y No, De acuerdo y Desacuerdo, o A favor y en contra. Si las cuatro celdas se identifican como en la siguiente tabla:
 
-+------------------------+--------------+--------------+--------------+
-| **Tiempo 1\\Tiempo 2** | **Favor**    | **Contra**   | **Total**    |
-+========================+==============+==============+==============+
-| **Favor**              | $A$          | $B$          | $A+B$        |
-+------------------------+--------------+--------------+--------------+
-| **Contra**             | $C$          | $D$          | $C+D$        |
-+------------------------+--------------+--------------+--------------+
-| **Total**              | $A+C$        | $B+D$        | $N$          |
-+------------------------+--------------+--------------+--------------+
+| **Tiempo 1\\Tiempo 2** | **Favor** | **Contra** | **Total** |
+|------------------------|-----------|------------|-----------|
+| **Favor**              | $A$       | $B$        | $A+B$     |
+| **Contra**             | $C$       | $D$        | $C+D$     |
+| **Total**              | $A+C$     | $B+D$      | $N$       |
 
 : Notación de una tabla de clasificación cruzada 2x2 para el test Q de McNemar
 
@@ -782,11 +766,11 @@ Al igual que $d_N^c$, muchas medidas de asociación para dos variables se han ba
 
 -   pares discordantes
 
--   pares ¿vinculados? en la variable $y$ pero que difieren en la variable $x$
+-   pares empatados en la variable $y$ pero que difieren en la variable $x$
 
--   pares ¿vinculados? en la variable $x$ pero que difieren en la variable $y$
+-   pares empatados en la variable $x$ pero que difieren en la variable $y$
 
--   pares ¿vinculados? en ambas variables $x$ e $y$
+-   pares empatados en ambas variables $x$ e $y$
 
 Para una tabla de contingencia $r\times c$, los pares concordantes (pares de objetos que están clasificados en el mismo orden tanto en la variable $x$ como en la variable $y$) vienen dados por:
 
@@ -800,19 +784,19 @@ $$
 D=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{i,c-j+1}(\sum_{k=i+1}^r\sum_{l=1}^{c-j}n_{kl})~,
 $$
 
-los pares de objetos ¿vinculados? en la variable $x$ pero que difieren en la variable $y$ vienen dados por:
+los pares de objetos empatados en la variable $x$ pero que difieren en la variable $y$ vienen dados por:
 
 $$
 T_x=\sum_{i=1}^{r}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=j+1}^cn_{ik})~,
 $$
 
-los pares de objetos ¿vinculados? en la variable $y$ pero que difieren en la variable $x$ vienen dados por:
+los pares de objetos empatados en la variable $y$ pero que difieren en la variable $x$ vienen dados por:
 
 $$
 T_y=\sum_{j=1}^{c}\sum_{i=1}^{r-1}n_{ij}(\sum_{k=i+1}^rn_{kj})~,
 $$
 
-y los pares de objetos ¿vinculados? en la variable $x$ y en la variable $y$ vienen dados por:
+y los pares de objetos empatados en la variable $x$ y en la variable $y$ vienen dados por:
 
 $$
 T_{xy}=\frac{1}{2}\sum_{i=1}^{r}\sum_{j=1}^{c}n_{ij}(n_{ij}-1)~.
@@ -838,19 +822,19 @@ $$
 
 A partir de la tabla de contingencia esperada se obtienen los parámetros $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$.
 
-Afortunadamente, existe una forma más eficiente de calcular $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$ sin calcular primero los valores esperados. En primer lugar, dadas las distribuciones de frecuencias marginales de filas y columnas observadas se calcula el número de pares de valores esperados de frecuencia de celdas esperadas vinculados a las variables $x$ e $y$,
+Afortunadamente, existe una forma más eficiente de calcular $C'$, $D'$, $T_x'$, $T_y'$ y $T_{xy}'$ sin calcular primero los valores esperados. En primer lugar, dadas las distribuciones de frecuencias marginales de filas y columnas observadas se calcula el número de pares de valores esperados de frecuencia de celdas esperadas empatados a las variables $x$ e $y$,
 
 $$
 T_{xy}'=\frac{1}{2N^2}(\sum_{i=1}^rn_{i.}^2)(\sum_{j=1}^cn_{.j}^2)-\frac{N}{2}
 $$
 
-A continuación, se calcula el número de pares de valores de frecuencia de celda esperados vinculados a la variable $y$,
+A continuación, se calcula el número de pares de valores de frecuencia de celda esperados empatados a la variable $y$,
 
 $$
 T_y'=\frac{1}{2}\sum_{i=1}^rn_{i.}^2-\frac{N}{2}-T_{xy}'
 $$
 
-Del mismo modo, se calcula el número de pares de valores de frecuencia de celda esperados vinculados a la variable $x$,
+Del mismo modo, se calcula el número de pares de valores de frecuencia de celda esperados empatados a la variable $x$,
 
 $$
 T_x'=\frac{1}{2}\sum_{j=1}^cn_{.j}^2-\frac{N}{2}-T_{xy}'
@@ -892,13 +876,13 @@ $$
 D''=\sum_{i=1}^{r-1}\sum_{j=1}^{c-1}n_{i,c-j+1}(\sum_{k=i+1}^r\sum_{l=1}^{c-j}n_{kl})~,
 $$
 
-el número de pares de valores de frecuencia de celda maximizados vinculados a la variable $x$ es
+el número de pares de valores de frecuencia de celda maximizados empatados a la variable $x$ es
 
 $$
 T_x''=\sum_{i=1}^{r}\sum_{j=1}^{c-1}n_{ij}(\sum_{k=j+1}^cn_{ik})~,
 $$
 
-el número de pares de valores de frecuencia celular maximizados vinculados a la variable $y$ es
+el número de pares de valores de frecuencia celular maximizados empatados a la variable $y$ es
 
 $$
 T_y''=\sum_{j=1}^{c}\sum_{i=1}^{r-1}n_{ij}(\sum_{k=i+1}^rn_{kj})~,
@@ -936,13 +920,13 @@ $$
 d_N^c=\frac{E_1-E_2}{E_1}=\frac{(T_y'-T_y'')-(T_y-T_y'')}{T_y'-T_y''}=\frac{T_y'-T_y}{T_y'-T_y''}
 $$
 
-Dado que $d_N^c$ es una medida simétrica, el número de valores vinculados en la variable $x$ puede utilizarse en lugar del número de valores vinculados en la variable $y$. Así pues,
+Dado que $d_N^c$ es una medida simétrica, el número de valores empatados en la variable $x$ puede utilizarse en lugar del número de valores empatados en la variable $y$. Así pues,
 
 $$
 d_N^c=\frac{T_x'-T_x}{T_x'-T_x''}
 $$
 
-Alternativamente, $d_N^c$ puede definirse en términos del número de valores vinculados tanto en $x$ como en $y$. Así,
+Alternativamente, $d_N^c$ puede definirse en términos del número de valores empatados tanto en $x$ como en $y$. Así,
 
 $$
 d_N^c=\frac{T_{xy}'-T_{xy}}{T_{xy}'-T_{xy}''}
@@ -1026,15 +1010,11 @@ Aunque la prueba de probabilidad exacta de Fisher se diseñó originalmente para
 
 Considere una tabla de contingencia $2\times2$ con $N$ casos, donde $x_o$ denota la frecuencia observada de cualquier celda y $r$ y $c$ representan las frecuencias marginales de fila y columna, respectivamente, correspondientes a $x_o$. La siguiente tabla ilustra la notación de una tabla de contingencia $2\times2$:
 
-+----------------+-----------------+-----------------+-----------------+
-|                | $A_1$           | $A_2$           | Total           |
-+================+=================+=================+=================+
-| $B_1$          | $x$             | $r-x$           | $r$             |
-+----------------+-----------------+-----------------+-----------------+
-| $B_2$          | $c-x$           | $N-r-c+x$       | $N-r$           |
-+----------------+-----------------+-----------------+-----------------+
-| **Total**      | $c$             | $N-c$           | $N$             |
-+----------------+-----------------+-----------------+-----------------+
+|           | $A_1$ | $A_2$     | Total |
+|-----------|-------|-----------|-------|
+| $B_1$     | $x$   | $r-x$     | $r$   |
+| $B_2$     | $c-x$ | $N-r-c+x$ | $N-r$ |
+| **Total** | $c$   | $N-c$     | $N$   |
 
 : Notación de una tabla de contingencia 2x2
 
