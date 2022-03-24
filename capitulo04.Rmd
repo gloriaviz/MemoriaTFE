@@ -1,6 +1,6 @@
 ---
-author: "Nombre Completo Autor"
-date: "27/10/2017"
+author: "Gloria Vizcaíno Castaño"
+date: "17/03/2022"
 documentclass: book
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
@@ -29,8 +29,6 @@ output:
       #after_body: latex/latex_antes_enddoc.tex
 ---
 
-
-
 ```{r include=FALSE}
 knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = FALSE, warning = FALSE, message = FALSE,
@@ -39,20 +37,25 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 
 ```
 
-
 <!-- \setcounter{chapter}{2} -->
+
 <!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
+
 <!-- \pagenumbering{arabic} -->
 
+```{=tex}
 \ifdefined\ifprincipal
 \else
 \setlength{\parindent}{1em}
 \pagestyle{fancy}
 \setcounter{tocdepth}{4}
 \tableofcontents
+```
 <!-- \nocite{*} -->
+
 \fi
 
+```{=tex}
 \ifdefined\ifdoblecara
 \fancyhead{}{}
 \fancyhead[LE,RO]{\scriptsize\rightmark}
@@ -68,8 +71,113 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \fi
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
+```
+# Medidas para Variables Ordinales (Parte 2)
 
+Este capítulo continúa la descripción de las medidas de asociación para dos variables de nivel ordinal iniciada en el capítulo 3, pero se centra las medidas que se basan en criterios distintos a las comparaciones por pares entre las puntuaciones de los rangos, aunque es inevitable cierto solapamiento.
 
-# Título del Capítulo
+Se incluyen métodos estadísticos de permutación exactos y de Monte Carlo para el coeficiente de correlación de Spearman, la medida de concordancia de la regla del pie de Spearman, el coeficiente de concordancia de Kendall y Babington Smith, la medida kappa ponderada de Cohen para la concordancia, y el análisis ¿ridit? de Bross.
 
-## Primera sección
+## Coeficiente de correlación de rango de Spearman
+
+Se consideran dos clasificaciones de $N$ objetos consistentes en los $N$ primeros enteros y sean $X_i$ e $Y_i$ para $i = 1, . . ., N$ la primera y la segunda clasificación, respectivamente. La correlación de rangos no está exenta de críticas, ya que la derivación de la fórmula para esta correlación implica la suposición de que las diferencias entre los rangos sucesivos son iguales.
+
+Una medida popular de la correlación entre las dos clasificaciones es el coeficiente de correlación de orden de rango de Spearman, dado por
+
+$$
+\rho=1-\frac{\displaystyle\sum_{i=1}^Nd_i^2}{\frac{N(N^2-1)}{6}}=1-\frac{6\displaystyle\sum_{i=1}^Nd_i^2}{N(N^2-1)}~, ~~~~~~~~ (4.1)
+$$
+
+donde $d_i = X_i - Y_i$ para $i = 1, . . . ,N$. Charles Spearman desarrolló $\rho$ en el primero de los dos artículos sobre la medición de la asociación y la correlación en 1904 y 1906 que aparecieron en el *American Journal of Psychology* y en el *British Journal of Psychology*, respectivamente. Con dos conjuntos de puntuaciones de rango sin valores empatados, $X_i$ e $Y_i$ para $i = 1, . . . , N$, se tiene que
+
+$$
+\sum_{i=1}^Nx_i=\sum_{i=1}^Ny_i=\frac{N(N+1)}{2}
+$$y
+
+$$
+\sum_{i=1}^Nx_i^2=\sum_{i=1}^Ny_i^2=\frac{N(N+1)(2N+1)}{6}~,
+$$
+
+Spearman simplemente sustituyó en la fórmula de Pearson del coeficiente de correlación producto-momento dado por
+
+$$
+r_{xy}=\frac{N\displaystyle\sum_{i=1}^Nx_iy_i-\sum_{i=1}^Nx_i\sum_{i=1}^Ny_i}{\sqrt{N\displaystyle\sum_{i=1}^Nx_i^2-(\sum_{i=1}^Nx_i)^2}\sqrt{N\displaystyle\sum_{i=1}^Ny_i^2-(\sum_{i=1}^Ny_i)^2}}
+$$
+
+y simplificó la ecuación, dando lugar a la Ecuación (4.1).
+
+Obsérvese que el denominador del coeficiente de correlación de orden de rango de Spearman, $N(N^2 - 1)/6$, como se indica en la Ec. (4.1), representa la mitad del valor máximo de $\sum_{i=1}^Nd_i^2$ cuando $X_i$ e $Y_i$ , $i = 1, . . . ,N$, son puntuaciones de rango sin valores empatados y las puntuaciones de rango de $Y_i$ son la inversa exacta de las puntuaciones de rango de $X_i$, es decir, $Y_i = N - X_i + 1$ para $i = 1, . . ., N$. Por lo tanto, la $\rho$ de Spearman es una medida de correlación de rango corregida al máximo y toma valores entre $\pm 1$, donde $+1$ indica una asociación positiva perfecta y $-1$ indica una asociación negativa perfecta.
+
+SEGUIRRRRRRRR
+
+Se confirma fácilmente que el denominador de la ecuación (6.1), N(N2 - 1)/6, es la mitad del valor máximo de N i=1 d2 i cuando xi e yi para i = 1, . . . , N son ambos son puntuaciones de rango no vinculadas y las puntuaciones de rango yi son la inversa de las puntuaciones de rango xi. En el valor máximo de N i=1 d2 i , defina
+
+Ya que, para N puntuaciones de rango no vinculadas,
+
+y, para xi = 1, . . . , N e yi = N - xi + 1, i = 1, . . . , N,
+
+entonces al sustituir en la Ec. (6.1) se obtiene
+
+que es el doble del valor de N(N2 - 1)/6.
+
+Kendall, Kendall y Babington Smith observaron que para juzgar la significación de un valor de ρ, es necesario considerar sólo la distribución de valores obtenida a partir de las clasificaciones observadas con todas las demás permutaciones posibles de los números enteros de 1 a N, y señalaron además que en la práctica suele ser más conveniente considerar sólo la distribución de N i=1 d2 i ya que N(N2-1)/6 es invariable bajo permutación [45, p. 25]. Kendall et al. proporcionaron tablas de valores explícitos hasta N = 8 inclusive con algunas distribuciones experimentales para N = 10 y N = 20. Las distribuciones para N = 2, . . . . 8 eran exactas, pero las distribuciones para N = 10 y N = 20 se basaban en una muestra de 2.000 permutaciones seleccionadas al azar de las puntuaciones de los rangos, lo que un ejemplo temprano de métodos estadísticos de permutación de remuestreo de Monte Carlo [45, pp. 261-267].
+
+## Medida de concordancia de la regla de pie de Spearman
+
+Los muy citados artículos de 1904 y 1906 de Charles Spearman contenían dos nuevas medidas de correlación de rango: el conocido coeficiente de correlación de rango de Spearman, ρ, y un segundo coeficiente de correlación menos conocido que Spearman denominó "la regla del pie" [82, 83].34 Considere dos clasificaciones de N objetos que consisten en los primeros N enteros y deje que xi e yi para i = 1, . . . N denotan la primera y la segunda clasificación, respectivamente. Entonces, la regla de Spearman viene dada por
+
+A diferencia del coeficiente de correlación de orden de rango de Spearman, el denominador del coeficiente de la regla de pie de Spearman, (N2 - 1)/3, como se da en la Ec. (6.2), no representa la mitad del valor máximo de N i=1 \|xi -yi \| cuando xi e yi para i = 1, . . . . N son ambas puntuaciones de rango no vinculadas y las puntuaciones de rango yi son la inversa exacta de las puntuaciones de rango xi, es decir, yi = N - xi + 1 para i = 1, . . . Por lo tanto, la R de Spearman no es una medida de correlación de rango máximo corregida y es, en cambio, una medida de concordancia corregida por el azar.
+
+Se puede demostrar fácilmente que la R de Spearman es una medida de concordancia corregida por el azar y no es, de hecho, una medida convencional de correlación, lo que explica por qué R puede, en ocasiones, dar valores negativos y sólo puede alcanzar un valor de -1 cuando N = 2. Para demostrar que el valor esperado de N i=1 \|di \| viene dado por (N2 - 1)/3, dejemos que
+
+Por lo tanto, el coeficiente de la regla de pie de Spearman, dado por
+
+es una medida de concordancia corregida por el azar cuando el valor esperado de N i=1 \|di \| viene dado por (N2 -1)/3, ya que adopta la forma clásica de las medidas de concordancia corregidas por el azar dada por
+
+Tres limitaciones de la regla de pie de Spearman contribuyen a su falta de uso en la investigación contemporánea, donde rara vez se encuentra [85, p. 104]. En primer lugar, a diferencia de otras medidas de correlación de rangos, R no norma adecuadamente entre los límites de ±1; en segundo lugar, al igual que la ρ de Spearman, R se limita a los datos totalmente clasificados y no se adapta a las puntuaciones de rango empatadas; y en tercer lugar, debido a la suma de las diferencias absolutas entre las puntuaciones de rango, tradicionalmente ha sido algo engorroso establecer el valor de probabilidad de un valor observado de R, especialmente cuando N es pequeño.
+
+La R de Spearman alcanza un valor máximo de +1 cuando xi es idéntica a yi para i = 1, . . . N y no hay valores empatados. Sin embargo, si yi = N - xi + 1 para i = 1, . . . . N, entonces R = -0,5 cuando N es impar y
+
+cuando N es par [42]. En consecuencia, R no puede alcanzar un valor mínimo de -1, excepto cuando N = 2. Spearman, aparentemente sin saber que R era una medida corregida por el azar y reconociendo que los valores negativos de R no representaban una correlación inversa, sugirió ingenuamente que "es mejor tratar toda correlación como positiva" [82, pp. 87-88]. Maurice Kendall señaló explícitamente esta aparente falta de normatividad adecuada como un defecto de la regla del pie y sugirió una corrección dada por
+
+que aseguraba un límite adecuado de+1 cuando las dos clasificaciones estaban en completa concordancia y -1 cuando las dos clasificaciones eran inversas entre sí [42, p. 33]. Sin embargo la corrección, aunque bien intencionada, destruyó por completo la interpretación de la regla de pie de Spearman, un atributo importante y valioso que no fue importante y valioso que no se entendía ni se apreciaba en ese momento.
+
+### Probabilidad de la regla del pie de Spearman
+
+Cuando las variables x e y consisten en su totalidad en puntuaciones de rango no vinculadas de 1 a N y la variable y es una permutación de las observaciones de rango en la variable x, existen métodos para determinar la probabilidad de una R observada bajo la hipótesis nula de que cualquiera de los N! ordenamientos de los valores de x o y es igualmente probable. Si
+
+entonces, dado que R es simplemente una transformación lineal de D, la probabilidad de un valor observado de D es la probabilidad de un valor observado de R. Las tablas de la función de distribución acumulativa exacta de D para 2 ≤ N ≤ 10 y los valores de probabilidad aproximados basados en métodos deMonte Carlo para 11 ≤ N ≤ 15 fueron publicados por Ury y Kleinecke en 1979 [88]. En 1988 Franklin amplió el trabajo de Ury y Kleinecke, informó de la función de distribución acumulativa exacta de D para 11 ≤ N ≤ 18, y discutió la tasa de convergencia a una distribución normal aproximada [31]. En 1990 Salama y Quade utilizaron las propiedades de la cadena de Markov para obtener la exacta función de distribución acumulativa de D para 4 ≤ N ≤ 40 y siguieron investigando aproximaciones a la distribución discreta de D [71]. Si la variable x o la variable y contiene valores ligados, entonces el cálculo de un valor de probabilidad exacto es más complejo.
+
+### Múltiples rangos
+
+La regla del pie de Spearman, tal como se presentó originalmente en sus artículos de 1904 y 1906 en el American Journal of Psychology y el British Journal of Psychology, respectivamente, se limitaba a N ≥ 2 puntuaciones de rango no empatadas y b = 2 jueces/ratores [82, 83]. Sin embargo, como Berry y Mielke demostraron en 1998, la regla de Spearman puede generalizarse para incluir tanto puntuaciones de rango empatadas como no empatadas y b ≥ 2 conjuntos de clasificaciones [5]. Dejemos que
+
+denota una función de distancia media basada en todas las b2 posibles diferencias absolutas emparejadas
+
+diferencias absolutas emparejadas entre los valores de las clasificaciones por b jueces y dejemos que
+
+denota el valor esperado de δ donde b es el número de jueces, N es el número de objetos, y
+
+r\<s es la suma sobre todos los r y s tales que 1 ≤ r \< s ≤ N. Entonces, la generalización de la medida de la regla del pie de Spearman viene dada por
+
+donde es una medida de concordancia corregida por el azar entre los b jueces que no se limita a las puntuaciones de rango no empatadas. Nótese que en el caso de b = 2 jueces, la Ec. (6.5) se reduce a la regla de pie de Spearman de 1906 para b = 2 jueces, como se indica en la ecuación (6.2) en la página 302.
+
+## Coeficiente de Concordancia
+
+Mientras que el coeficiente de correlación de rango de Spearman y las medidas τa y τb de Kendall expresan el grado de asociación entre dos variables medidas en puntuaciones de rango o transformadas en ellas, el coeficiente de concordancia expresa el grado de asociación entre múltiples conjuntos de puntuaciones de rango.
+
+En 1939, Maurice Kendall y Bernard Babington Smith publicaron un artículo en The Annals of Mathematical Statistics sobre "The problem of m rankings" en el que desarrollaron el conocido coeficiente de concordancia [43].6 Si N y m denotan el número de puntuaciones de rango y el número de jueces, respectivamente, entonces Kendall y Babington Smith definieron el coeficiente de concordancia como
+
+donde S es la suma observada de los cuadrados de las desviaciones de las sumas de los rangos respecto al valor medio m(N + 1)/2.7
+
+Dado que m2(N3 - N) en el denominador de la ecuación (6.6) es invariable en todas las permutaciones de los datos observados, Kendall y Babington Smith demostraron que para para comprobar si un valor observado de W es estadísticamente significativo sólo es necesario considerar la distribución de S permutando los N rangos de todas las formas posibles e igualmente probables. posibles. Si uno de los rangos es fijo, hay (N!)m-1 valores posibles de S. de S. Basándose en este procedimiento de permutación, Kendall y Babington Smith crearon cuatro tablas que proporcionan valores de probabilidad exactos para N = 3 y m = 2, . . . , 10, N = 4 y m = 2, . . . . 6, y N = 5 y m = 3.
+
+En una forma más fácil de calcular, W puede definirse como
+
+donde Ri para i = 1, . . . . . N es la suma de las puntuaciones de rango para el i-ésimo de los N objetos y no hay puntuaciones de rango empatadas. También se sabe que W puede definirse como una función del valor medio de todos los coeficientes de correlación de orden de rango de Spearman por pares, dado por
+
+A este respecto, Kendall y Babington Smith demostraron que ρ¯ es simplemente el coeficiente intraclase rI, para los m conjuntos de clasificaciones, y también observaron que el coeficiente de concordancia es equivalente al análisis de varianza de dos vías de Friedman para los rangos, como como señaló I.R. Savage [72, p. 335]. Las relaciones entre W y ρ¯ vienen dadas por
+
+Si todos los ordenamientos de los conjuntos de puntuaciones de rango observadas ocurren con igual probabilidad el valor exacto de la probabilidad del valor observado de W calculado sobre M posible, ordenamientos igualmente probables de las puntuaciones de rango observadas bajo la hipótesis nula es
+
+donde Wo indica el valor observado de W.
