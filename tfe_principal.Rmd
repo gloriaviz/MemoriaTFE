@@ -76,13 +76,13 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \tableofcontents
 
 
-\cleardoublepage   
-<!--  \clearpage -->
-\section*{Prólogo}
-\addcontentsline{toc}{section}{Prólogo}
+<!-- \cleardoublepage    -->
+<!-- <!--  \clearpage --> -->
+<!-- \section*{Prólogo} -->
+<!-- \addcontentsline{toc}{section}{Prólogo} -->
 
-```{r child = 'prologo.Rmd'}
-```
+<!-- ```{r child = 'prologo.Rmd'} -->
+<!-- ``` -->
 
 
 \cleardoublepage   
@@ -149,7 +149,7 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 
 \FloatBarrier
 
-```{r child = 'capitulo03.Rmd'}
+```{r child = 'capitulo04.Rmd'}
 ```
 
 
