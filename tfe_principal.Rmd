@@ -77,7 +77,7 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 
 
 <!-- \cleardoublepage    -->
-<!-- <!--  \clearpage --> -->
+<!-- <!--  \clearpage --> 
 <!-- \section*{Prólogo} -->
 <!-- \addcontentsline{toc}{section}{Prólogo} -->
 

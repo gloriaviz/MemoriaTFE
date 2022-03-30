@@ -74,7 +74,7 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 ```
 # Medidas para Variables Ordinales (Parte 1)
 
-Las medidas de las relaciones entre dos variables de nivel ordinal suelen ser más informativas que las medidas entre simples variables de nivel nominal (categóricas), ya que las categorías disjuntas y ordenadas suelen contener más información que las categorías disjuntas y desordenadas. Las medidas de asociación para dos variables de nivel ordinal suelen ser de dos tipos: las que se basan en las diferencias entre pares, como las medidas $\tau_a$ y $\tau_b$ de Kendall y la medida $\gamma$ de Goodman y Kruskal, y las que se basan otros criterios, como la medida kappa ponderada de Cohen de concordancia entre evaluadores y el análisis ¿ridit? de Bross.
+Las medidas de las relaciones entre dos variables de nivel ordinal suelen ser más informativas que las medidas entre simples variables de nivel nominal (categóricas), ya que las categorías disjuntas y ordenadas suelen contener más información que las categorías disjuntas y desordenadas. Las medidas de asociación para dos variables de nivel ordinal suelen ser de dos tipos: las que se basan en las diferencias entre pares, como las medidas $\tau_a$ y $\tau_b$ de Kendall y la medida $\gamma$ de Goodman y Kruskal, y las que se basan otros criterios, como la medida kappa ponderada de Cohen de concordancia entre evaluadores y el análisis ridit de Bross.
 
 En este capítulo se aplican los métodos estadísticos de permutación a una variedad de medidas de asociación diseñadas para variables de nivel ordinal que se basan en las comparaciones por pares. Se incluyen las medidas de asociación ordinal $\tau_a$ y $\tau_b$ de Kendall, $\tau_c$ de Stuart, las medidas asimétricas $d_{yx}$ y $d_{xy}$ de Somers, las medidas $d_{y.x}$ y $d_{x.y}$ de Kim, la medida $e$ de Wilson o el coeficiente de correlación rango-biserial de Cureton.
 
@@ -88,13 +88,13 @@ $$
 
 La siguiente tabla muestra una notación convencional para una tabla de contingencia $r\times c$ para dos variables categóricas, $X_i$ para $i = 1, . . . ,r$ e $Y_j$ para $j = 1, . . .,c$:
 
-| **X\\Y**  | $Y_1$    | $Y_2$    | **...** | $Y_c$    | **Total** |
-|-----------|----------|----------|---------|----------|-----------|
-| $X_1$     | $n_{11}$ | $n_{12}$ | ...     | $n_{1c}$ | $n_{1.}$  |
-| $X_2$     | $n_{21}$ | $n_{22}$ | ...     | $n_{2c}$ | $n_{2.}$  |
-| **...**   | ...      | ...      | ...     | ...      | ...       |
-| $X_r$     | $n_{r1}$ | $n_{r2}$ | ...     | $n_{rc}$ | $n_{r.}$  |
-| **Total** | $n_{.1}$ | $n_{.2}$ | ...     | $n_{.c}$ | $N$       |
+| **X\\Y**  | $Y_1$    | $Y_2$    | $\dots$  | $Y_c$    | **Total** |
+|-----------|----------|----------|----------|----------|-----------|
+| $X_1$     | $n_{11}$ | $n_{12}$ | $\dots$  | $n_{1c}$ | $n_{1.}$  |
+| $X_2$     | $n_{21}$ | $n_{22}$ | $\dots$  | $n_{2c}$ | $n_{2.}$  |
+| $\vdots$  | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$  |
+| $X_r$     | $n_{r1}$ | $n_{r2}$ | $\dots$  | $n_{rc}$ | $n_{r.}$  |
+| **Total** | $n_{.1}$ | $n_{.2}$ | $\dots$  | $n_{.c}$ | $N$       |
 
 : Notación para la clasificación cruzada de dos variables categóricas, X e Y.
 

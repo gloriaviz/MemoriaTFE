@@ -176,15 +176,15 @@ En 1954, Leo Goodman y William Kruskal propusieron varias medidas nuevas de asoc
 
 Sea una tabla de contingencia $r\times c$ como la representada a continuación:
 
-| B\\A      | $A_1$    | $A_2$    | ... | $A_c$    | Total    |
-|-----------|----------|----------|-----|----------|----------|
-| $B_1$     | $n_{11}$ | $n_{12}$ | ... | $n_{1c}$ | $n_{1.}$ |
-| $B_2$     | $n_{21}$ | $n_{22}$ | ... | $n_{2c}$ | $n_{2.}$ |
-| ...       | ...      | ...      | ... | ...      | ...      |
-| $B_r$     | $n_{r1}$ | $n_{r2}$ | ... | $n_{rc}$ | $n_{r.}$ |
-| **Total** | $n_{.1}$ | $n_{.2}$ | ... | $n_{.c}$ | $N$      |
+| B\\A      | $A_1$    | $A_2$    | $\dots$  | $A_c$    | Total    |
+|-----------|----------|----------|----------|----------|----------|
+| $B_1$     | $n_{11}$ | $n_{12}$ | $\dots$  | $n_{1c}$ | $n_{1.}$ |
+| $B_2$     | $n_{21}$ | $n_{22}$ | $\dots$  | $n_{2c}$ | $n_{2.}$ |
+| $\vdots$  | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $B_r$     | $n_{r1}$ | $n_{r2}$ | $\dots$  | $n_{rc}$ | $n_{r.}$ |
+| **Total** | $n_{.1}$ | $n_{.2}$ | $\dots$  | $n_{.c}$ | $N$      |
 
-: Notación para la clasificación cruzada de dos variables categóricas, A_j con j=1,...,c y B_i con i=1,...,r
+: Notación para la clasificación cruzada de dos variables categóricas, A y B, con c y r categorías respectivamente
 
 donde $A_j$ con $j = 1,...,c$ representan las $c$ categorías de la variable dependiente $A$, $B_i$ con $i = 1, . . . , r$ denotan las $r$ categorías para la variable independiente $B$, $n_{ij}$ la frecuencia absoluta de celda para $i = 1, . . . r$ y $j = 1, . . . . c$, y $N$ es el total observaciones. Denotamos por un punto ($.$) la suma parcial de todas las filas o todas las columnas, según la posición del ($·$) en la lista de subíndices. Si el ($·$) está en la primera posición del subíndice la suma es sobre todas las filas y si el ($·$) está en la segunda posición de subíndice, la suma es sobre todas las columnas. Por lo tanto, $n_{i.}$ denota el total de la frecuencia marginal de la i-ésima fila, $i = 1, . . . r$, sumada en todas las columnas, y $n_{.j}$ indica la frecuencia marginal de la j-ésima columna, $j = 1, . . . . c$, sumada en todas las filas.
 
@@ -320,15 +320,15 @@ Una prueba simétrica de homogeneidad, por su naturaleza, excluye la informació
 
 Se consideran las variables $A$ y $B$, con $B$ la variable dependiente. Sean $B_1, . . . ,B_r$ las $r\ge 2$ categorías de la variable dependiente, $A_1, . . . , A_g$ las $g \ge 2$ categorías de la variable independiente, $n_{ij}$ la frecuencia de celda en la i-ésima fila y j-ésima columna, $i = 1, . , r$ y $j = 1, . . . , g$, y $N$ el tamaño total de la muestra. Sean $n_{1.}, . . . . n_{r.}$ las frecuencias marginales de la variable $B$ y $n_{.1}, … , n_{.g}$ las frecuencias marginales totales de la variable $A$. La clasificación cruzada de las variables A y B se muestra en la tabla siguiente:
 
-| B\\A      | $A_1$    | $A_2$    | ... | $A_g$    | Total    |
-|-----------|----------|----------|-----|----------|----------|
-| $B_1$     | $n_{11}$ | $n_{12}$ | ... | $n_{1g}$ | $n_{1.}$ |
-| $B_2$     | $n_{21}$ | $n_{22}$ | ... | $n_{2g}$ | $n_{2.}$ |
-| ...       | ...      | ...      | ... | ...      | ...      |
-| $B_r$     | $n_{r1}$ | $n_{r2}$ | ... | $n_{rg}$ | $n_{r.}$ |
-| **Total** | $n_{.1}$ | $n_{.2}$ | ... | $n_{.g}$ | $N$      |
+| B\\A      | $A_1$    | $A_2$    | $\dots$  | $A_g$    | Total    |
+|-----------|----------|----------|----------|----------|----------|
+| $B_1$     | $n_{11}$ | $n_{12}$ | $\dots$  | $n_{1g}$ | $n_{1.}$ |
+| $B_2$     | $n_{21}$ | $n_{22}$ | $\dots$  | $n_{2g}$ | $n_{2.}$ |
+| $\vdots$  | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $B_r$     | $n_{r1}$ | $n_{r2}$ | $\dots$  | $n_{rg}$ | $n_{r.}$ |
+| **Total** | $n_{.1}$ | $n_{.2}$ | $\dots$  | $n_{.g}$ | $N$      |
 
-: Notación para la clasificación cruzada de dos variables categóricas, A_j para j=1,...,g y B_i para i=1,...,r
+: Notación para la clasificación cruzada de dos variables categóricas, A y B, con g y r categorías respectivamente
 
 Aunque nunca se ha propuesto como prueba de homogeneidad, la prueba asimétrica $t_b$, introducida por primera vez por Goodman y Kruskal en 1954 [@Goodman1954], es una alternativa atractiva a la prueba simétrica de homogeneidad, la chi-cuadrado. El estadístico de la prueba viene dado por:
 
@@ -462,13 +462,13 @@ Tanto en el caso no ponderado como en el ponderado, kappa es igual a $+1$ cuando
 
 Supongamos que dos jueces o calificadores clasifican independientemente cada una de las $N$ observaciones en una de las $c$ categorías desordenadas, exhaustivas y mutuamente excluyentes. Las clasificaciones resultantes pueden mostrarse en una clasificación cruzada $c\times c$ con proporciones para las entradas de las celdas:
 
-| **Fila\\Columna** | **1**    | **2**    | **...** | **c**    | **Total** |
-|-------------------|----------|----------|---------|----------|-----------|
-| **1**             | $p_{11}$ | $p_{12}$ | ...     | $p_{1c}$ | $p_{1.}$  |
-| **2**             | $p_{21}$ | $p_{22}$ | ...     | $p_{2c}$ | $p_{2.}$  |
-| **...**           | ...      | ...      | ...     | ...      | ...       |
-| **c**             | $p_{c1}$ | $p_{c2}$ | ...     | $p_{cc}$ | $p_{c.}$  |
-| **Total**         | $p_{.1}$ | $p_{.2}$ | ...     | $p_{.c}$ | $p_{..}$  |
+| **Fila\\Columna** | **1**    | **2**    | $\dots$  | **c**    | **Total** |
+|-------------------|----------|----------|----------|----------|-----------|
+| **1**             | $p_{11}$ | $p_{12}$ | $\dots$  | $p_{1c}$ | $p_{1.}$  |
+| **2**             | $p_{21}$ | $p_{22}$ | $\dots$  | $p_{2c}$ | $p_{2.}$  |
+| $\vdots$          | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$  |
+| **c**             | $p_{c1}$ | $p_{c2}$ | $\dots$  | $p_{cc}$ | $p_{c.}$  |
+| **Total**         | $p_{.1}$ | $p_{.2}$ | $\dots$  | $p_{.c}$ | $p_{..}$  |
 
 : Clasificación cruzada cxc con proporciones en celdas
 

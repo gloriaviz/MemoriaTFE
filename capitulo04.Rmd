@@ -300,13 +300,13 @@ La medición de la concordancia es un caso especial de medición de la asociaci�
 
 Para simplificar, consideremos $N \ge 2$ objetos clasificados de forma cruzada por $b = 2$ jueces independientes en una tabla de contingencia $c\times c$ con $c$ categorías disjuntas y ordenadas denotadas por $a_1, . . . , a_c$, como en la siguiente tabla:
 
-| Juez 1 \\ Juez 2 | $a_1$    | $a_2$    | ... | $a_c$    | Total    |
-|------------------|----------|----------|-----|----------|----------|
-| $a_1$            | $n_{11}$ | $n_{12}$ | ... | $n_{1c}$ | $n_{1.}$ |
-| $a_2$            | $n_{21}$ | $n_{22}$ | ... | $n_{2c}$ | $n_{2.}$ |
-| **...**          | ...      | ...      | ... | ...      | ...      |
-| $a_c$            | $n_{c1}$ | $n_{c2}$ | ... | $n_{cc}$ | $n_{c.}$ |
-| **Total**        | $n_{.1}$ | $n_{.2}$ | ... | $n_{.c}$ | $N$      |
+| Juez 1 \\ Juez 2 | $a_1$    | $a_2$    | $\dots$  | $a_c$    | Total    |
+|------------------|----------|----------|----------|----------|----------|
+| $a_1$            | $n_{11}$ | $n_{12}$ | $\dots$  | $n_{1c}$ | $n_{1.}$ |
+| $a_2$            | $n_{21}$ | $n_{22}$ | $\dots$  | $n_{2c}$ | $n_{2.}$ |
+| $\vdots$         | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $a_c$            | $n_{c1}$ | $n_{c2}$ | $\dots$  | $n_{cc}$ | $n_{c.}$ |
+| **Total**        | $n_{.1}$ | $n_{.2}$ | $\dots$  | $n_{.c}$ | $N$      |
 
 : Notación para una tabla de validación cruzada de N objetos por 2 jueces en c categorías disjuntas y ordenadas
 
