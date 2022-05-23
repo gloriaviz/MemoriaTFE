@@ -4,6 +4,6 @@ output: pdf_document
 
 La evaluación de la relación y la intensidad de la misma entre dos o más variables aleatorias es un objetivo presente en cualquier estudio estadístico. Para ello se han propuesto una amplia gama de medidas estadísticas adaptadas a la naturaleza de las variables analizadas.  
 
-El objetivo de este trabajo se centra en recopilar las medidas de asociación entre variables nominales, incluyendo la definición teórica e inferencia estadística sobre las mismas.    
+El objetivo de este trabajo se centra en recopilar las medidas de asociación entre variables nominales y ordinales, incluyendo la definición teórica e inferencia estadística sobre las mismas.    
 
-Asimismo, el trabajo incluye su implementación en R y/o el uso de librerías de R, con una ilustración sobre datos reales. Además, con objeto de ilustrar la aplicabilidad de las mismas, incluiye referencias sobre trabajos científicos recientes en los que se han utilizado estas medidas. 
+Asimismo, el trabajo incluye su implementación y/o el uso de librerías de R, con una ilustración sobre datos reales. Además, con objeto de ilustrar la aplicabilidad de las mismas, incluye referencias sobre trabajos científicos recientes en los que se han utilizado estas medidas. 

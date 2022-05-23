@@ -1,6 +1,6 @@
 ---
 author: "Gloria Vizcaíno Castaño"
-date: "27/10/2017"
+date: "01/02/2022"
 documentclass: book
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
@@ -86,13 +86,13 @@ Existen dos enfoques principales para determinar los p-valores de las medidas de
 
 El modelo poblacional está plagado de suposiciones que rara vez se cumplen en la práctica y que, algunas veces, son inapropiadas; por ejemplo, independencia, normalidad, homogeneidad de la varianza...
 
-De aquí en adelante se usará casi exclusivamente el modelo de permutación ya que está libre de cualquier suposición de distribución, no requiere un muestreo aleatorio, es completamente dependiente de los datos, proporciona valores de probabilidad exactos y es ideal para el análisis de muestras pequeñas.
+De aquí en adelante se usará casi exclusivamente el modelo de permutación, ya que está libre de cualquier suposición de distribución, no requiere un muestreo aleatorio, es completamente dependiente de los datos, proporciona valores de probabilidad exactos y es ideal para el análisis de muestras pequeñas.
 
 Por tanto, en este Trabajo Fin de Grado, se usará el enfoque de permutación para la medición de la asociación estadística, definida ampliamente para incluir medidas de correlación, asociación y concordancia.
 
 ## Definiciones
 
-Dado que el título de este Trabajo de Fin de Grado es "Medidas de Asociación para Variables Nominales", es conveniente, en primer lugar, definir "Medición" y "Asociación".
+Dado que el título de este Trabajo de Fin de Grado es "Medidas de Asociación para Variables Nominales y Ordinales", es conveniente, en primer lugar, definir "Medición" y "Asociación".
 
 ### Definición de Medición
 
@@ -150,19 +150,29 @@ Así pues, en este trabajo, la asociación se usará de dos maneras. En primer l
 
 En general, la **correlación** suele referirse a las medidas de covariación derivadas de las ecuaciones de regresión basadas en el método de mínimos cuadrados ordinarios. A menudo, pero no siempre, la correlación simple mide la relación entre dos variables a nivel de intervalo de medida, donde las dos variables se etiquetan normalmente como $X$ e $Y$. La medida de correlación más usada es el coeficiente de correlación de Pearson al cuadrado.
 
-Las medidas de **concordancia** intentan determinar la identidad de dos variables en cualquier nivel de medición, es decir, $X_i = Y_i$ para todo $i$. Algunos ejemplos de medidas de concordancia son la medida $\pi$ de Scott, la medida $A$ de Robinson, la medida de la regla de Spearman y los coeficientes kappa ponderados y no ponderados de Cohen.
+Las medidas de **concordancia** intentan determinar la identidad de dos variables en cualquier nivel de medición, es decir, $X_i = Y_i$ para todo $i$.
 
 La correlación y la concordancia se suelen confurdir, a continuación se muestra un ejemplo para ententender las diferencias:
 
-Supongamos que un investigador desea establecer la relación entre los valores observados y los predichos por la regresión, $y$ e $\hat y$ , respectivamente. La concordancia implica que la relación funcional entre $y$ e $\hat y$ puede describirse mediante una la recta $x=y$. Si por ejemplo obtenemos los pares (1,1), (3,3), (8,8), el coeficiente de correlación de Pearson al cuadrado es $r^2_{ y,\hat y} = 1$ y el porcentaje de concordancia es del 100 %, es decir, los elementos de los tres pares $(y,\hat y)$ son iguales. En este contexto, el coeficiente de correlación de Pearson al cuadrado, $r^2_{ y,\hat y}$ , también se ha utilizado como medida de concordancia. Sin embargo, $r^2_{y,\hat y} = 1,00$ implica una relación lineal entre $y$ e $\hat y$ , donde tanto la el corte con el eje de ordenadas como la pendiente son arbitrarias. Así, aunque la concordancia perfecta se describe con un valor de 1,00, también es cierto que $r^2_ {y,\hat y} = 1,00$ describe una relación lineal que puede o no reflejar una concordancia perfecta, por ejemplo para los valores $(y,\hat y)$: (2, 4), (4, 5), (6, 6), (8, 7), y (10, 8), el coeficiente de correlación de Pearson es $r^2_{y,\hat y}= 1,00$, y el porcentaje de concordancia es del 20%, es decir, sólo un par valores coinciden [@Berry2010].
+Supongamos que un investigador desea establecer la relación entre los valores observados y los predichos por la regresión, $y$ e $\hat y$ , respectivamente. La concordancia implica que la relación funcional entre $y$ e $\hat y$ puede describirse mediante una la recta $x=y$. Si por ejemplo obtenemos los pares (1,1), (3,3), (8,8), el coeficiente de correlación de Pearson al cuadrado es $r^2_{ y,\hat y} = 1$ y el porcentaje de concordancia es del 100 %, es decir, los elementos de los tres pares $(y,\hat y)$ son iguales.
 
-((aquí podría meter gráficos para visualizar el ejemplo))
+```{r echo=FALSE,out.width='10cm',fig.align='center',fig.cap="\\label{fig:ejemplo1}Representación gráfica Ejemplo 1.1",fig.pos="H"}
+plot(c(1,3,8),c(1,3,8),type='l',col='#AEEEEE',xlab = 'eje X',ylab = 'eje Y',lwd=3, main="Ejemplo 1.1")
+points(c(1,3,8),c(1,3,8), pch=19,type='o',cex=1.5)
+```
+
+En este contexto, el coeficiente de correlación de Pearson al cuadrado, $r^2_{ y,\hat y}$ , también se ha utilizado como medida de concordancia. Sin embargo, $r^2_{y,\hat y} = 1,00$ implica una relación lineal entre $y$ e $\hat y$ , donde tanto la el corte con el eje de ordenadas como la pendiente son arbitrarias. Así, aunque la concordancia perfecta se describe con un valor de 1,00, también es cierto que $r^2_ {y,\hat y} = 1,00$ describe una relación lineal que puede o no reflejar una concordancia perfecta, por ejemplo para los valores $(y,\hat y)$: (2, 4), (4, 5), (6, 6), (8, 7), y (10, 8), el coeficiente de correlación de Pearson es $r^2_{y,\hat y}= 1,00$, y el porcentaje de concordancia es del 20%, es decir, sólo un par valores coinciden [@Berry2010].
+
+```{r echo=FALSE,out.width='10cm',fig.align='center',fig.cap="\\label{fig:ejemplo}Representación gráfica Ejemplo 1.2",fig.pos="H"}
+plot(c(1,3,10),c(1,3,10),type='l',col='#AEEEEE',xlab = 'eje X',ylab = 'eje Y',lwd=3, main="Ejemplo 1.2")
+points(c(2,4,6,8,10),c(4,5,6,7,8),type ='o',pch=19 ,cex=1.5)
+```
 
 ## Criterios para las medidas de asociación
 
-Varios investigadores han escrito sobre criterios importantes para las medidas de asociación, sobre todo Costner [@Costner1965] y Goodman y Kruskal[@Goodman1954]. Sin embargo, esta sección se basa principalmente en los criterios que Weiss [@Weiss1968]consideraba más importantes.
+Varios investigadores han escrito sobre criterios importantes para las medidas de asociación, como Costner [@Costner1965] y Goodman y Kruskal [@Goodman1954]. Sin embargo, esta sección se basa principalmente en los criterios que Weiss [@Weiss1968] consideraba más importantes.
 
-Los criterios importantes para las medidas de asociación incluyen la normalización adecuada, la interpretación, la independencia de las frecuencias marginales y la magnitud (grado o fuerza) de la asociación:
+Los criterios más importantes para las medidas de asociación incluyen la normalización adecuada, la interpretación, la independencia de las frecuencias marginales y la magnitud (grado o fuerza) de la asociación:
 
 -   [Normalización]{.ul}: Idealmente, los valores de una medida de asociación deberían cubrir el mismo rango que los valores de probabilidad, es decir, de 0 a 1. Además, la medida de asociación debe ser cero cuando las variables son independientes y uno cuando hay una asociación perfecta. Cuando sea conveniente considerar la asociación inversa, entonces menos uno debe representar la asociación negativa perfecta.
 
@@ -174,7 +184,7 @@ Los criterios importantes para las medidas de asociación incluyen la normalizac
 
 ## Grado de Asociación
 
-Las diferentes medidas de asociación evalúan el grado de asociación de diversas maneras. Entre las diversas formas de medir la fuerza de la asociación se encuentran la desviación de la independencia, la magnitud de las diferencias de los subgrupos, las comparaciones por pares, la correspondencia incremental y la concordancia entre variables:
+Las diferentes medidas de asociación evalúan el grado de asociación de diversas maneras. Entre las diversas formas de medir la fuerza de la asociación se encuentran la desviación de la independencia, las comparaciones por pares, la correspondencia incremental y la concordancia entre variables:
 
 -   [Desviación de la independencia:]{.ul} Las medidas de asociación que se basan en la desviación de la independencia plantean cómo serían los datos si las dos variables fueran independientes, es decir, que no hubiera asociación, y luego miden el grado en que los datos observados se apartan de la independencia.
 
@@ -183,3 +193,159 @@ Las diferentes medidas de asociación evalúan el grado de asociación de divers
 -   [Correspondencia incremental:]{.ul} El grado de asociación se basa en la medida en que un aumento (disminución) incremental en una variable va acompañado de un aumento (disminución) en la otra variable. Este enfoque se denomina convencionalmente "correlación" en lugar de "asociación".
 
 -   [Concordancia entre variables:]{.ul} El grado de asociación se mide por el grado en que los valores de una variable discrepan de los valores de la otra variable, por encima de lo esperado por el mero azar.
+
+## Modelo estadístico de Permutación
+
+La Medición de la Asociación adopta un enfoque de permutación para generar valores de probabilidad exactos y de remuestreo para varias medidas de asociación.
+
+Las medidas estadísticas de permutación tienen varias ventajas sobre los métodos estadísticos clásicos de la estadística clásica, ya que son óptimas para muestras pequeñas, pueden utilizarse para analizar muestras no aleatorias, son completamente dependientes de los datos, no necesitan hipótesis distribucionales y proporcionan valores de probabilidad exactos.
+
+Hoy en día, las pruebas estadísticas de permutación son consideradas por muchos como la herramienta más importante para evaluar y validar las pruebas estadísticas convencionales.
+
+Un inconveniente obvio de los métodos estadísticos de permutación es la cantidad de cálculos necesarios, pero es cierto que la llegada de la informática hizo posible que los métodos de permutación fueran viables para muchos problemas. Aunque, actualmente, los potentes algoritmos computacionales y los ordenadores modernos hacen que los análisis de permutación sean prácticos para muchas aplicaciones de investigación.
+
+A continuación, se compara el modelo poblacional convencional y el modelo estadístico de permutación:
+
+-   El modelo poblacional supone un muestreo aleatorio de una o más poblaciones específicas. Según el modelo poblacional, el nivel de significación estadística que resulta de la aplicación de una prueba estadística a los resultados de un experimento o encuesta corresponde a la frecuencia con la que se rechazaría la hipótesis nula en muestreos aleatorios repetidos de una población especificada. Dado que el muestreo repetido de la población especificada no es práctico, se supone que la distribución de muestreo de los estadísticos de prueba generados en el muestreo aleatorio repetido se ajusta a una distribución teórica aproximada, como la distribución normal. El tamaño de una prueba estadística es la probabilidad bajo la hipótesis nula de que los resultados repetidos basados en muestras aleatorias de muestras aleatorias del mismo tamaño sean iguales o más extremos que el resultado observado.
+
+-   El modelo de permutación no supone ni requiere un muestreo aleatorio de una población determinada. Para el modelo de permutación exacta, se calcula un estadístico de prueba para los datos observados. A continuación, las observaciones se permutan sobre todos los posibles arreglos de los datos observados, y el estadístico de prueba seleccionado se calcula para cada uno de los posibles arreglos. La proporción de arreglos con valores del estadístico de prueba iguales o más extremos que el estadístico de prueba observado da la probabilidad exacta del valor del estadístico de prueba observado. Cuando el número de disposiciones posibles de los datos observados es muy grande, los métodos de permutación exacta son poco prácticos y se hacen necesarios los métodos de permutación por remuestreo de Monte Carlo. Los métodos de remuestreo generan una muestra aleatoria de todas las posibles ordenaciones de los datos observados, y el valor de la probabilidad de remuestreo es la proporción de ordenaciones con valores del estadístico de prueba iguales o más extremos que el valor del estadístico de prueba observada.
+
+### Distribución de probabilidad hipergeométrica
+
+Los métodos estadísticos de permutación exacta, especialmente cuando se aplican a las tablas de contingencia, dependen en gran medida de los valores de probabilidad hipergeométricos. En esta sección, se hace una breve introducción a la distribución de probabilidad hipergeométrica ilustrando su cálculo e interpretación. Para las tablas de contingencia de $2\times2$, el cálculo de las probabilidades hipergeométricas es fácil de demostrar. Consideremos la siguiente tabla de contingencia $2\times2$:
+
+```{r}
+library(knitr)
+library(kableExtra)
+conting2x2=cbind.data.frame(c("$B_1$","$B_2$","Total"),c("$n_{11}$","$n_{21}$","$C_1$"),c("$n_{12}$","$n_{22}$","$C_2$"),c("$R_1$","$R_2$","$N$"))
+
+library(dplyr)
+conting2x2 %>% knitr::kable(format = "latex", booktabs = T, align = rep('c', 4),
+               col.names = c("","$A_1$","$A_2$","Total"),
+               escape = FALSE,
+               caption = "\\label{c2x2}Clasificación cruzada de dos variables categóricas, A y B, con 2 categorías cada una") %>%
+  column_spec (c(1,4),border_left = T, border_right = T) %>%
+  row_spec (2,hline_after = T) %>%
+  kableExtra::kable_styling(latex_options = c("HOLD_position"),
+                            full_width = FALSE) 
+  
+
+```
+
+donde $n_{11}$, . . . , $n_{22}$ denotan las cuatro frecuencias absolutas, $R_1$ y $R_2$ denotan los totales de las frecuencias marginales de cada fila, $C_1$ y $C_2$ denotan los totales de las frecuencias marginales de cada columna y $$
+N=\sum_{i=1}^2\sum_{j=1}^2 n_{ij}~.
+$$
+
+Dado que la tabla de contingencia que aparece en la *Tabla 2.1* es una tabla $2\times2$ y, en consecuencia tiene sólo un grado de libertad, la probabilidad de cualquier frecuencia de celda constituye la probabilidad de toda la tabla de contingencia. Por lo tanto, la probabilidad del punto hipergeométrico para la celda que contiene $n_{11}$ viene dada por:
+
+$$
+p(n_{11}|R_1,C_1,N)=\left(\begin{array}{c}C_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}C_2\\ n_{12}\end{array}\right)\left(\begin{array}{c}N\\ R_1\end{array}\right)^{-1}=
+$$
+
+$$
+=\left(\begin{array}{c}R_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}R_2\\ n{21}\end{array}\right)\left(\begin{array}{c}N\\ C_1\end{array}\right)^{-1}=\frac{R_1!R_2!C_1!C_2!}{N!n_{11}!n_{12}!n_{21}!n_{22}!}
+$$
+
+El cálculo de las probabilidades hipergeométricas para las tablas de contingencia $r\times c$ es más complejo que para las tablas de contingencia simples $2\times2$. Consideremos la tabla de contingencia $4\times3$:
+
+```{r}
+conting4x3=cbind.data.frame(c("$B_1$","$B_2$","$B_3$","$B_4$","Total"),c("$n_{11}$","$n_{21}$","$n_{31}$","$n_{41}$","$C_1$"),c("$n_{12}$","$n_{22}$","$n_{32}$","$n_{42}$","$C_2$"),c("$n_{13}$","$n_{23}$","$n_{33}$","$n_{43}$","$C_3$"),c("$R_1$","$R_2$","$R_3$","$R_4$","$N$"))
+
+library(dplyr)
+conting4x3 %>% knitr::kable(format = "latex", booktabs = T, align = rep('c', 5),
+               col.names = c("","$A_1$","$A_2$","$A_3$","Total"),
+               escape = FALSE,
+               caption = "\\label{c4x3}Clasificación cruzada de dos variables categóricas, A y B, con 3 y 4 categorías respectivamente") %>%
+  column_spec (c(1,5),border_left = T, border_right = T) %>%
+  row_spec (4,hline_after = T) %>%
+  kableExtra::kable_styling(latex_options = c("HOLD_position"),
+                            full_width = FALSE) 
+```
+
+donde $n_{11}$, . . . , $n_{43}$ denotan las $12$ frecuencias absolutas de las celdas, $R_1 ,. . . , R_4$ denotan los totales de frecuencia marginal de las cuatro filas, $C_1$, $C_2$ y $C_3$ denotan los totales de las frecuencias marginales de las tres columna y$$
+N=\sum_{i=1}^4\sum_{j=1}^3 n_{ij}~.
+$$
+
+Cuando sólo hay dos filas, como en el ejemplo anterior con la tabla $2\times2$, cada probabilidad de columna es binomial, pero con cuatro filas cada probabilidad de columna es multinomial. Es bien sabido que una probabilidad multinomial puede obtenerse de una serie interconectada de expresiones binomiales. Por ejemplo, para la columna $A_1$ de la *Tabla 2.2*:
+
+$$
+\left(\begin{array}{c}C_1\\ n_{11}\end{array}\right)\left(\begin{array}{c}C_1-n_{11}\\ n_{21}\end{array}\right)\left(\begin{array}{c}C_1-n_{11}-n_{21}\\ n_{31}\end{array}\right)=
+$$
+
+$$
+=\frac{C_1!}{n_{11}!(C_1-n_{11})!}\times\frac{(C_1-n_{11})!}{n_{21}!(C_1-n_{11}-n_{21})!}\times\frac{(C_1-n_{11}-n_{21})!}{n_{31}(C_1-n_{11}-n_{21}-n_{31})!}=\frac{C_1!}{n_{11}!n_{21}!n_{31}!n_{42}!}
+$$
+
+Para la columna $A_2$:
+
+$$
+\left(\begin{array}{c}C_2\\ n_{12}\end{array}\right)\left(\begin{array}{c}C_2-n_{12}\\ n_{22}\end{array}\right)\left(\begin{array}{c}C_2-n_{12}-n_{22}\\ n_{32}\end{array}\right)=
+$$
+
+$$
+=\frac{C_2!}{n_{12}!(C_2-n_{12})!}\times\frac{(C_2-n_{12})!}{n_{22}!(C_2-n_{12}-n_{22})!}\times\frac{(C_2-n_{12}-n_{22})!}{n_{32}(C_2-n_{12}-n_{22}-n_{32})!}=\frac{C_2!}{n_{12}!n_{22}!n_{32}!n_{42}!}
+$$
+
+y para la distribución de frecuencias marginales de las filas:
+
+$$
+\left(\begin{array}{c}N\\ R_1\end{array}\right)\left(\begin{array}{c}N-R_1\\ R_2\end{array}\right)\left(\begin{array}{c}N-R_1-R_2\\ R_3\end{array}\right)=
+$$
+
+$$
+=\frac{N!}{R_1!(N-R_1)!}\times\frac{(N-R_1)!}{R_2!(N-R_1-R_2)!}\times\frac{(N-R_1-R_2)!}{R_3!(N-R_1-R_2-R_3)!}=\frac{N!}{R_1!R_2!R_3!R_4!}
+$$
+
+Por consiguiente, para tablas de contingencia $r\times c$ se tiene:
+
+$$
+p(n_{ij}|R_i,C_j,N)=\frac{(\displaystyle\prod_{i=1}^rR_i!)(\prod_{j=1}^cC_j!)}{N!\displaystyle\prod_{i=1}^r\prod_{j=1}^cn_{ij}!}
+$$
+
+De esta forma, la ecuación anterior puede generalizarse fácilmente a tablas de contingencia multidireccionales más complejas [@Mielke1988].
+
+## Métodos de Predicción
+
+Las medidas de asociación se basan en diferentes modelos, los más usados, debido a su fácil interpretación, son el de corrección por azar y el de reducción proporcional del error.
+
+**Medidas de Corrección por Azar**
+
+*Corregida por el azar* significa "quitar del acuerdo global", es decir, el acuerdo que se obtendría si las valoraciones se hicieran aleatoriamente. Este tipo de medidas se contruyen de la siguiente forma:
+
+$$
+medida_{CA}=\frac{p_o-p_e}{1-p_e}
+$$Donde, $p_o$ es la proporción observada de observaciones en las que los jueces están de acuerdo, $p_e$ es la proporción de observaciones para las que se espera una concordancia por azar, $p_o - p_e$ es la proporción de concordancia más allá de la esperada por el azar, $1 - p_e$ es la máxima proporción posible de concordancia más allá de la esperada por el azar.
+
+Su interpretación es bastante sencilla, los valores positivos indican una concordancia superior a la esperada por el azar y los valores negativos indican una concordancia inferior.
+
+**Medidas de Reducción Proporcional del Error**
+
+La *Reducción Proporcional del Error* es un criterio estadístico que cuantifica hasta qué punto el conocimiento sobre una variable puede ayudar a predecir otra variable.
+
+Es decir, ayuda a comprender hasta qué punto conocer una variable $X$ puede ayudar a predecir otra variable $Y$. Si la relación entre las variables es cero, saber $X$ no te ayudar a predecir $Y$. Y si existe una "correlación" perfecta , conocer $X$ permite predecir $Y$ con un 100% de confianza.
+
+La reducción proporcional del error es, por tanto, la ganancia de precisión en la predicción de la variable dependiente $Y$ a partir del conocimiento de la variable independiente $X$ (o un conjunto de múltiples variables). Este tipo de medidas es especialmente útil y popular cuando se utiliza para evaluar modelos en los que la variable dependiente es binaria.
+
+Para la construcción de estas medidas es necesario definir los siguientes errores:
+
+-   El primer tipo es el error de predicción basado únicamente en el conocimiento de la distribución de la variable dependiente, denominado "error del primer tipo" ($E_1$) y que consiste en el número esperado de errores al predecir las $c$ categorías de la variable dependiente $(X_1, . . . , X_c)$ a partir de la distribución observada de las marginales de la variable dependiente $(n_{.1}, . . . , n_{.c})$.
+
+-   El segundo tipo es el error de predicción basado en el conocimiento de las distribuciones de las de la variable independiente y de la dependiente, denominado "error del segundo tipo" ($E_2$) y que consiste en el número de errores esperados al predecir las $c$ categorías de la variable dependiente $(X_1, . . . , X_c)$ a partir del conocimiento de las $r$ categorías de la variable independiente $(Y_1, . . . , Y_r)$.
+
+Así, las medidas de Reddución Proporcional del Error se contruyen como sigue:
+
+$$
+medida_{RPE}=\frac{E_1-E_2}{E_1}
+$$
+
+Y su interpretación es la siguiente, los valores positivos indican una mejora proporcional de los errores de predicción con el conocimiento de ambas variables, en comparación de los errores de predicción con el conocimiento de una sola variable.
+
+\bigskip
+
+Variando el [tipo de variables]{.ul}, el [método de predicción]{.ul} y la [medida del error]{.ul} es como se obtienen las diferentes medidas de asociación.
+
+Para ilustrar el proceso, se contruye a continuación la medida de asociación más conocida y usada: el coeficiente de correlación lineal de Pearson, $\rho_{X,Y}$.
+
+El coeficiente de correlación lineal es una medida de reducción proporcional del error considerando dos variables ($X$ e $Y$) continuas, como criterio de predicción se usa la esperanza matemática, es decir, $E[Y]=\mu$ y $[Y|X=x]=\mu(x)$, y como medida del error el error cuadrático medio, $E[(Y-\mu)^2]=\sigma^2_Y$ y $E[(Y-\mu(x))^2]=\sigma^2_{Y|X=x}$. Por tanto, la medida es:$$
+\rho_{X,Y}=\frac{\sigma^2_Y-\sigma^2_{Y|X=x}}{\sigma^2_Y}~.
+$$

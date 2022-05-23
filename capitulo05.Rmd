@@ -1,19 +1,19 @@
 ---
-author: "Nombre Completo Autor"
-date: "27/10/2017"
+author: "Gloria Vizcaíno Castaño"
+date: "23/04/2022"
 documentclass: book
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
 geometry: margin = 2.5cm 
-bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+bibliography: ["bib/export.bib"]
 # metodobib -> true: natbib (descomentar: citation_package: natbib) 
 #           -> false: pandoc (comentar: citation_package: natbib)
 metodobib: true
 #natbib: plainnat, abbrvnat, unsrtnat
 biblio-style: "plainnat"
 #Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
-csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
-#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+#csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
+csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
 link-citations: yes
 output: 
   pdf_document:
@@ -29,37 +29,33 @@ output:
       #after_body: latex/latex_antes_enddoc.tex
 ---
 
-
 ```{r include=FALSE}
-#Sys.setlocale('LC_ALL','C') # corrige problema con 
-options(kableExtra.latex.load_packages = F)
-#options(tinytex.latexmk.emulation = FALSE)
 knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = FALSE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
-knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
-                 file="bib/paquetes.bib", width = 60)
+
 ```
 
-
 <!-- \setcounter{chapter}{2} -->
+
 <!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
+
 <!-- \pagenumbering{arabic} -->
 
-
+```{=tex}
 \ifdefined\ifprincipal
 \else
 \setlength{\parindent}{1em}
 \pagestyle{fancy}
 \setcounter{tocdepth}{4}
 \tableofcontents
-<!-- \subpdfbookmark{Índice General}{indice} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
+```
+<!-- \nocite{*} -->
 
 \fi
 
+```{=tex}
 \ifdefined\ifdoblecara
 \fancyhead{}{}
 \fancyhead[LE,RO]{\scriptsize\rightmark}
@@ -73,1656 +69,1401 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \fancyfoot[C]{}
 \fancyfoot[RO]{\footnotesize\thepage}
 \fi
-
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
-
-
-# Tareas habituales al escribir documentos R Markdown
-
-
-
-
-Este capítulo está escrito en el fichero R Markdown **"capitulo05.Rmd"** y se ha incluido para 
-que pueda copiar y pegar en su trabajo la solución a algunas de las cuestiones más habituales
-al escribir un trabajo escrito. 
-
-
-
-## Mostrar los chunks de código R y las opciones
-
-
-Un chunk de código R comienza con tres acentos abiertos:  ```` ```{r} ```` donde `r` indica el nombre del lenguaje,^[No se limita al lenguaje R, se pueden usar otros lenguajes, ver: [Ingenierías de lenguaje con knitr](https://rmarkdown.rstudio.com/authoring_knitr_engines.html%23sql).] y finaliza con tres acentos abiertos. Pueden escribirse opciones adicionales a un chunk en las llaves (por ejemplo, se define la altura de un gráfico en 5 centímetros: ```` ```{r fig.height='5cm'} ````). 
-
-**Nota importante**: las opciones de un chunk deben estar escritas en una misma línea de texto.
-
-Una "expresión R en línea" o en el interior de un párrafo comienza con `` `r `` y finaliza con un acento abierto `` ` ``.
-
-Para marcar texto como "código en línea" use un par de acentos abiertos, por ejemplo, `` `code` ``. Para incluir $n$ acentos abiertos literalmente, se deben usar al menos $n+1$ acentos abiertos que los envuelvan, por ejemplo, pueden usarse 4 acentos abiertos para preservar 3 acentos abiertos dentro: ````` ```` ```code``` ```` `````, lo cual se mostrará como: ```` ```code``` ````.
-
-Si lo que se quiere es mostrar literalmente los chunks de código junto a las opciones seleccionadas, ver el código utilizado en el siguiente ejemplo: 
-
-
-`````
-
-````markdown
-código markdown que quiera mostrarse
-
-````
-
-`````
-
-
-````markdown
-Esto es un párrafo en un documento R Markdown.
-
-A continuación se muestra un chunk de código R:
-
-`r ''````{r}
-fit = lm(dist ~ speed, data = cars)
-b   = coef(fit)
-plot(cars)
-abline(fit)
 ```
+# Ilustración sobre datos reales
 
-La pendiente de la regresión es `r '\x60r b[1]\x60'`
+A la hora de seleccionar una medida de asociación adecuada, hay que tener en cuenta varios criterios. Liebetrau proporciona algunas directrices para seleccionar la medida más apropiada [@Liebetrau1983]:
 
-````
+En primer lugar, nos planteamos si las variables son nominales, ordinales, de intervalo o alguna combinación de las tres. Una medida de asociación para variables de nivel nominal (categóricas) no debería depender de categorías ordenadas. Por otro lado, una medida de asociación para variables de nivel ordinal debería depender de categorías ordenadas, ya que si se ignora el orden de las categorías, se pierde información.
 
-La última frase se mostraría así:
+En segundo lugar, ¿se medirá la correlación, la asociación o la concordancia? En general, las medidas asimétricas son adecuadas para la predicción, mientras que las medidas simétricas son apropiadas para la asociación o la correlación, dependiendo del nivel de medición.
 
-\bmarkdownsal
+En tercer lugar, ¿se va a utilizar la medida de asociación para hacer inferencia? Bajo el modelo poblacional de Neyman-Pearson, esto requiere conocer el error estándar del estimador y a menudo requiere hacer suposiciones sobre la naturaleza de la población, así como un muestreo aleatorio. Bajo el modelo de permutación de Fisher-Pitman, no se requiere conocer el error estándar, no es necesario el muestreo aleatorio, los supuestos de distribución son irrelevantes y las pruebas de permutación dependen completamente de los datos. Las probabilidad basadas en permutaciones pueden ser exactas, basadas en el conjunto de referencia de todas las permutaciones posibles de los datos observados, o aproximadas, basados en una gran muestra aleatoria extraída del conjunto de referencia con el método Monte Carlo.
 
-```{r echo=FALSE}
-fit = lm(dist ~ speed, data = cars)
-b   = coef(fit)
-```
+En cuarto lugar, ¿es la medida de asociación sensible a los cambios de frecuencias marginales? Que la medida de asociación no se altere al multiplicar o dividir una o ambas columnas o filas de la tabla de contingencia por cualquier factor arbitrario es una propiedad muy importante de la medida. En general, los valores de una medida de asociación calculados en dos muestras diferentes no pueden compararse si la medida depende de las frecuencias marginales. Prácticamente todas las medidas de asociación para las variables de nivel nominal y ordinal son sensibles a los cambios de frecuencias marginales. Algunas excepciones notables son la odds ratio, las diferencias porcentuales y la medida de asociación $Q$ de Yule.
 
-La pendiente de la regresión es `r b[1]`.
+En quinto lugar, ¿es la medida de asociación estable ante cambios en el número de categorías? Una medida de asociación estable es aquella en la que el valor no cambia cuando, por ejemplo, el número de categorías se cambia de cinco a cuatro. La medida gamma de asociación ordinal de Goodman y Kruskal es especialmente inestable, mientras que la medida $\tau_b$ de asociación ordinal de Kendall es relativamente estable.
 
-\emarkdownsal
+En sexto lugar, ¿es el valor de la medida de asociación fácilmente interpretable? Algunas medidas de asociación tienen interpretaciones claras y significativas, como las medidas de reducción proporcional del error y las medidas corregidas por el azar. Otras medidas no tienen una interpretación significativa, excepto cuando poseen los valores extremos de $0$, $1$ o $-1$. Por ejemplo, la medida simétrica gamma de Goodman y Kruskal de asociación ordinal y las medidas asimétricas $d_{yx}$ y $d_{xy}$ de Somers de asociación ordinal poseen interpretaciones de reducción proporcional en el error, donde los valores positivos indican una mejora proporcional de los errores de predicción con el conocimiento de ambas variables, en comparación de los errores de predicción con el conocimiento de una sola variable. Las medidas kappa no ponderada y kappa ponderada de Cohen para la concordancia y la regla del pie de Spearman poseen interpretaciones corregidas por el azar, en las que los valores positivos indican una concordancia superior a la esperada por el azar y los valores negativos indican una concordancia inferior.
 
+En séptimo lugar, ¿la medida de asociación tiene en cuenta los valores empatados? Algunas medidas de asociación requieren ajustes complicados para usar los valores empatados, mientras que otras incorporan los valores empatados sin ningún ajuste. Por ejemplo, el coeficiente de correlación de rango de Spearman requiere complejos ajustes para los valores empatados.
 
-Hay una gran cantidad de opciones para los chunks en knitr documentadas en <https://yihui.name/knitr/options>. 
-A continuación, enumeramos un subconjunto de ellas:
+En octavo lugar, ¿se generalizará fácilmente la medida de asociación para datos multivariantes? El análisis multivariante es cada vez más importante en la investigación, por lo que las medidas de asociación que se adaptan a los datos multivariantes son extremadamente útiles.
 
-- **eval**: si evalúa un fragmento de código o no.
+En noveno lugar, ¿para qué tipo de asociación asume la medida de asociación su valor extremo? Algunas medidas de asociación asumen sus valores extremos, por ejemplo, $+1$ en casos de asociación débil, como es el caso del estadístico gamma de Goodman y Kruskal. Otras medidas de asociación asumen sus valores extremos sólo en el caso de una asociación perfecta. Por ejemplo, la medida $\tau_b$ de Kendall de asociación ordinal asume un valor de $+1$ sólo cuando existe una asociación extremadamente fuerte.
 
-- **echo**: si se debe hacer eco o presentar el código fuente en el documento de salida (en algunas ocasiones es posible no quiera leer el código fuente, solamente los resultados).
+En décimo lugar, ¿es la medida de asociación fácil de calcular? Algunas medidas de asociación son notoriamente difíciles de calcular. La medida de correlación tetracórica de Pearson para tablas de contingencia $2\times 2$ o la medida de asociación nominal $d^c_N$ de Leik y Gove son de las más dificiles de calcular. Por otro lado, la medida de la regla del pie de Spearman se diseñó específicamente para facilitar su cálculo.
 
-- **result**: 
+Una vez desarrolladas cada una de las medidas de asociación, tanto nominales como ordinales, y describir los criterios que se usan para seleccionar la más adecuada, se va a proceder a mostrar un caso práctico donde aplicar las diferentes medidas.
 
-    + cuando se establece en `'hide'` (ocultar), la salida de texto se ocultará; 
-        
-        \bmarkdownsal
-        ```{r echo=TRUE,results='hide'}
-        cat('**Markdown** es genial. \n')
-        ```
-        \emarkdownsal
-    
-    + cuando se establece en `'asis'`, la salida de texto se escribe "tal cual", por ejemplo, puede escribirse el texto markdown sin procesar el código R (como `cat('**Markdown** es genial. \n')`). 
+## Conjunto de datos
 
-        \bmarkdownsal
-        ```{r echo=TRUE,results='asis'}
-        cat('**Markdown** es genial. \n')
-        ```
-        \emarkdownsal
-        
-    + De forma predeterminada (`'markup'` y `'hold'`), la salida de texto se envolverá en elementos textuales (generalmente bloques de código simple).
+Los datos que se usarán son los datos reales correspondientes a la encuesta sobre tendencias sociales realizada por el Centro de Investigación Sociológica[^1] (C.I.S.) en España del 24 al 30 de noviembre de 2021.
 
-        \bmarkdownsal
-        ```{r echo=TRUE}
-        cat('**Markdown** es genial. \n')
-        ```
-        \emarkdownsal
-        
-- **warning**, **message**, y **error**: si se muestran o no advertencias, mensajes y errores en el documento de salida. Tenga en cuenta que si establece `error = FALSE`, `rmarkdown::render()` se detendrá al encontrar un error en un fragmento de código, y el error se mostrará en la consola R, si `error = TRUE`, no se detendrá cuando encuentre un error en el chunk y mostrará el mensaje de error. De manera similar, cuando `warning = FALSE` o `message = FALSE`, estos mensajes se mostrarán en la consola R.
+[^1]: <https://www.cis.es/cis/opencm/ES/2_bancodatos/estudios/listaEstudiosYear.jsp?year=2021>
 
-    \bmarkdownsal
-    ```{r echo=TRUE,error=TRUE}
-    si(3.2)
-    ```
-    \emarkdownsal
-    
-- **child**: puede incluir un documento hijo a un documento principal. Esta opción toma una ruta a un archivo externo.
+Los datos corresponden a las respuestas de una muestra de 2691 personas procedentes de 888 municipios y 50 provincias. El procedimiento de muestreo fue el siguiente: se seleccionaron aleatoriamente teléfonos fijos y móviles con un porcentaje del 22,0% y del 78,0%, respectivamente. La selección de los individuos se llevó a cabo mediante la aplicación de cuotas de sexo y edad. Los estratos se formaron de forma independiente considerando las 17 comunidades autónomas y las dos ciudades autónomas y el tamaño de hábitat, dividido en 7 categorías: menor o igual a 2.000 habitantes; de 2.001 a 10.000; de 10.001 a 50.000; de 50.001 a 100.000; de 100.001 a 400.000; de 400.001 a 1.000.000; y más de 1.000.000 de habitantes. Los cuestionarios aplicaron mediante entrevista telefónica asistida por ordenador (CATI).
 
-En este enlace [url-bookdown](https://bookdown.org/yihui/rmarkdown/r-code.html) puede obtenerse más información sobre las opciones en un chunk de código R.
+La encuesta está formada por 33 preguntas (véase [Apéndice A](#encuesta-sobre-tendencias-sociales-cuestionario)) y de ella se han extraído las variables más interesantes para estudiar el grado de asociación entre las preguntas. Además, las variables se han limpiado y agrupado para que tengan el menor número de categorías posibles (véase [Apéndice B](#preparacion-de-datos)) para facilitar la interpretación de las medidas.
 
+Las variables ecogidas han sido las siguientes:
 
+**Variables Nominales**
 
-## Cómo incluir un gráfico {#sec:incluirgrafico}
+-   SEXO: Sexo de la persona que realiza la encuesta.
+-   CCAA: Comunidad Autónoma a la que está empadronada.
+-   INESTADO: Respuesta de la persona ante la pregunta ¿debería intervenir el Estado en la vida económica?
+-   INFLUPOLITICA: Mayor influencia en las decisiones políticas de los últimos dos años.
+-   SISTEMAUTOM1: Cómo afectará al número de parados la utilización de robots y sistemas automáticos de trabajo en los próximos diez años.
+-   SIMBOLO: Objeto (artefacto, aparato, máquina) que identifica y simboliza en mayor grado la época actual.
+-   IDENTPERSONAS: Grupo de personas con el que piensa el encuestado que tiene más intereses comunes.
+-   PARTIDOSIMP: Partido político con el que simpatiza más la persona encuestada.
+-   SITLABORAL: Situación laboral en la que se encuentra actualmente.
+-   RELIGION: Religión en la que cree la persona encuestada.
 
+**Variables Ordinales**
 
-### Incluir un fichero gráfico en el documento
+-   EDAD: Rango de edad de la persona encuestada (intervalos de amplitud 10 años).
+-   INTPOLITICO: Grado de interes de la persona por las cuestiones políticas.
+-   FUTURO1: Cantidas de cambios sociales y económicos de aquí a diez años según las personas que han realizado la encuesta.
+-   FUTURO2: Grado de positividad ante los cambios sociales y económicos producidos de aquí a diez años.
+-   SISTEMAUTOM2: Aumento del número de robots y sistemas automáticos en las empresas en los próximos diez años (mucho, bastante, algo, poco, nada o casi nada).
+-   ESCIDEOL: Posición que la persona tiene en una escala del 1 al 10 respecto a los ideales políticos, en la que 1 significa "lo más a la izquierda" y 10 "lo más a la derecha".
+-   ESTUDIOS: Grado de estudios básicos (No sabe leer ni escribir; no ha ido a la escuela, pero sabe leer y escribir; ha ido a la escuela).
+-   OPINION: ¿Las nuevas generaciones vivirán mejor, peor o igual de lo que se ha vivido hasta ahora?
+-   CLASESOCIAL: Clase social que mejor define al encuestado.
 
-Se tiene el fichero gráfico "capitulo05ejemplo01.png" en la subcarpeta "graficos". Este fichero gráfico
-puede proceder de 
+```{r 1}
+library(readr)
+X3343 <- read_csv2("MD3343/3343.csv")
 
-- un fichero gráfico descargado de internet,
-- una captura de pantalla que hemos obtenido de nuestro ordenador,
-- una ilustración que hemos diseñado con carácter didáctico que hemos guardado en un fichero gráfico, etc.
+# se quitan variables que no interesan
+datos = X3343[,c(6,11:14,16,39,48,49,57,58,67,110,112,117,120,121,125,
+                 126,128)]
 
-A continuación se ha escrito el comando LaTeX: "`\clearpage`", el cual provoca un salto de página en el punto del texto en el que se ha escrito.
+# se agrupan las variables nominales:
 
-````markdown
-\clearpage
-````
+for (i in 1:length(datos$IDENTIFIC1)){
+if (datos$IDENTIFIC1[i]=="Con las de la misma clase social"){
+    datos$IDENTIFIC1[i]="Clase Social"}
+else {if (datos$IDENTIFIC1[i]=="Con las de la misma edad y generación") {
+      datos$IDENTIFIC1[i]="Generación"}
+      else{if (datos$IDENTIFIC1[i]=="Con las de la misma región o nacionalidad" ){
+      datos$IDENTIFIC1[i]="Religión/Nacionalidad"}
+      else {if (datos$IDENTIFIC1[i]=="Con las del mismo género") {
+      datos$IDENTIFIC1[i]="Género"}
+      else {if (datos$IDENTIFIC1[i]=="Con las del mismo municipio") {
+      datos$IDENTIFIC1[i]="Municipio"}
+      else {if (datos$IDENTIFIC1[i]=="Con las que tienen su misma profesión y trabajo"){
+      datos$IDENTIFIC1[i]="Profesión/Trabajo"}
+      else {if (datos$IDENTIFIC1[i]=="Con las que tienen su misma profesión y trabajo"){
+      datos$IDENTIFIC1[i]="Profesión/Trabajo"}
+      else {if (datos$IDENTIFIC1[i]=="Con las que tienen sus mismas aficiones, gustos, modas"){
+      datos$IDENTIFIC1[i]="Aficiones y Gustos"}
+      else {if (datos$IDENTIFIC1[i]=="Con las que tienen sus mismas ideas políticas"){
+      datos$IDENTIFIC1[i]="Ideas Políticas"}
+      else {if (datos$IDENTIFIC1[i]=="Con las que tienen sus mismas ideas religiosas"){
+      datos$IDENTIFIC1[i]="Ideas Religiosas"}
+        else{datos$IDENTIFIC1[i]="N.S/N.C"}
+      }}}}}}}}
+}}
 
-\clearpage
-
-
-#### Gráfico sin leyenda y justo aquí
-
-Si queremos incluirlo sin ningún tipo de leyenda explicativa y justamente en la posición que lo hemos colocado, podríamos hacerlo con ayuda del siguiente "chunk de código R":
-
-
-````markdown
-`r ''````{r echo=FALSE,out.width='70%',fig.align='center',fig.pos="H"}
-knitr::include_graphics("graficos/capitulo05ejemplo01.png")
-```
-````
-
-```{r echo=FALSE,out.width='70%',fig.align='center',fig.pos="H"}
-knitr::include_graphics("graficos/capitulo05ejemplo01.png")
-```
-
-
-
-
-#### Gráfico con leyenda y justo aquí
-
-Si queremos incluirlo con una leyenda explicativa con una numeración que lo identifica para poder hacer referencia a él en cualquier parte del documento y además aparezca justamente en la posición que lo hemos colocado, podríamos hacerlo con ayuda del siguiente "chunk de código R":
-
-
-````markdown
-`r ''````{r echo=FALSE,out.width='8cm',fig.align='center',
-fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio 
-(fuente: elaboraci\\'on propia)",fig.pos="H"}
-knitr::include_graphics("graficos/capitulo05ejemplo01.png")
-```
-
-````
-
-```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio (fuente: elaboraci\\'on propia)",fig.pos="H"}
-knitr::include_graphics("graficos/capitulo05ejemplo01.png")
-```
-
-
-En cualquier parte del documento, delante o detrás del gráfico, puede 
-hacerse referencia a la figura \ref{fig:c05ej01} y además puede indicarse 
-la página en la que se encuentra: página \pageref{fig:c05ej01}.
-
-
-
-
-````markdown
-En cualquier parte del documento, delante o detrás del gráfico, puede 
-hacerse referencia a la figura \ref{fig:c05ej01} y además puede indicarse 
-la página en la que se encuentra: página \pageref{fig:c05ej01}.
-````
-
-
-#### Gráfico con leyenda y posición flotante: superior o inferior
-
-En muchos tipos de publicaciones se recomienda que las figuras y tablas se coloquen por motivos estéticos en la parte superior o inferior de una página. 
-
-Esta forma de trabajar evita un efecto no deseado de espacios verticales en blanco. Ya que cuando se quiere colocar una figura en una posición particular, muchas veces se queda un espacio en blanco, debido a que por su tamaño tenga que llevarse a la página siguiente (LaTeX actúa automáticamente repartiendo ese espacio vertical sobrante entre los elementos de la página, ver lo que ocurre en la página \pageref{sec:incluirgrafico}).
-
-Esto requerirá que cuando se habla de la Figura o Tabla, se utilice un elemento que la identifique. Para ello, se utilizará la pareja "label-ref" vista en el apartado anterior.
-
-Lo habitual es hacer la primera referencia cerca de donde esté ubicada. Como vemos en la Figura \ref{fig:c05ej02} (ver [url](https://resource-cms.springernature.com/springer-cms/rest/v1/content/19112/data/v5)).
-
-En R Markdown se tiene que utilizar en la opción del chunk correspondiente: **`fig.pos="t"`**  para colocarla en la parte superior, **`fig.pos="b"`**  para colocarla en la parte inferior de una página y **`fig.pos="htbp"`** para colocarla por orden: "aquí-superior-inferior-páginasolotablas", pero a partir de la página en la que se haya colocado la figura (se decide automáticamente).
-
-**Nota**. Se recomienda el uso de la opción **`fig.pos="htbp"`** o **`fig.pos="!htbp"`** para que no aparezcan espacios en blanco adicionales (`!` obliga). Se puede obligar a que en el caso que no se especifique se comporte obligadamente como indiquemos con `floatplacement{figure}{}` o `floatplacement{table}{}` . Por ejemplo, si queremos obligar que las figuras se coloquen como: "!bthp".
-
-```latex
-\floatplacement{figure}{!bthp}
-```
-
-
-**Nota**. El comando LaTeX: **`\clearpage`** produce salto de página pero obliga a que todas las figuras o tablas que se hayan incluido anteriormente sean mostradas.
-Ver más en [ayuda overleaf](https://es.overleaf.com/learn/latex/Line_breaks_and_blank_spaces#Espacios_verticales_en_blanco).
-
-
-````markdown
-`r ''````{r echo=FALSE,out.width='8cm',fig.align='center',
-fig.cap="\\label{fig:c05ej02}Un ejemplo de figura colocada 
-en la parte superior de un documento 
-(Fuente: \\url{http://destio.us.es/calvo})",fig.pos="t"}
-knitr::include_graphics("graficos/capitulo05ejemplo01.png")
-```
-````
-
-```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej02}Un ejemplo de figura colocada en la parte superior de un documento. (fuente: \\url{http://destio.us.es/calvo})",fig.pos="t"}
-knitr::include_graphics("graficos/capitulo05ejemplo01.png")
-```
-
-
-
-### Incluir un gráfico creado con R en el documento
-
-
-Se tienen las mismas posibilidades que el caso de un fichero gráfico, pero habitualmente en este caso el gráfico se construye con funciones de R en un chunk de código R. 
-
-También es posible construir el gráfico con funciones R en un fichero de script R y guardar el resultado en un fichero gráfico (ver comandos: **`png()`** y **`dev.off()`**, **`ggplot2::ggsave()`**). Para incluirlo en el documento R Markdown se haría lo visto en la sección anterior.
-
-El siguiente código ilustra cómo crear un fichero con ayuda del paquete "ggplot2" y lo grabamos en un fichero ".png" con ayuda de la función **`ggsave()`**.
-
-```{r echo=TRUE}
-library(ggplot2)
-p = ggplot(mtcars, aes(mpg, wt)) + 
-  geom_point()
-ggsave("figurasR/capi05mtcars.png",plot=p)
-```
-
-
-Para incluirlo en el documento se podría utilizar el siguiente chunk de código R (lo coloca aquí porque por defecto se ha definido **`fig.pos="H"`**): 
-
-````markdown
-`r ''````{r echo=FALSE,out.width='70%',fig.align='center'}
-knitr::include_graphics("figurasR/capi05mtcars.png")
-```
-````
-
-```{r echo=FALSE,out.width='70%',fig.align='center'}
-knitr::include_graphics("figurasR/capi05mtcars.png")
-```
-
-También se pueden grabar con las funciones **`png()`**, **`jpeg()`**, **`pdf()`**, etc, y **`dev.off()`**, como se ilustra en los siguientes ejemplos de código R:
-
-```{r eval=FALSE,echo=TRUE}
-png(file = "figurasR/capi05myplot.png", bg = "transparent")
-plot(1:10)
-rect(1, 5, 3, 7, col = "white")
-dev.off()
-```
-
-```{r eval=FALSE,echo=TRUE}
- # creará myplot1.jpg y myplot2.jpg
-jpeg(file = "figurasR/capi05myplot%d.jpg")
-example(rect)
-dev.off()
-```
-
-
-#### Incluir un gráfico creado con R sin leyenda y justo aquí
-
-Se demuestra con un ejemplo que usa el paquete "ggplot2", en el que además el gráfico aparece centrado (se ha indicado: `fig.align='center'`, pero hay otros valores para esta opción: `'left'`, `'right'`. Si no se utiliza aparece justificada a la izquierda).
-
-````markdown
-`r ''````{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='H'}
-library(ggplot2)
-p = ggplot(mtcars, aes(mpg, wt)) + 
-  geom_point()
-p  
-```
-````
-
-```{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='H'}
-library(ggplot2)
-p = ggplot(mtcars, aes(mpg, wt)) + 
-  geom_point()
-p
-```
-
-
-
-
-#### Incluir un gráfico creado con R con leyenda y situado en la parte superior
-
-El gráfico de la Figura \ref{fig:cap05gg02} es un ejemplo de gráfico creado con R y aparece con una leyenda explicativa y colocado en la parte superior de la página.
-
-````markdown
-`r ''````{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',
-fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}neas creado con ggplot2 (fuente: elaboraci\\'on propia)"}
-library(ggplot2)
-ggplot(mtcars, aes(mpg, wt)) + 
-  geom_line(col="blue")
-```
-````
-
-```{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}neas creado con ggplot2 (fuente: elaboraci\\'on propia)"}
-library(ggplot2)
-ggplot(mtcars, aes(mpg, wt)) + 
-  geom_line(col="blue")
-```
-
-
-
-
-
-<!-- \pagebreak\FloatBarrier -->
-
-#### Varios gráficos creados con R con varias leyendas
-
-Con el siguiente código se pueden presentar dos gráficos en una única figura y además se puede colocar una leyenda explicativa a cada gráfico (obtenido en: [stackoverflow](https://stackoverflow.com/questions/53850299/how-to-get-a-newline-in-a-figure-caption-in-rmarkdown-bookdown-pdfdocument2)).
-
-
-**Observe** que no se ha usado **label** en `fig.cap`, el identificador se ha construido del identificador del chunk: "plot-cars" al que se le ha añadido como prefijo: "fig:", quedando el identificador para usar con **ref**: "fig:plot-cars". A las subfiguras se les ha añadido números consecutivos.
-
-````markdown
-
-Vea la Figura \ref{fig:plot-cars}, la cual contiene la Figura 
-\ref{fig:plot-cars-1} y la Figura \ref{fig:plot-cars-2}.
-
-```{r plot-cars, fig.height = 3, fig.width = 4,out.width='49%', 
-fig.cap="Dos gr\\'aficos", fig.subcap = c("Regresi\\'on", 
-"Gr\\'afico sobre cars"),fig.pos="htbp"}
-plot(mpg ~ wt, data = mtcars)
-plot(cars)
-```
-
-````
-
-
-
-Vea la Figura \ref{fig:plot-cars}, la cual contiene la Figura 
-\ref{fig:plot-cars-1} y la Figura \ref{fig:plot-cars-2}.
-
-```{r plot-cars, fig.height = 3, fig.width = 4, out.width='49%', fig.cap="Dos gr\\'aficos", fig.subcap = c("Regresi\\'on", "Gr\\'afico sobre cars"),fig.pos="htbp"}
-plot(mpg ~ wt, data = mtcars)
-plot(cars)
-```
-
-
-
-
-
-Otro ejemplo en el que solamente se usa una leyenda para los dos gráficos (también se modifican los márgenes). Importante el uso de la opción de chunk: **fig.show="hold"**.
-
-
-````markdown
-```{r out.width='45%',fig.show="hold",
-        fig.cap="Dos gr\\'aficos R cara a cara",fig.pos="htbp"}
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
-plot(cars, pch = 19)
-```
-
-````
-
-Produce la Figura \ref{fig:fig2}.
-
-```{r fig2, out.width='45%',fig.show="hold",fig.cap="Dos gr\\'aficos R cara a cara",fig.pos="htbp"}
-par(mar = c(4, 4, 0.1, 0.1))
-plot(pressure, pch = 19, type = "b")
-plot(cars, pch = 19)
-```
-
-
-## Cómo incluir una tabla o cuadro con información
-
-Para profundizar en el tema de la presentación de tablas de información se recomienda visitar la siguiente url: [Cómo Crear tablas de información en  R Markdown](http://destio.us.es/calvo/post/como-crear-tablas-de-informacion-en-r-markdown/).
-
-
-### Incluir una tabla con leyenda
-
-
-La presentación de las primeras 10 filas de un data.frame de R, por ejemplo, el dataset `iris`, puede hacerse del siguiente modo:
-
-```{r echo=TRUE}
-head(iris,10)
-```
-
-Pero para mejorar la presentación se pueden utilizar paquetes R especializados, como: [knitr](https://cran.r-project.org/web/packages/knitr/index.html), [kableExtra](https://cran.r-project.org/web/packages/kableExtra/index.html), [huxtable](https://cran.r-project.org/web/packages/huxtable/) (trata aspectos muy avanzados), etc. El siguiente ejemplo ilustra el uso de "kableExtra". Se comentan algunas de las opciones usadas:
-
-- **`"hold_position"`**: usa el posicionamiento como en las figuras **"h"**.
-- **`position="center"`**: presenta la tabla centrada.
-- **`"striped"`**: alterna el color de las filas.
-- **`caption="\\label{}Explicación..."`**: Añade una leyenda que explique el contenido de la tabla junto a un identificador para hacer referencia a ella con **`\ref{}`**.
-
-````markdown
-`r ''````{r}
-library(knitr)
-library(kableExtra) 
-head(iris,10) %>%
- kable(booktabs = TRUE,format = "latex",
-  caption = "\\label{tabla02}Leyenda explicativa de la segunda tabla") %>%
- kable_styling(
-  latex_options = c("striped", "condensed","hold_position"), 
-  position = "center",full_width = FALSE)
-```
-````
-
-
-Produce el siguiente resultado:
-
-```{r}
-library(knitr)
-library(kableExtra) 
-head(iris,10) %>%
-  kable(booktabs = TRUE,format = "latex",
-    caption = "\\label{tabla02}Leyenda explicativa de la segunda tabla") %>%
-  kable_styling(
-    latex_options = c("striped", "condensed","hold_position"), 
-    position = "center",full_width = FALSE)
-```
-
-
-
-### Incluir una tabla que ocupe varias páginas
-
-Para corregir esa situación, la librería "kableExtra" nos permite presentar tablas que ocupen varias páginas utilizando los siguientes argumentos, como puede comprobarse en el ejemplo que se muestra:
-
-- Se ha añadido a **latex_options** la opción: **repeat_header**.
-
-- Se ha indicado el texto que aparecerá antes de pasar a la siguiente página:
-**`repeat_header_continued="contin\\'ua en la siguiente p\\'agina"`**.
-
-- Se ha indicado también el texto que aparecerá antes de escribir información de la tabla en la siguiente página: **`repeat_header_text = "continuaci\\'on"`**.
-
-El siguiente código:
-
-````markdown
-`r ''````{r}
-library(kableExtra) 
-iris[1:50,] %>% 
-  kable(booktabs = TRUE,format = "latex",digits = 1, longtable=TRUE) %>%
-  kable_styling(
-   latex_options = c("striped", "condensed","repeat_header"), 
-   position = "center",full_width = FALSE,
-   repeat_header_text = "continuaci\\'on", 
-   repeat_header_continued="contin\\'ua en la siguiente p\\'agina"
-  )
-```
-````
-
-Produce el siguiente resultado:
-
-```{r}
-library(kableExtra) 
-iris[1:50,] %>% 
-  kable(booktabs = TRUE,format = "latex",digits = 1, longtable=TRUE) %>%
-  kable_styling(
-   latex_options = c("striped", "condensed","repeat_header"), 
-   position = "center",full_width = FALSE,
-   repeat_header_text = "continuaci\\'on", 
-   repeat_header_continued="contin\\'ua en la siguiente p\\'agina"
-  )
-```
-
-
-### Incluir una tabla con aspecto de lista-diccionario
-
-El siguiente código:
-
-````markdown
-`r ''````{r}
-text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3"), 
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. "
-    ) 
-  )
-
-kable(text_tbl, "latex", booktabs = T) %>% 
-  kable_styling(full_width = F) %>% 
-  column_spec(1, bold = T, color = "red") %>% 
-  column_spec(2, width = "30em")
-```
-
-````
-
-
-Produce el siguiente resultado:
-
-```{r}
-text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3"), 
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. "
-    ) 
-  )
-
-kable(text_tbl, "latex", booktabs = T) %>% 
-  kable_styling(full_width = F) %>% 
-  column_spec(1, bold = T, color = "red") %>% 
-  column_spec(2, width = "30em")
-```
-
-
-### Incluir una tabla con notas a pie de tabla
-
-El siguiente código 
-
-````markdown
-`r ''````{r}
-library(kableExtra)
-dt <- mtcars[1:5, 1:6]
-
-kable(dt, "latex", align = "cccrcc", booktabs = T) %>%
-    kable_styling(position = "left") %>% 
-    footnote(general = "Elaboración propia. ",
-             number = c("Footnote 1; ", "Footnote 2; "),
-             alphabet = c("Footnote A; ", "Footnote B; "),
-             symbol = c("Footnote Symbol 1; ", "Footnote Symbol 2"), 
-             general_title = "Fuente: ", 
-             number_title = "Type I: ", 
-             alphabet_title = "Type II: ", 
-             symbol_title = "Type III: ", 
-             footnote_as_chunk = T, 
-             title_format = c("italic", "underline") )
-```
-
-````
-
-Produce la siguiente salida (la tabla está justificada a la izquierda **`position = "left"`**):
-
-```{r}
-library(kableExtra)
-dt <- mtcars[1:5, 1:6]
-
-kable(dt, "latex", align = "cccrcc", booktabs = T) %>%
-    kable_styling(position = "left") %>% 
-    footnote(general = "Elaboración propia. ",
-             number = c("Footnote 1; ", "Footnote 2; "),
-             alphabet = c("Footnote A; ", "Footnote B; "),
-             symbol = c("Footnote Symbol 1; ", "Footnote Symbol 2"), 
-             general_title = "Fuente: ", 
-             number_title = "Type I: ", 
-             alphabet_title = "Type II: ", 
-             symbol_title = "Type III: ", 
-             footnote_as_chunk = T, 
-             title_format = c("italic", "underline") )
-```
-
-
-### Presentar una tabla en modo apaisado
-
-Se presentan tres ejemplos de tablas apaisadas.
-
-1. La tabla \ref{tab:apaisada} tiene de especial que se usa la función **`landscape()`**.
-
-````markdown
-`r ''````{r}
-text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6",
-    "Item 7", "Item 8", "Item 9"), 
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. "
-    ) 
-  )
-text_tbl %>%
-  kable(booktabs = TRUE,caption="\\label{tab:apaisada}Esta tabla 
-          est\\'a apaisada y en una p\\'agina separada") %>% 
-      column_spec(c(1), 
-          width = "2cm") %>% 
-      column_spec(c(2), 
-          width = "10cm") %>% 
-      landscape()
-```
-
-````
-
-
-2. La tabla \ref{tab:apaisada2} tiene las siguientes características:
-
-    - `\hspace{2cm}`: desplaza la tabla hacia la derecha desde el margen izquierdo-largo.
-    - `skip=50pt`: desplaza verticalmente la tabla hacia abajo.
-
-
-````markdown
-
-\begingroup
-\captionsetup{type=table,skip=50pt}
-\caption{Es una tabla apaisada ...} \label{tab:apaisada2}
-\hspace{2cm}
-\Rotatebox{90}{
-`r ''````{r echo=FALSE, warning=FALSE}
-library(knitr)
-library(kableExtra)
-library(dplyr)
-
-text_tbl %>%
-  kable(booktabs = TRUE) %>% 
-      column_spec(c(1), width = "2cm") %>% 
-      column_spec(c(2), width = "14cm")
-
-```
+for (i in 1:length(datos$INESTADO1)){
+if (datos$INESTADO1[i]=="El Estado no debe intervenir en la vida económica"){
+    datos$INESTADO1[i]="No"}
+else {if (datos$INESTADO1[i]=="El Estado sí debe intervenir en la economía" ) {
+      datos$INESTADO1[i]="Sí"}
+          else{datos$INESTADO1[i]="N.S/N.C"}
 }
-\endgroup
+  }
 
-\newpage
-````
+for (i in 1:length(datos$CCAA)){
+if (datos$CCAA[i]=="Ceuta (Ciudad Autónoma de)" ){
+    datos$CCAA[i]="Ceuta"}
+else {if (datos$CCAA[i]=="Murcia (Región de)") {
+      datos$CCAA[i]="Murcia"}
+      else{if (datos$CCAA[i]=="Comunitat Valenciana"){
+      datos$CCAA[i]="Valencia"}
+      else {if (datos$CCAA[i]=="Madrid (Comunidad de)") {
+      datos$CCAA[i]="Madrid"}
+      else {if (datos$CCAA[i]=="Navarra (Comunidad Foral de)") {
+      datos$CCAA[i]="Navarra"}
+      else {if (datos$CCAA[i]=="Asturias (Principado de)"){
+      datos$CCAA[i]="Asturias"}
+      else {if (datos$CCAA[i]=="Melilla (Ciudad Autónoma de)"){
+      datos$CCAA[i]="Melilla"}
+        else{datos$CCAA[i]=datos$CCAA[i]}
+      }}}}}
+}}
 
-3. La tabla \ref{tab:sidewaystable} es un ejemplo de uso del entorno LaTeX "sidewaystable" (en el paquete "rotating" incluido) que rota la tabla y la leyenda.
+for (i in 1:length(datos$INFLUPOL1)){
+if (datos$INFLUPOL1[i]=="Alguna persona concreta (de sus familiares, amigos/as, conocidos/as…)"){
+    datos$INFLUPOL1[i]="Conocido Concreto"}
+else {if (datos$INFLUPOL1[i]=="La radio") {
+      datos$INFLUPOL1[i]="Radio"}
+      else{if (datos$INFLUPOL1[i]=="La televisión" ){
+      datos$INFLUPOL1[i]="Televisión"}
+      else {if (datos$INFLUPOL1[i]=="Las redes sociales, Internet") {
+      datos$INFLUPOL1[i]="Internet"}
+      else {if (datos$INFLUPOL1[i]=="Los periódicos" |
+                datos$INFLUPOL1[i]=="Las revistas" ) {
+      datos$INFLUPOL1[i]="Prensa"}
+      else {if (datos$INFLUPOL1[i]=="Un/a candidato/a, las actuaciones de los/as candidatos/as"){
+      datos$INFLUPOL1[i]="Candidatos"}
+      else {if (datos$INFLUPOL1[i]=="Los programas electorales"){
+      datos$INFLUPOL1[i]="Prog. Electorales"}
+        else{datos$INFLUPOL1[i]="N.S/N.C"}
+      }}}}}
+}}
 
+for (i in 1:length(datos$SIMBOL1)){
+if (datos$SIMBOL1[i]=="El ordenador, el portátil" |
+    datos$SIMBOL1[i]=="El software y la informática"){
+    datos$SIMBOL1[i]="Odenador e informática"}
+      else {if (datos$SIMBOL1[i]=="El robot aspirador y el robot de cocina" | datos$SIMBOL1[i]=="El robot, la robótica, la domótica en general") {
+      datos$SIMBOL1[i]="Robot"}
+      else {if (datos$SIMBOL1[i]=="Internet, wifi, rúter, fibra, conectividad") {
+      datos$SIMBOL1[i]="Internet"}
+      else {if (datos$SIMBOL1[i]=="La máquina fabril, la maquinaria industrial y agrícola" ){
+      datos$SIMBOL1[i]="Máquina fabril"}
+      else {if (datos$SIMBOL1[i]=="La radio"){
+      datos$SIMBOL1[i]="Radio"}
+      else {if (datos$SIMBOL1[i]=="La televisión y la smart TV"){
+      datos$SIMBOL1[i]="Televisión"}
+      else {if (datos$SIMBOL1[i]=="Los trenes de alta velocidad" |
+                datos$SIMBOL1[i]=="Los medios de transporte en general" |
+                datos$SIMBOL1[i]=="El coche, la automoción, el coche eléctrico" |
+                datos$SIMBOL1[i]=="El avión"){
+      datos$SIMBOL1[i]="Medios Transporte"}
+      else {if (datos$SIMBOL1[i]=="Los satélites espaciales, las naves, los viajes espaciales"){
+      datos$SIMBOL1[i]="Tema Aeroespacial"}
+      else {if (datos$SIMBOL1[i]=="Otros electrodomésticos (freidora, microondas)" | datos$SIMBOL1[i]=="Los electrodomésticos: lavadora,secadora, frigorífico y lavaplatos" |
+                datos$SIMBOL1[i]=="Los electrodomésticos para la climatización (aire acondicionado, calefacción)" ){
+      datos$SIMBOL1[i]="Electrodomésticos"}
+        else{datos$SIMBOL1[i]="N.S/N.C"}
+      }}}}}}}
+}}
 
-```{r}
-text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6","Item 7", "Item 8", "Item 9"), 
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. "
-    ) 
-  )
-text_tbl %>%
-  kable(booktabs = TRUE,caption="\\label{tab:apaisada}Esta tabla 
-          est\\'a apaisada y en una p\\'agina separada") %>% 
-      column_spec(c(1), 
-          width = "2cm") %>% 
-      column_spec(c(2), 
-          width = "10cm") %>% 
-      landscape()
-
-```
-
-
-\newpage
-
-<!-- https://stackoverflow.com/questions/51633434/prevent-pagebreak-in-kableextra-landscape-table -->
-<!-- \floatplacement{table}{!htbp} -->
-<!-- \captionsetup{type=table,format=plain, font=small, labelfont=bf,skip=100pt} -->
-
-\begingroup
-\captionsetup{type=table,skip=50pt}
-\caption{Es una tabla apaisada ...} \label{tab:apaisada2}
-\hspace{2cm}
-\Rotatebox{90}{
-```{r echo=FALSE, warning=FALSE}
-library(knitr)
-library(kableExtra)
-library(dplyr)
-text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6","Item 7", "Item 8", "Item 9"), 
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. "
-    ) 
-  )
-
-text_tbl %>%
-  kable(booktabs = TRUE) %>% 
-      column_spec(c(1), width = "2cm") %>% 
-      column_spec(c(2), width = "14cm")
-
-```
+for (i in 1:length(datos$SIMPATIA)){
+if (datos$SIMPATIA[i]=="BNG (Bloque Nacionalista Galego)"){
+    datos$SIMPATIA[i]="BNG"}
+else {if (datos$SIMPATIA[i]=="En Comú Podem" |
+          datos$SIMPATIA[i]=="En Común - Unidas Podemos" |
+          datos$SIMPATIA[i]=="Unidas Podemos") {
+      datos$SIMPATIA[i]="Unidas Podemos"}
+      else{if (datos$SIMPATIA[i]=="PACMA (Partido Animalista)"){
+      datos$SIMPATIA[i]="PACMA"}
+      else {if (datos$SIMPATIA[i]=="PRC (Partido Regionalista de Cantabria)") {
+      datos$SIMPATIA[i]="PRC"}
+      else {if (datos$SIMPATIA[i]=="Navarra Suma (UPN)") {
+      datos$SIMPATIA[i]="Navarra Suma"}
+      else {if (datos$SIMPATIA[i]=="Otro" | datos$SIMPATIA[i]=="N.C." |
+                datos$SIMPATIA[i]=="Ninguno"){
+      datos$SIMPATIA[i]="N.S/N.C"}
+        else{datos$SIMPATIA[i]=datos$SIMPATIA[i]}
+      }}}}}
 }
-\endgroup
 
-\newpage
+for (i in 1:length(datos$SITLAB)){
+if (datos$SITLAB[i]=="En paro y busca su primer empleo" ){
+    datos$SITLAB[i]="Paro y busca primer empleo"}
+else {if (datos$SITLAB[i]=="En paro y ha trabajado antes") {
+      datos$SITLAB[i]="Paro y ha trabajado"}
+      else{if (datos$SITLAB[i]=="Jubilado/a o pensionista 
+               (anteriormente ha trabajado)"){
+      datos$SITLAB[i]="Jubilado/pensionista (ha trabajado)"}
+      else {if (datos$SITLAB[i]=="Pensionista (anteriormente no ha trabajado)" ) {
+      datos$SITLAB[i]="Pensionista (no ha trabajado)"}
+      else {if (datos$SITLAB[i]=="Navarra (Comunidad Foral de)") {
+      datos$SITLAB[i]="Navarra"}
+      else {if (datos$SITLAB[i]=="N.C." | datos$SITLAB[i]=="Otra situación"){
+      datos$SITLAB[i]="N.C."}
+      else {if (datos$SITLAB[i]=="Melilla (Ciudad Autónoma de)"){
+      datos$SITLAB[i]="Melilla"}
+        else{datos$SITLAB[i]=datos$SITLAB[i]}
+      }}}}}
+}}
+
+for (i in 1:length(datos$SAT2)){
+if (datos$SAT2[i]=="Cree que todo seguirá prácticamente igual, que no influirá en el desempleo" ){
+    datos$SAT2[i]="Misma situación"}
+else {if (datos$SAT2[i]=="Dará lugar a la creación de más puestos de trabajo" ) {
+      datos$SAT2[i]="Más trabajo"}
+      else{if (datos$SAT2[i]=="Dará lugar a un aumento del paro"){
+      datos$SAT2[i]="Aumento paro"}
+        else{datos$SAT2[i]="N.S/N.C."}
+      }}
+}
+
+for (i in 1:length(datos$P0)){
+  if (datos$P0[i]=="La nacionalidad española" ){
+      datos$P0[i]="Española"}
+  else{datos$P0[i]="Española y otra"}
+}
+
+# nueva variable que se estudia en caso concreto:
+datos$PARTIDOBLOQUES=rep(1,length(datos$SIMPATIA))
+
+for (i in 1:length(datos$SIMPATIA)){
+if (datos$SIMPATIA[i]=="PSOE" | datos$SIMPATIA[i]=="Unidas Podemos"){
+    datos$PARTIDOBLOQUES[i]="Bloque Izquierda"}
+else {if (datos$SIMPATIA[i]=="PP" | datos$SIMPATIA[i]=="VOX" |
+          datos$SIMPATIA[i]=="Ciudadanos") {
+      datos$PARTIDOBLOQUES[i]="Bloque Derecha"}
+        else{datos$PARTIDOBLOQUES[i]="Otro"}
+      }}
+        
+# se redefinen las variables ordinales para que sigan un "orden"
+
+for (i in 1:length(datos$EDAD)){
+if (datos$EDAD[i]<=24){
+    datos$EDAD[i]="18-24"}
+else {if (datos$EDAD[i]<=34) {
+      datos$EDAD[i]="25-34"}
+      else{if (datos$EDAD[i]<=44) {
+      datos$EDAD[i]="35-44"}
+      else {if (datos$EDAD[i]<=54) {
+      datos$EDAD[i]="45-54"}
+      else {if (datos$EDAD[i]<=64) {
+      datos$EDAD[i]="55-64"}
+      else {if (datos$EDAD[i]>64) {
+      datos$EDAD[i]="65-99"}
+          else{datos$EDAD[i]="N.C"}
+      }}}}
+}}
+
+for (i in 1:length(datos$INTPOL)){
+if (datos$INTPOL[i]=="Nada"){
+    datos$INTPOL[i]="1-Nada"}
+else {if (datos$INTPOL[i]=="Poco") {
+      datos$INTPOL[i]="2-Poco"}
+      else{if (datos$INTPOL[i]=="Regular") {
+      datos$INTPOL[i]="3-Regular"}
+      else {if (datos$INTPOL[i]=="Bastante") {
+      datos$INTPOL[i]="4-Bastante"}
+      else {if (datos$INTPOL[i]=="Mucho") {
+      datos$INTPOL[i]="5-Mucho"}
+          else{datos$INTPOL[i]="0-N.S/N.C"}
+      }}}
+}}
+
+for (i in 1:length(datos$FUTUR1)){
+if (datos$FUTUR1[i]=="Ningún o casi ningún cambio"){
+    datos$FUTUR1[i]="1-Ningún o casi ningún cambio"}
+else {if (datos$FUTUR1[i]=="Pocos cambios") {
+      datos$FUTUR1[i]="2-Pocos cambios"}
+      else{if (datos$FUTUR1[i]=="Regular, ni muchos ni pocos") {
+      datos$FUTUR1[i]="3-Regular, ni muchos ni pocos"}
+      else {if (datos$FUTUR1[i]=="Bastantes cambios") {
+      datos$FUTUR1[i]="4-Bastantes cambios"}
+      else {if (datos$FUTUR1[i]=="Muchos cambios") {
+      datos$FUTUR1[i]="5-Muchos cambios"}
+          else{datos$FUTUR1[i]="0-N.S/N.C"}
+      }}}
+}}
+
+for (i in 1:length(datos$FUTUR2)){
+if (datos$FUTUR2[i]=="Muy negativos"){
+    datos$FUTUR2[i]="1-Muy negativos"}
+else {if (datos$FUTUR2[i]=="Negativos") {
+      datos$FUTUR2[i]="2-Negativos"}
+      else{if (datos$FUTUR2[i]=="En parte positivos y en parte negativos" |
+               datos$FUTUR2[i]=="Indiferentes"){
+      datos$FUTUR2[i]="3-Indiferentes"}
+      else {if (datos$FUTUR2[i]=="Positivos") {
+      datos$FUTUR2[i]="4-Positivos"}
+      else {if (datos$FUTUR2[i]=="Muy positivos") {
+      datos$FUTUR2[i]="5-Muy positivos"}
+        else{datos$FUTUR2[i]="0-N.S/N.C"}
+      }}}
+}}
+
+for (i in 1:length(datos$CLASESUB)){
+if (datos$CLASESUB[i]=="Clase baja/pobre"){
+    datos$CLASESUB[i]="1-Clase baja/pobre"}
+else {if (datos$CLASESUB[i]=="Clase trabajadora/obrera/proletariado") {
+      datos$CLASESUB[i]="2-Clase trabajadora/obrera/proletariado"}
+      else{if (datos$CLASESUB[i]=="Clase media-baja"){
+      datos$CLASESUB[i]="3-Clase media-baja"}
+      else {if (datos$CLASESUB[i]=="Clase media-media") {
+      datos$CLASESUB[i]="4-Clase media-media"}
+      else {if (datos$CLASESUB[i]=="Clase alta y media alta") {
+      datos$CLASESUB[i]="5-Clase alta y media alta"}
+        else{datos$CLASESUB[i]="0-N.S/N.C"}
+      }}}
+}}
+
+for (i in 1:length(datos$ESCIDEOL)){
+if (datos$ESCIDEOL[i]=="1 Izquierda") {
+    datos$ESCIDEOL[i]="01 Izquierda"}
+else {if (datos$ESCIDEOL[i]=="2"){
+  datos$ESCIDEOL[i]="02"}
+      else{if (datos$ESCIDEOL[i]=="3"){
+      datos$ESCIDEOL[i]="03"}
+      else {if (datos$ESCIDEOL[i]=="4") {
+      datos$ESCIDEOL[i]="04"}
+      else {if (datos$ESCIDEOL[i]=="5") {
+      datos$ESCIDEOL[i]="05"}
+      else {if (datos$ESCIDEOL[i]=="6"){
+      datos$ESCIDEOL[i]="06"}
+      else {if (datos$ESCIDEOL[i]=="7") {
+      datos$ESCIDEOL[i]="07"}
+      else {if (datos$ESCIDEOL[i]=="8") {
+      datos$ESCIDEOL[i]="08"}
+      else {if (datos$ESCIDEOL[i]=="9"){
+      datos$ESCIDEOL[i]="09"}
+      else {if (datos$ESCIDEOL[i]=="10 Derecha"){
+      datos$ESCIDEOL[i]="10 Derecha"}
+else {datos$ESCIDEOL[i]="0-N.S./N.C."}}
+      }}}}}}}}}
 
 
+for (i in 1:length(datos$ESTUDIOS)){
+if (datos$ESTUDIOS[i]=="Sin estudios"){
+    datos$ESTUDIOS[i]="1-Sin estudios"}
+else {if (datos$ESTUDIOS[i]=="Primaria") {
+      datos$ESTUDIOS[i]="2-Primaria"}
+      else{if (datos$ESTUDIOS[i]=="Secundaria 1ª etapa"){
+      datos$ESTUDIOS[i]="3-Secundaria 1ª etapa"}
+      else {if (datos$ESTUDIOS[i]=="Secundaria 2ª etapa") {
+      datos$ESTUDIOS[i]="4-Secundaria 2ª etapa"}
+      else {if (datos$ESTUDIOS[i]=="F.P." | datos$ESTUDIOS[i]=="Otros") {
+      datos$ESTUDIOS[i]="5-F.P. y otros no superiores"}
+      else {if (datos$ESTUDIOS[i]=="Superiores"){
+      datos$ESTUDIOS[i]="6-Superiores"}
+        else{datos$ESTUDIOS[i]="0-N.C"}
+      }}}}
+}}
 
-\begingroup
-\begin{sidewaystable}
-\centering
-\caption{Es una tabla apaisada ...} \label{tab:sidewaystable}
-```{r echo=FALSE, warning=FALSE}
+for (i in 1:length(datos$OPINION)){
+if (datos$OPINION[i]=="Peor"){
+    datos$OPINION[i]="1-Peor"}
+else {if (datos$OPINION[i]=="Igual") {
+      datos$OPINION[i]="2-Igual"}
+      else{if (datos$OPINION[i]=="Mejor") {
+           datos$OPINION[i]="3-Mejor"}
+           else {datos$OPINION[i]="0-N.S/Duda/N.C"}
+      }
+}}
+
+for (i in 1:length(datos$SAT1)){
+if (datos$SAT1[i]=="No aumentarán nada o casi nada"){
+    datos$SAT1[i]="1-No aumentarán nada o casi nada"}
+else {if (datos$SAT1[i]=="Aumentarán poco") {
+      datos$SAT1[i]="2-Aumentarán poco"}
+      else{if (datos$SAT1[i]=="Aumentarán algo"){
+      datos$SAT1[i]="3-Aumentarán algo"}
+      else {if (datos$SAT1[i]=="Aumentarán bastante") {
+      datos$SAT1[i]="4-Aumentarán bastante"}
+      else {if (datos$SAT1[i]=="Aumentarán mucho") {
+      datos$SAT1[i]="5-Aumentarán muchos"}
+        else{datos$SAT1[i]="0-N.S/N.C"}
+      }}}
+}}
+
+names(datos)=c("CCAA","SEXO","EDAD","NACIONALIDAD","INTPOLITICO",
+               "INESTADO","INFLUPOLITICA","FUTURO1","FUTURO2",
+               "SISTEMAUTOM2","SISTEMAUTOM1","SIMBOLO","IDENTPERSONAS",
+               "ESCIDEOL","PARTIDOSIMP","ESTUDIOS","SITLABORAL",
+               "RELIGION","OPINION","CLASESOCIAL","PARTIDOBLOQUES")
+
+# Ponemos las variables categoricas como factores y las ordinales como 
+# factores ordenados:
+datos$CCAA=as.factor(datos$CCAA)
+datos$SEXO=as.factor(datos$SEXO)
+datos$EDAD=as.ordered(datos$EDAD)
+datos$NACIONALIDAD=as.factor(datos$NACIONALIDAD)
+datos$INTPOLITICO=as.ordered(datos$INTPOLITICO)
+datos$INESTADO=as.factor(datos$INESTADO)
+datos$INFLUPOLITICA=as.factor(datos$INFLUPOLITICA)
+datos$FUTURO1=as.ordered(datos$FUTURO1)
+datos$FUTURO2=as.ordered(datos$FUTURO2)
+datos$SISTEMAUTOM2=as.ordered(datos$SISTEMAUTOM2)
+datos$SISTEMAUTOM1=as.factor(datos$SISTEMAUTOM1)
+datos$SIMBOLO=as.factor(datos$SIMBOLO)
+datos$IDENTPERSONAS=as.factor(datos$IDENTPERSONAS)
+datos$ESCIDEOL=as.ordered(datos$ESCIDEOL)
+datos$PARTIDOSIMP=as.factor(datos$PARTIDOSIMP)
+datos$ESTUDIOS=as.ordered(datos$ESTUDIOS)
+datos$SITLABORAL=as.factor(datos$SITLABORAL)
+datos$RELIGION=as.factor(datos$RELIGION)
+datos$CLASESOCIAL=as.ordered(datos$CLASESOCIAL)
+datos$OPINION=as.ordered(datos$OPINION)
+datos$PARTIDOBLOQUES=as.factor(datos$PARTIDOBLOQUES)
+
+# lo guardamos:
+
+save(datos,file="C:/Users/glori/OneDrive - UNIVERSIDAD DE SEVILLA/Escritorio/MemoriaTFEGloriaVizcaino/datos.Rdata")
+
+# save(datos,file="C:/Users/Escritorio/MemoriaTFEGloriaVizcaino/
+#                  datos.Rdata")
+
+load("datos.Rdata")
+```
+
+## Medidas de Asociación para Variables Nominales
+
+Se realizará un análisis descriptivo y se aplicarán las diferentes medidas de asociación, creadas para variables categóricas, a los siguientes pares de variables:
+
+-   SEXO - IDENTPERSONAS
+
+-   SEXO - INESTADO
+
+-   CCAA - SIMBOLO
+
+-   RELIGION - PARTIDOSIMP
+
+-   SITLABORAL - SISTEMAUTOM1
+
+-   INFLUPOLITICA - PARTIDOSIMP
+
+-   INESTADO - PARTIDOSIMP
+
+Para así, conocer el grado de asociación entre ellas y poder comparar las distintas medidas.
+
+### SEXO - IDENTPERSONAS
+
+En primer lugar, se estudia si a partir del sexo de la persona se puede predecir el grupo de personas con el que tiene más intereses comunes.
+
+Un resumen de los datos muestrales se observa en la siguiente tabla, donde aparece el total de personas para cada categoría de la variable IDENTPERSONAS diferenciado por la variable SEXO. Además, también aparece el porcentaje para ambos sexos de cada una de las categorías:
+
+```{r 2}
+library(dplyr)
+
+d2 <- datos %>%
+group_by(IDENTPERSONAS,SEXO) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+
 library(knitr)
 library(kableExtra)
-library(dplyr)
-text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6","Item 7", "Item 8", "Item 9"), 
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. ",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
-    at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
-    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
-    a aliquet ex tincidunt in. ",
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
-    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
-    velit scelerisque mattis. "
-    ) 
-  )
 
-text_tbl %>%
-  kable(booktabs = TRUE) %>% 
-      column_spec(c(1), width = "2cm") %>% 
-      column_spec(c(2), width = "14cm")
-
+kable(d2,caption ="Variables IDENTPERSONAS y SEXO",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header",
+                                  "condensed","hold_position"), 
+                repeat_header_text="(contin\\'ua)",
+                position = "center",full_width = FALSE)
 ```
-\end{sidewaystable}
-\endgroup
 
-\clearpage
+A continuación, se representan dichos datos en un gráfico de barras para facilitar su interpretación:
 
+```{r 3, echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:nom1} Gráfico de barras SEXO-IDENTPERSONAS",fig.pos="H"}
+library(ggplot2)
 
+ggplot(data = d2,
+       mapping = aes(x = factor(IDENTPERSONAS),y = Porcentaje*100,
+                     fill = factor(SEXO))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Indentificación con sus mismos/as...", y = "Porcentaje", 
+       fill = "Sexo") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5)) +
+  scale_fill_manual(values=c("#AEEEEE","#7A67EE"))
+```
 
-### Cambiar la etiqueta "Tabla"
+A través del gráfico, se intuye que no habrá demasiada asociación entre las dos variables, ya que parece que la variable SEXO no influye demasiado en la categoría de la variable IDENTPERSONAS. Las categorías que están más diferenciadas por el sexo son: Género, Clase Social y Municipio.
 
-Para que en lugar de "Tabla" aparezca "Cuadro" (este término es el que recomienda la RAE), se deberían hacer las siguientes modificaciones en: 
+Para calcular las diferentes medidas de asociación se considera que la variable dependiente es IDENTPERSONAS.
 
-- en el fichero principal "tfe_principal.Rmd"
+Las diferentes medidas obtenidas se observan en la siguiente tabla:
 
-    ```latex
-    \addcontentsline{toc}{section}{Índice de Tablas}
-    ```
+```{r 4}
+tabla1=table(datos$IDENTPERSONAS,datos$SEXO)
+tabla1=tabla1[-8,] #quitar los N.S/N.C
 
-- Quitar la opción "es-tabla" en el fichero "latex/templateMemoriaTFE.tex" 
+library(DescTools)
+a1=Lambda(tabla1, direction="column", conf.level = 0.95) 
+#en dirección va la independiente
+b1=GoodmanKruskalTau(tabla1, direction="column", conf.level = 0.95)
 
-    ```latex
-    %\usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
-    \usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
-    ```
+c1=rbind.data.frame(a1,b1)
+rownames(c1)=c("$\\lambda$ de Goodman y Krukal","$t$ de Goodman y Kruskal")
+colnames(c1)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
-Más información en la url siguiente: [Documentación babel-spanish en CTAN](https://osl.ugr.es/CTAN/macros/latex/contrib/babel-contrib/spanish/spanish.pdf).
+kable(c1,caption ="Medidas de variables IDENTPERSONAS y SEXO", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
 
-<!-- ### Cambiar la etiqueta "Cuadro" -->
+Se observa que ambas medidas, tanto la $\lambda$ como la $t$ de Goodman y Kruskal, presentan valores cercanos a $0$, es decir, la asociación entre ambas variables no es demasiado significativa. Aunque cabe destacar que como el $0$ no pertenece al intervalo de confianza, la asociación tampoco se consideraría nula.
 
-<!-- Para que en lugar de "Cuadro" aparezca "Tabla", se debería incluir una de las siguientes opciones en el fichero principal  -->
+Como se observó en el gráfico \ref{fig:nom1}, las variables en las que el sexo toma un papel más importante son Género, Municipio y Clase Social. A continuación, se calculan de nuevos estas medidas usando únicamente esas categorías de la variable IDENTPERSONAS:
 
-<!-- ```latex -->
-<!-- \renewcommand\tablename{Tabla} -->
-<!-- ``` -->
+```{r 6}
+tabla1a=tabla1[c(2,4,7),]
+a2=Lambda(tabla1a, direction="column", conf.level = 0.95) 
+b2=GoodmanKruskalTau(tabla1a, direction="column", conf.level = 0.95)
 
-<!-- Con el paquete babel y la opción "spanish" (o al final de: "latex/latex_preambulo.tex"): -->
+c2=rbind.data.frame(a2,b2)
+rownames(c2)=c("$\\lambda$ de Goodman y Krukal","$t$ de Goodman y Kruskal")
+colnames(c2)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
-<!-- ```latex -->
-<!-- \renewcommand\spanishtablename{Tabla} -->
-<!-- ``` -->
+kable(c2,caption ="Medidas de variables IDENTPERSONAS y SEXO (2)", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
 
+Se puede ver cómo ambas medidas han aumentado considerablemente sus valores, y por tanto, restringiénsonos a estas categorías, se obtiene que el conocimiento de los valores de la variable SEXO permite reducir la incertidumbre en la predicción del comportamiento de la variable IDENTPERSONAS en un 42% y un 22,44%, respectivamente.
 
-## Uso de expresiones matemáticas
+### SEXO - INESTADO
 
+Igualmente, se plantea ahora si la variable sexo influye en la respuesta de cada persona a la pregunta ¿debería intervenir el Estado en la vida económica? y viceversa.
 
-En el siguiente enlace [overleaf: alfabeto griego y símbolos matemáticos](https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols) puede encontrarse una recopilación de los comandos LaTeX para representar todo el alfabeto griego y muchos de los símbolos más usados en expresiones matemáticas.
+Realizando el mismo proceso, se obtiene la tabla:
 
+```{r 7}
+d3 <- datos %>%
+group_by(INESTADO,SEXO) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
 
-
-
-### Algunas expresiones matemáticas
-
-
-Las fracciones pueden usarse en el texto, por ejemplo $\frac{1}{2}$, y en un estilo matemático centrado como puede verse a continuación:
- 
-\[\frac{1}{2}\]
-
-El código utilizado ha sido:
-
-```markdown
-Las fracciones pueden usarse en el texto, por ejemplo \( \frac{1}{2} \), 
-y en un estilo matemático centrado como puede verse a continuación:
- 
-\[\frac{1}{2}\]
+kable(d3,caption ="Variables INESTADO y SEXO",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
 
 ```
 
-- Como puede verse **`\( \)`** se utiliza para modo matemático en el texto. También se puede escribir la expresión matemática entre un signo de dólar a cada lado: **`$  $`**.
+Y el gráfico:
 
-- Como puede verse **`\[ \]`** se utiliza para modo matemático centrado en el texto. También se puede escribir la expresión matemática entre un doble signo de dólar a cada lado: **`$$  $$`**.
+```{r 8, echo=FALSE,out.width='10cm',fig.align='center',fig.cap="\\label{fig:nom2} Gráfico de barras SEXO-INESTADO",fig.pos="H"}
 
+ggplot(data = d3,
+       mapping = aes(x = factor(INESTADO),y = Porcentaje*100, 
+                     fill = factor(SEXO))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "¿Debería el Estado intervenir en la vida económica? ", 
+       y = "Porcentaje", fill = "Sexo") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5)) +
+  scale_fill_manual(values=c("#AEEEEE","#7A67EE"))
+```
 
-**Nota**. Cuando se usa el modo matemático visto anteriormente no es posible añadir etiquetado de ecuaciones para hacer referencia a ellas. Para el etiquetado se usa el entorno LaTeX: **`\begin{equation} \label{identificador} ... \end{equation}`**, el cual se verá en el apartado \ref{etiquetadomatematico}.
+Mediante el análisis descriptivo no hay signos de que haya asociación entre las variables. Esto se comprueba con los valores que obtenemos al calcular las medidas de asociación siguientes:
 
-Veamos más ejemplos de uso de LaTeX en R Markdown para escribir expresiones matemáticas:
+```{r 9}
+tabla2=table(datos$INESTADO,datos$SEXO)
+tabla2=tabla2[-1,] #quitar los N.S/N.C
 
-\[ \int_0^1 x^2 + y^2 \ dx \]
+a3.1=Lambda(tabla2, direction="column", conf.level = 0.95)
+a3.2=Lambda(tabla2, direction="row", conf.level = 0.95)
+b3.1=GoodmanKruskalTau(tabla2, direction="column", conf.level = 0.95)
+b3.2=GoodmanKruskalTau(tabla2, direction="row", conf.level = 0.95)
 
-\[ \int\limits_0^1 x^2 + y^2 \ dx \]
+c3=rbind.data.frame(a3.1,a3.2,b3.1,b3.2)
+rownames(c3)=c("$\\lambda_{INESTADO}$ de Goodman y Krukal","$\\lambda_{SEXO}$ de Goodman y Krukal","$t_{INESTADO}$ de Goodman y Kruskal", "$t_{SEXO}$ de Goodman y Kruskal")
+colnames(c3)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
-\[ a_1^2 + a_2^2 = a_3^2 \]
+kable(c3,caption ="Medidas de variables INESTADO y SEXO", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
 
-\[ x^{2 \alpha} - 1 = y_{ij} + y_{ij}  \]
+Mediante este ejemplo, se puede observar la particularidad de que $\lambda$ puede tomar el valor de $0$ para casos distintos a la independencia. En este caso se ha obtenido la tabla de contingencia:
 
-\[ (a^n)^{r+s} = a^{nr+ns}  \]
+```{r 10}
+kable(tabla2,longtable=TRUE) %>%
+   kable_styling(position = "center")
+```
 
-\[ \sum_{i=1}^{\infty} \frac{1}{n^s} 
-= \prod_p \frac{1}{1 - p^{-s}} \]
-
-
-
-$$ 
-F = G \left( \frac{m_1 m_2}{r^2} \right)
+En esta situación, la moda de la categorías de INESTADO coinciden que son la misma categoría de la variable SEXO (Hombre), por tanto, $$
+W=\sum_{i=1}^2max(n_{i1},n_{i2})=350+932=1282; ~~~~~~A=max(n_{.1},n_{.2})=1282
+$$ y así, $$
+\lambda_{INESTADO}=\frac{W-A}{N-A}=0~.
+$$ Análogamente, la moda de la categorías de SEXO coinciden que son la misma categoría de la variable INESTADO (Sí), por tanto, $$
+Z=\sum_{j=1}^2max(n_{1j},n_{2j})=932+930=1862; ~~~~~~B=max(n_{1.},n_{2.})=1862
+$$ y así, $$
+\lambda_{SEXO}=\frac{Z-B}{N-B}=0~.
 $$
 
+### CCAA - SIMBOLO
 
+A continuación, se plantea la cuestión de si hay relación entre la elección del símbolo que mejor define la época actual y la comunidad autónoma a la que pertenecen los encuestados. Gráficamente:
 
-$$ 
- \left[  \frac{ N } { \left( \frac{L}{p} \right)  - (m+n) }  \right]
-$$
+```{r 11}
+tabla4=table(datos$SIMBOLO,datos$CCAA)
+tabla4=tabla4[-5,] #quitar los N.S/N.C
 
-Controlando el tamaño de los elementos separadores:
-
-$$
- \Bigg \langle 3x+7 \bigg \rangle
-$$
-
-El código LaTeX utilizado respectivamente ha sido:
-
-```latex
-\[ \int_0^1 x^2 + y^2 \ dx \]
-
-\[ \int\limits_0^1 x^2 + y^2 \ dx \]
-
-\[ a_1^2 + a_2^2 = a_3^2 \]
-
-\[ x^{2 \alpha} - 1 = y_{ij} + y_{ij}  \]
-
-\[ (a^n)^{r+s} = a^{nr+ns}  \]
-
-\[ \sum_{i=1}^{\infty} \frac{1}{n^s} 
-= \prod_p \frac{1}{1 - p^{-s}} \]
-
-$$ 
-F = G \left( \frac{m_1 m_2}{r^2} \right)
-$$
-
-$$ 
- \left[  \frac{ N } { \left( \frac{L}{p} \right)  - (m+n) }  \right]
-$$
-
-$$
- \Bigg \langle 3x+7 \bigg \rangle
-$$
+# kable(tabla4[,1:6],longtable=TRUE) %>%
+#   row_spec(0, bold=T, background='gray!6',align='c') %>%
+#   kable_styling(position = "center",full_width = T)
+# kable(tabla4[,7:12],longtable=TRUE) %>%
+#   row_spec(0, bold=T, background='gray!6',align='c') %>%
+#   kable_styling(position = "center",full_width = T)
+# kable(tabla4[,13:19],longtable=TRUE) %>%
+#   row_spec(0, bold=T, background='gray!6',align='c') %>%
+#   kable_styling(position = "center",full_width = T)
 ```
 
-### Expresiones matriciales
+```{r 12}
+d5 <- datos %>%
+group_by(SIMBOLO,CCAA) %>% # agrupa por variables
+summarise(Total=n()) %>%# resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
 
-El uso de `\begin{array}{} ... \end{array}` nos permite escribir expresiones en forma de tabla. Veamos con algunos ejemplos su uso básico.
+# Esta tabla es demasiado grande, mejor no mostrarla
 
-- Ejemplo 1:
+# kable(d5,caption ="Variables SÍMBOLO y CCAA") %>%
+#   kable_styling(latex_options = c("striped", "condensed","hold_position"),
+# position = "center",
+# full_width = FALSE) 
 
-El  \emph{polinomio característico} $\chi(\lambda)$ de la matriz
-$3 \times 3$
-\[ \left( \begin{array}{ccc}
-a & b & c \\
-d & e & f \\
-g & h & i \end{array} \right)\] 
-viene dado por la fórmula
-\[ 
-\chi(\lambda) = 
-\left| 
-\begin{array}{ccc}
-\lambda - a & -b & -c \\
--d & \lambda - e & -f \\
--g & -h & \lambda - i 
-\end{array} 
-\right|.
-\] 
-
-```latex
-El  \emph{polinomio característico} $\chi(\lambda)$ de la matriz
-$3 \times 3$
-\[ \left( \begin{array}{ccc}
-a & b & c \\
-d & e & f \\
-g & h & i \end{array} \right)\] 
-viene dado por la fórmula
-\[ 
-\chi(\lambda) = 
-\left| 
-\begin{array}{ccc}
-\lambda - a & -b & -c \\
--d & \lambda - e & -f \\
--g & -h & \lambda - i 
-\end{array} 
-\right|.
-\] 
 ```
 
-Otros ejemplos de uso de `\begin{array}{} ... \end{array}`:
+```{r 13, echo=FALSE,out.width='14cm',fig.align='center',fig.cap="\\label{fig:nom4} Gráfico de barras CCAA-SÍMBOLO",fig.pos="H"}
 
-- Ejemplo 2:
-
-\[ 
-\begin{array}{lcr}
-\mbox{First number} & x & 8 \\
-\mbox{Second number} & y & 15 \\
-\mbox{Sum} & x + y & 23 \\
-\mbox{Difference} & x - y & -7 \\
-\mbox{Product} & xy & 120 \end{array}
-\] 
-
-```latex
-\[ 
-\begin{array}{lcr}
-\mbox{First number} & x & 8 \\
-\mbox{Second number} & y & 15 \\
-\mbox{Sum} & x + y & 23 \\
-\mbox{Difference} & x - y & -7 \\
-\mbox{Product} & xy & 120 \end{array}
-\] 
+d5=d5[-(51:69),]
+ggplot(data = d5,
+       mapping = aes(x = factor(SIMBOLO),y = Porcentaje, 
+                     fill = factor(CCAA))) + 
+  geom_bar(colour="black", stat = 'identity') +
+  labs(x = "El símbolo que mejor define la época actual es...", 
+       y = "Total", fill = "CCAA") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5), 
+        legend.key.height = unit (0.35, 'cm')) 
 ```
 
-- Ejemplo 3:
+Las medidas se asociación aparecen recogidas en la siguiente tabla:
 
-\[ |x| = \left\{ \begin{array}{ll}
-         x & \mbox{if $x \geq 0$};\\
-        -x & \mbox{if $x < 0$}.\end{array} \right. \] 
+```{r 14}
 
-```latex
-\[ |x| = \left\{ \begin{array}{ll}
-         x & \mbox{if $x \geq 0$};\\
-        -x & \mbox{if $x < 0$}.\end{array} \right. \] 
+a5.1=Lambda(tabla4, direction="column", conf.level = 0.95)
+b5.1=GoodmanKruskalTau(tabla4, direction="column", conf.level = 0.95)
+a5.2=Lambda(tabla4, direction="row", conf.level = 0.95)
+b5.2=GoodmanKruskalTau(tabla4, direction="row", conf.level = 0.95)
+
+c5=rbind.data.frame(a5.1,a5.2,b5.1,b5.2)
+rownames(c5)=c("$\\lambda_{SIMBOLO}$ de Goodman y Krukal","$\\lambda_{CCAA}$ de Goodman y Krukal","$t_{SIMBOLO}$ de Goodman y Kruskal","$t_{CCAA}$ de Goodman y Kruskal")
+colnames(c5)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(c5,caption ="Medidas de variables SIMBOLO y CCAA", 
+      row.names = T,escape = FALSE, digits = rep(4,3), longtable=T) %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+                position = "center",repeat_header_text="(contin\\'ua)", 
+                full_width = FALSE)
 ```
 
-- Ejemplo 4:
-$$
-f(n) = 
-\begin{cases} 
-  n/2,  & \mbox{if } n\mbox{ is even} \\ 
-  3n+1, & \mbox{if } n\mbox{ is odd} 
-\end{cases}
-$$
+Sin importar qué variable se tome como dependiente, no hay evidencias para rechazar la hipótesis nula de que $\lambda=0$, y por tanto, con esta medida las variables SIMBOLO y CCAA no presentan asociación. Sin embargo, con la medida $t$ de Goodman y Kruskal, la asociación sí es significativa aunque con el conocimiento de las variables CCAA y SIMBOLO sólo permite reducir la incertidumbre en la predicción del comportamiento de la otra variable en un 0,68% y un 1,62%, respectivamente.
 
-```latex
-$$
-f(n) = 
-\begin{cases} 
-  n/2,  & \mbox{if } n\mbox{ is even} \\ 
-  3n+1, & \mbox{if } n\mbox{ is odd} 
-\end{cases}
-$$
+### RELIGION - PARTIDOSIMP
+
+Seguidamente se cuantifica la asociación entre las creencias religiosas y los partidos políticos más afines a los entrevistados.
+
+Análisis descriptivo:
+
+```{r 15}
+d7 <- datos %>%
+group_by(PARTIDOSIMP,RELIGION) %>% # agrupa por variables
+summarise(Total=n()) %>%# resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4)) 
+
+d7=d7[-c(9,17,25,36:40,46,56,62,67),]
+
+kable(d7,caption ="Variables PARTIDOSIMP y RELIGIÓN",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)", full_width = FALSE)
 ```
 
+Esta vez, no se representan los porcentajes, sino las frecuencias absolutas. Así se ve también cuáles son los partidos mayoritarios:
 
+```{r 16, echo=FALSE,out.width='17cm',fig.align='center',fig.cap="\\label{fig:nom6} Gráfico de barras RELIGIÓN-PARTIDOSIMP",fig.pos="H"}
 
-### Alineando ecuaciones y etiquetado {#etiquetadomatematico}
-
-Para alinear ecuaciones en R Markdown habrá que utilizar las habilidades de los paquetes LaTeX. Ver [overleaf](https://www.overleaf.com/learn/latex/Aligning_equations_with_amsmath).
-
-A continuación se mostrará el código LaTeX necesario para construir expresiones matemáticas.
-
-
-- Uso de "equation-split" y etiquetado con "label" (ver la ecuación \ref{eq1})
-
-```latex
-(ver la ecuación \ref{eq1})
-\begin{equation} \label{eq1}
-\begin{split}
-A & = \frac{\pi r^2}{2} \\
- & = \frac{1}{2} \pi r^2
-\end{split}
-\end{equation}
+ggplot(data = d7,
+       mapping = aes(x = factor(PARTIDOSIMP),y = Total, 
+                     fill = factor(RELIGION))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "¿Qué partido es con el que más simpatizas? ", 
+       y = "Total", fill = "Religión") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5)) 
 ```
 
-\begin{equation} \label{eq1}
-\begin{split}
-A & = \frac{\pi r^2}{2} \\
- & = \frac{1}{2} \pi r^2
-\end{split}
-\end{equation}
+Considerando la variable PARTIDOSIMP como la variable dependiente, se obtienen las siguientes medidas:
 
+```{r 17}
+tabla6=table(datos$PARTIDOSIMP,datos$RELIGION)
+tabla6=tabla6[-11,-5] #quitar los N.S/N.C
 
-- Uso de "`multline*`" para mostrar ecuaciones largas:
+a8=Lambda(tabla6, direction="column", conf.level = 0.95)
+b8=GoodmanKruskalTau(tabla6, direction="column", conf.level = 0.95)
 
-```latex
-\begin{multline*}
-p(x) = 3x^6 + 14x^5y + 590x^4y^2 + 19x^3y^3 
-            - 32x^2y^4 - 22xy^5 + 12y^6 - 7a^3b^3\\ 
-- 12x^2y^4 - 12xy^5 + 2y^6 - a^3b^3
-\end{multline*}
+c8=rbind.data.frame(a8,b8)
+rownames(c8)=c("$\\lambda$ de Goodman y Krukal","$t$ de Goodman y Kruskal")
+colnames(c8)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(c8,caption ="Medidas de variables PARIDOSIMP y RELIGION", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
 ```
 
-\begin{multline*}
-p(x) = 3x^6 + 14x^5y + 590x^4y^2 + 19x^3y^3 
-            - 32x^2y^4 - 22xy^5 + 12y^6 - 7a^3b^3 \\ 
-- 12x^2y^4 - 12xy^5 + 2y^6 - a^3b^3
-\end{multline*}
+Se puede considerar que hay asociación entre las variables RELIGIÓN y PARTIDOSIMP. Más concretamente, el conocimiento de los valores de la variable RELIGION permite reducir la incertidumbre en la predicción de la variable PARTIDOSIMP en un 21,82% y un 12,76%, considerando las medidas $\lambda$ y $t$ de Goodman y Kruskal respectivamente.
 
+### SITLABORAL - SISTEMAUTOM1
 
-- Uso de "`align`" y "`align*`" (diferencia entre incluir "*" y no incluirlo) para alinear varias ecuaciones:
+Se plantea ahora la cuestión de si a través de la situación laboral se puede predecir cómo afectará al número de parados la utilización de robots y sistemas automáticos de trabajo en los próximos diez años.
 
-```latex
-\begin{align} 
-2x - 5y &=  8  \label{eqalign01}\\ 
-3x + 9y &=  -12 \label{eqalign02}
-\end{align}
+Los datos muestrales son los siguientes:
+
+```{r 18}
+d8 <- datos %>%
+group_by(SISTEMAUTOM1,SITLABORAL) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+
+kable(d8,caption ="Variables SISTEMAUTOM1 y SITLABORAL",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE) %>%
+column_spec(2,width = "7cm")
+
 ```
 
-\begin{align} 
-2x - 5y &=  8  \label{eqalign01}\\ 
-3x + 9y &=  -12 \label{eqalign02}
-\end{align}
+A través de ellos, se obtiene el gráfico:
 
-```latex
-\begin{align*}
-x&=y           &  w &=z              &  a&=b+c\\
-2x&=-y         &  3w&=\frac{1}{2}z   &  a&=b\\
--4 + 5x&=2+y   &  w+2&=-1+w          &  ab&=cb
-\end{align*}
+```{r 19, echo=FALSE,out.width='17cm',fig.align='center',fig.cap="\\label{fig:nom7} Gráfico de barras SITLABORAL-SISTEMAUTOM1",fig.pos="H"}
+
+ggplot(data = d8,
+       mapping = aes(x = factor(SISTEMAUTOM1),y = Porcentaje, 
+                     fill = factor(SITLABORAL))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "La utilización de robots y sistemas automáticos 
+       va a ser causa en los próximos años de...", 
+       y = "Porcentaje", fill = "Situación Laboral") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
 ```
 
-\begin{align*}
-x&=y           &  w &=z              &  a&=b+c\\
-2x&=-y         &  3w&=\frac{1}{2}z   &  a&=b\\
--4 + 5x&=2+y   &  w+2&=-1+w          &  ab&=cb
-\end{align*}
+Las medidas de asociación que se obtienen, considerando la variable SISTEMAUTOM1, son:
 
-- Uso de "`gather*`" para agrupar y centrar ecuaciones:
+```{r 20}
+tabla7=table(datos$SISTEMAUTOM1,datos$SITLABORAL)
+tabla7=tabla7[-4,-3] #quitar los N.S/N.C
 
-```latex
-\begin{gather*} 
-2x - 5y =  8 \\ 
-3x^2 + 9y =  3a + c
-\end{gather*}
+a9=Lambda(tabla7, direction="column", conf.level = 0.95)
+b9=GoodmanKruskalTau(tabla7, direction="column", conf.level = 0.95)
+
+c9=rbind.data.frame(a9,b9)
+rownames(c9)=c("$\\lambda$ de Goodman y Krukal","$t$ de Goodman y Kruskal")
+colnames(c9)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(c9,caption ="Medidas de variables SISTEMAUTOM1 y SITLABORAL", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
 ```
 
-\begin{gather*} 
-2x - 5y =  8 \\ 
-3x^2 + 9y =  3a + c
-\end{gather*}
+Como $\lambda = 0$, indica que el conocimiento de los valores de una variable no permite predecir el comportamiento de la otra variable.
 
-
-
-
-### Escribiendo resultados matemáticos
-
-Se pueden utilizar entornos matemáticos para establecer: "Definiciones", "Teoremas", "Corolarios", "Demostraciones", "Ejemplos", etc. Se ha dado un aspecto personalizado a estas construcciones, que pueden consultarse (y modificarse) en el interior del fichero de estilos LaTeX: "latex/latex_preambulo.tex".
-
-A continuación se recoge un ejemplo con el código necesario.
-
-```markdown
-\bedefinition
-Se **define**... 
-\eedefinition
-```
-
-\bedefinition
-Se **define**... 
-\eedefinition
-
-```markdown
-\betheorem
-Dado...
-\eetheorem
-```
-
-
-\betheorem
-Dado...
-\eetheorem
-
-```markdown
-\becorollary
-Se verifica...
-\eecorollary
-```
-
-
-\becorollary
-Se verifica...
-\eecorollary
-
-```markdown
-\beproof
-Para demostrar...
-\eeproof
-```
-
-
-\beproof
-Para demostrar...
-\eeproof
-
-```markdown
-\beexample
-Se considera el siguiente ejemplo...
-\eeexample
-```
-
-\beexample
-Se considera el siguiente ejemplo...
-\eeexample
-
-## Uso de la bibliografía
-
-Se aconseja guardar todas las referencias bibliográficas en ficheros con formato bibtex. En este caso se usan dos ficheros de bibliografía (podrían tener otros nombres):
-
-- "bib/library.bib": en este fichero podremos tener todas las referencias bibliográficas que vayamos encontrando convenientemente formateadas. Se podría utilizar en otros proyectos o trabajos. 
-
-- "bib/paquetes.bib": este fichero lo genera automáticamente R cuando creamos la salida R Markdown del fichero principal: "tfe_principal.Rmd", de ahí que no se debe modificar porque se perderían los cambios introducidos. En este se recogerán las referencias bibliográficas de los paquetes R que le indiquemos. Si quisiéramos personalizar alguna referencia a un paquete R se debería incluir en el fichero: "library.bib". Por ejemplo, en el chunk inicial del fichero "tfe_principal.Rmd" se han indicado para que paquetes R se incluirán referencias bibliográficas.
+El estadístico $t$ de Goodman toma el valor de $0.0092$, este resultado confirma las conclusiones comentadas justo antes.
 
 \bigskip
 
-```{r eval=F,echo=T}
-knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
-                   "stringr","shiny","flexdashboard","htmlwidgets",
-                   "bookdown"),
-                 file="bib/paquetes.bib", 
-                 width = 60)
+Se obtienen las respectivas asociaciones correspondientes a varios aspectos políticos:
+
+### INFLUPOLITICA - PARTIDOSIMP
+
+Se consideran únicamente los partidos que obtuvieron más votos, es decir, PSOE, PP, Unidas Podemos, VOX y Ciudadanos; y se observa si existe relación con cuál ha sido la mayor influencia en las decisiones políticas de los últimos dos años.
+
+```{r 21}
+d10 <- datos %>%
+group_by(PARTIDOSIMP,INFLUPOLITICA) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+d10=d10[c(8:15,81:88,90:97,99:114),]
+kable(d10,caption ="Variables PARTIDOSIMP y INFLUPOLITICA",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
 ```
 
+```{r 22, echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:nom9} Gráfico de barras INFLUPOLITICA-PARTIDOSIMP",fig.pos="H"}
 
+ggplot(data = d10,
+       mapping = aes(x = factor(PARTIDOSIMP),y = Porcentaje*100, 
+                     fill = factor(INFLUPOLITICA))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "¿Qué partido es con el que más simpatizas?", 
+       y = "Porcentaje", fill = "Mayor Influencia") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
+```
 
-Algunas de las referencias bibliográficas incluidas en el fichero "bib/library.bib" aparecen a continuación. Se recogen ejemplos de publicaciones de tipos diferentes: "Manual", "book", "article", "misc", pero existen muchas más.
+Observando el gráfico, parece que para los principales partidos, la influencia en las decisiones políticas es similar; por lo que debería traducirse en que que no hay (o hay poca asociación) entre ambas variables. Esto se verifica a través de las medidas de asociación:
 
-Hay que resaltar, que cada una de estas referencias bibliográficas tiene un identificador ("Luque2017", "R-base", "Wickham2017", etc) que será el que nos permita hacer referencia a las correspondientes referencias al añadir el prefijo `@`, es decir, por ejemplo: `@Luque2017`.
+```{r 23}
+tabla9=table(datos$PARTIDOSIMP,datos$INFLUPOLITICA)
+tabla9=tabla9[c(3,14,16,18,19),] #escoger los partidos con más votos
 
-```bibtex
-@Manual{Luque2017,
-  title = {Escribir un Trabajo Fin de Estudios con R Markdown},
-  author = {Pedro L. Luque-Calvo},
-  year = "2017",
-  howpublished = {Disponible en \url{http://destio.us.es/calvo}}
-}
+a11=Lambda(tabla9, direction="column", conf.level = 0.95)
+b11=GoodmanKruskalTau(tabla9, direction="column", conf.level = 0.95)
 
-@Manual{R-base,
-  title = {R: A Language and Environment for Statistical
-    Computing},
-  author = {{R Core Team}},
-  organization = {R Foundation for Statistical Computing},
-  address = {Vienna, Austria},
-  year = {2016},
-  url = {https://www.R-project.org/},
-}
+c11=rbind.data.frame(a11,b11)
+rownames(c11)=c("$\\lambda$ de Goodman y Krukal","$t$ de Goodman y Kruskal")
+colnames(c11)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
+kable(c11,caption ="Medidas de variables PARTIDOSIMP e INFLUPOLITICA", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
 
-@book{Wickham2017,
-	Author = {Hadley Wickham and Garrett Grolemund},
-	Edition = {First Edition},
-	Publisher = {O'Reilly},
-	Title = {R for Data Science: Import, Tidy, Transform, 
-	Visualize, and Model Data},
-	Year = {2017}
-}
+### INESTADO - PARTIDOSIMP
 
-@ARTICLE {Example1999,
-    author  = "Example, The",
-    title   = "This is an exmaple article not cited in the text",
-    journal = "Journal of Examples",
-    year    = "1999",
-    volume  = "4",
-    number  = "2",
-    pages   = "1-9"
-}
+Para finalizar con las medidas de asociación nominal, se estudia la asociación entre la elección del martido más afín a la persona y su opición sobre si el Estado debería intervenir en la vida económica.
 
-@Misc{Techopedia,
-  title = {"Definition - What does Business Intelligence (BI) mean?"},
-  author = {Techopedia},
-  howpublished = {Disponible en
-  \url{https://www.techopedia.com/definition/345/business-intelligence-bi}}
-}
+Un resumen se los datos se muestra en la siguiente tabla y gráfico:
 
+```{r 24}
+d11 <- datos %>%
+group_by(PARTIDOSIMP,INESTADO) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+d11=d11[c(5,6,31,32,35,36,39,40,42,43),]
+kable(d11,caption ="Variables PARTIDOSIMP y INESTADO",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
+```
+
+```{r 25, echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:nom10} Gráfico de barras INESTADO-PARTIDOSIMP",fig.pos="H"}
+
+ggplot(data = d11,
+       mapping = aes(x = factor(PARTIDOSIMP),y = Porcentaje*100, 
+                     fill = factor(INESTADO))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "¿Qué partido es con el que más simpatizas?", 
+       y = "Porcentaje", fill = "¿Debería el Estado intervenir \n en la vida económica?") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5)) +
+  scale_fill_manual(values=c("#AEEEEE","#7A67EE"))
+```
+
+Las medidas de asociación que se obtienen son:
+
+```{r 26}
+tabla11=table(datos$PARTIDOSIMP,datos$INESTADO)
+tabla11=tabla11[c(3,14,16,18,19),-1] #escoger los partidos con más votos
+
+a12.1=Lambda(tabla11, direction="column", conf.level = 0.95)
+a12.2=Lambda(tabla11, direction="row", conf.level = 0.95)
+b12.1=GoodmanKruskalTau(tabla11, direction="column", conf.level = 0.95)
+b12.2=GoodmanKruskalTau(tabla11, direction="row", conf.level = 0.95)
+
+c12=rbind.data.frame(a12.1,a12.2,b12.1,b12.2)
+rownames(c12)=c("$\\lambda_{PARIDOSIMP}$ de Goodman y Krukal","$\\lambda_{INESTADO}$ de Goodman y Krukal","$t_{PARIDOSIMP}$ de Goodman y Kruskal","$t_{INESTADO}$ de Goodman y Kruskal")
+colnames(c12)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(c12,caption ="Medidas de variables PARTIDOSIMP e INESTADO", 
+      row.names = T,escape = FALSE, digits = rep(4,3),longtable=T)%>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+                position = "center",repeat_header_text="(contin\\'ua)", 
+                full_width = T)
+```
+
+Tomando la variable PARIDOSIMP como dependiente , $\lambda = 0.0219$. Así pues, el conocimiento de los valores de la variable PARIDOSIMP permite reducir la incertidumbre en la predicción del comportamiento de la variable INESTADO en un 2.19%, pero como el $0$ pertenece al intervalo de confianza, se puede concluir que la asociación no es significativa usando esta medida. Por el contrario, usando la medida $t$ de Goodman y Kruskal, la asociación sí que es evidente y en este caso, el conocimiento de los valores de la variable PARIDOSIMP permite reducir la incertidumbre en la predicción del comportamiento de la variable INESTADO en un 18.96%.
+
+Tomando la variable INESTADO como dependiente, ambas medidas son significativas. $\lambda=0.1074$ y $t=0.0574$ así, el conocimiento de los valores de la variable INESTADO permite reducir la incertidumbre en la predicción del comportamiento de la variable PARIDOSIMP en un 10.74% y un 5,74% respectivamente.
+
+\bigskip
+
+Es de destacar que las medidas obtenidas no describen del todo bien el comportamiento del gráfico, ya que se observa gran relación entre estas variables. Por tanto, se da un paso más y se agrupan los partidos en los bloques de izquierda (PSOE y Unidas Podemos) y derecha (PP, Vox y Ciudadanos), para así calcular de nuevo dichas medidas:
+
+```{r 27}
+tabla11.=table(datos$PARTIDOBLOQUES,datos$INESTADO)
+tabla11.=tabla11.[-3,-1]
+
+a13.1=Lambda(tabla11., direction="column", conf.level = 0.95)
+a13.2=Lambda(tabla11., direction="row", conf.level = 0.95)
+b13.1=GoodmanKruskalTau(tabla11., direction="column", conf.level = 0.95)
+b13.2=GoodmanKruskalTau(tabla11., direction="row", conf.level = 0.95)
+
+c13=rbind.data.frame(a13.1,a13.2,b13.1,b13.2)
+rownames(c13)=c("$\\lambda_{PARTIDOSIMP}$ de Goodman y Krukal","$\\lambda_{INESTADO}$ de Goodman y Krukal","$t_{PARTIDOSIMP}$ de Goodman y Kruskal","$t_{INESTADO}$ de Goodman y Kruskal")
+colnames(c13)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(c13,caption ="Medidas de variables PARTIDOSIMP e INESTADO (2)", 
+      row.names = T,escape = FALSE, digits = rep(4,3), longtable=T)%>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+                position = "center",repeat_header_text="(contin\\'ua)", 
+                full_width = T)
+```
+
+En este caso, que $\lambda_{PARTIDOSIMP}$ sea $0$ no es porque no exista asociación, se debe a la problemática ya vista anteriormente de que la moda de los dos bloques ideológicos coinciden que son la misma categoría de la variable INESTADO (Sí).
+
+En las demás medidas el grado de asociación sí que ha aumentado considerablemente.
+
+## Medidas de Asociación para Variables Ordinales
+
+La función *cor* también se puede aplicar a variables de tipo ordinal usando la medida $\tau$ de Kendall, por eso, antes que nada, se examina el gráfico de correlaciones para aplicar las medidas de asociación ordinal entre las variables más interesantes.
+
+```{r 28, echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:corrplot} Gráfico de correlaciones método Kendall",fig.pos="H"}
+cor=cor(apply(datos[,c(3,5,8:10,14,16,19,20)],2,xtfrm),method = "kendall")
+
+library(corrplot)
+corrplot(cor,title = "Correlación entre Variables Ordinales",tl.cex = 0.7, tl.col = "black")
 
 ```
 
+Se observa que la asociación no es extremadamente fuerte para ningún par de variables, además, cabe destacar que hay variables que presentan asociación tanto positiva como negativa.
 
-Podrían generarse en la consola de R, al utilizar la función **`citation("paqueteR")`**, por ejemplo: 
+Al igual que para las variables nominales, se realizará un análisis descriptivo y se aplicarán las diferentes medidas de asociación a cada uno de los siguientes pares de variables:
 
-\footnotesize
+-   EDAD - ESTUDIOS
 
-```r
-> citation("dplyr")
+-   ESTUDIOS - INTPOLITICO
 
-To cite package ‘dplyr’ in publications use:
+-   OPINION - FUTURO2
 
-  Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2019). dplyr: A
-  Grammar of Data Manipulation. R package version 0.8.3.
-  https://CRAN.R-project.org/package=dplyr
+-   CLASESOCIAL - ESTUDIOS
 
-A BibTeX entry for LaTeX users is
+-   ESCIDEOL - EDAD
 
-  @Manual{,
-    title = {dplyr: A Grammar of Data Manipulation},
-    author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller},
-    year = {2019},
-    note = {R package version 0.8.3},
-    url = {https://CRAN.R-project.org/package=dplyr},
-  }
+-   SISTEMAUTOM2 - FUTURO1
 
+-   ESCIDEOL - CLASESOCIAL
+
+Para así, conocer el grado de asociación entre ellas y poder comparar las distintas medidas.
+
+### EDAD - ESTUDIOS
+
+En primer lugar, se va a analizar si a partir del nivel de estudios de la persona se puede predecir a qué grupo de edad pertenece y viceversa.
+
+Un resumen de los datos muestrales se observa en la siguiente tabla:
+
+```{r 29}
+d1_ <- datos %>%
+group_by(EDAD,ESTUDIOS) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+
+kable(d1_,caption ="Variables EDAD y ESTUDIOS",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
 ```
 
-\normalsize
+Se representan en la siguiente figura:
 
+```{r 30, echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord1} Gráfico de barras EDAD-ESTUDIOS",fig.pos="H"}
 
-Para obtener más información sobre la realización de citas en R Markdown visitar la url [R Markdown: Bibliographies and Citations](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html).
-
-### Hacer citaciones
-
-Las citas van entre corchetes y están separadas por punto y coma. Cada cita debe tener una clave, compuesta de "`@`" + el identificador de cita de la base de datos, y opcionalmente puede tener un prefijo, un localizador y un sufijo. A continuación  se muestran algunos ejemplos:
-
-```markdown
-Blah blah [vea @Luque2017, págs. 33-35; también @Luque2019, cap. 1].
-
-Blah blah [@Luque2017, págs. 33-35, 38-39 y *passim*].
-
-Blah blah [@Luque2017; @Wickham2017].
+ggplot(data = d1_,
+       mapping = aes(x = factor(EDAD),y = Porcentaje*100,
+                     fill = factor(ESTUDIOS))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Nivel de estudios según edad", y = "Porcentaje", 
+       fill = "Nivel de Estudios") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
 ```
 
-*Produce la siguiente salida:*
+Las diferentes medidas de asociación ordinal se recogen en la tabla:
 
-Blah blah [vea @Luque2017, págs. 33-35; también @Luque2019, cap. 1].
+```{r 31}
+tabla1_=table(datos$EDAD,datos$ESTUDIOS)
+tabla1_=tabla1_[,-1]
 
-Blah blah [@Luque2017, págs. 33-35, 38-39 y *passim*].
+e1=KendallTauA(tabla1_, conf.level = 0.95)
+f1=KendallTauB(tabla1_, conf.level = 0.95)
+g1=StuartTauC(tabla1_, conf.level = 0.95)
+h1=GoodmanKruskalGamma(tabla1_, conf.level = 0.95)
+i1=SomersDelta(tabla1_, direction="column", conf.level = 0.95)
+j1=SomersDelta(tabla1_, direction="row", conf.level = 0.95)
 
-Blah blah [@Luque2017; @Wickham2017].
+k1=rbind.data.frame(e1,f1,g1,h1,i1,j1)
+rownames(k1)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{EDAD}$ de Sommers","$d_{ESTUDIOS}$ de Sommers")
+colnames(k1)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
-
-Un signo menos (-) antes de la @ suprimirá la mención del autor en la cita. Esto puede ser útil cuando el autor ya se menciona en el texto:
-
-<!-- A minus sign (-) before the @ will suppress mention of the author in the citation. This can be useful when the author is already mentioned in the text: -->
-
-```markdown
-Luque dice blah [-@Luque2017].
+kable(k1,caption ="Medidas de variables EDAD y ESTUDIOS", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
 ```
 
-*Produce la siguiente salida:*
+Todas las medidas son negativas, es decir, existe asociación y es negativa (a medida que aumenta el grupo de edad es menor el nivel de estudios). Las diferentes medidas son relativamente parecidas en cuanto a los valores que toman y van desde -0.2127, la $\gamma$ de Goodman y Kruskal, hasta -0.124, la $\tau_a$ de Kendall. La asociación es significativa en todas ellas.
 
-Luque dice blah [-@Luque2017].
+### ESTUDIOS - INTPOLITICO
 
-También puede escribir una cita en el texto, de la siguiente manera:
+A continuación, se examina si es posible conocer el nivel de estudios a partir del interés hacia la política de la persona .
 
-```markdown
-@Luque2017 dice blah.
+```{r}
+d2_ <- datos %>%
+group_by(ESTUDIOS,INTPOLITICO) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
 
-@Luque2017 [pág. 33] dice blah.
+kable(d2_,caption ="Variables ESTUDIOS e INTPOLITICO",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
 ```
 
-*Produce la siguiente salida:*
+Gráficamente:
 
-@Luque2017 dice blah.
+```{r echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord2} Gráfico de barras ESTUDIOS-INTPOLITICO",fig.pos="H"}
 
-@Luque2017 [pág. 33] dice blah.
-
-
-### Estilos de citación
-
-Por defecto, pandoc usará un formato de "fecha-autor" del estilo "Chicago" para citas y referencias. Para usar otro estilo, deberá especificar un archivo de estilo CSL 1.0 en el campo de metadatos csl. Por ejemplo:
-
-```yaml
----
-title: "Sample Document"
-output: html_document
-bibliography: bibliography.bib
-csl: biomed-central.csl
----
+ggplot(data = d2_[-c(1,2),],
+       mapping = aes(x = factor(ESTUDIOS),y = Porcentaje*100,
+                     fill = factor(INTPOLITICO))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Nivel de Estudios", y = "Porcentaje", 
+       fill = "Interés Político") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
 ```
 
-Puede encontrar una introducción a la creación y modificación de estilos CSL en <http://citationstyles.org/downloads/primer.html>. Puede encontrar un repositorio de estilos CSL en <https://github.com/citation-style-language/styles>. Consulte también <http://zotero.org/styles> para navegar fácilmente por ellos.
+Las medidas de asociación que se obtienen son las siguientes:
 
+```{r}
+tabla2_=table(datos$ESTUDIOS,datos$INTPOLITICO)
+tabla2_=tabla1_[-1,-1]
 
-**Citaciones para salidas PDF**. Por defecto, las citas son generadas por la utilidad "pandoc-citeproc", y funciona para todos los formatos de salida. Cuando la salida es LaTeX/PDF, también puede usar paquetes LaTeX (por ejemplo, natbib) para generar citas; ver [documentos PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html) para más detalles.
+e2=KendallTauA(tabla2_, conf.level = 0.95)
+f2=KendallTauB(tabla2_, conf.level = 0.95)
+g2=StuartTauC(tabla2_, conf.level = 0.95)
+h2=GoodmanKruskalGamma(tabla2_, conf.level = 0.95)
+i2=SomersDelta(tabla2_, direction="column", conf.level = 0.95)
+j2=SomersDelta(tabla2_, direction="row", conf.level = 0.95)
 
+k2=rbind.data.frame(e2,f2,g2,h2,i2,j2)
+rownames(k2)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{ESTUDIOS}$ de Sommers","$d_{INTPOLITICO}$ de Sommers")
+colnames(k2)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
-
-
-
-
-### Estilos bibliográficos con natbib: método 1
-
-Este método es el que está activado por defecto.
-
-**Importante**. Hay que asegurarse que en el fichero principal: "tfe_principal.Rmd" aparecen sin comentar las siguientes líneas (habría que comentar las del otro método):
-
-- En la cabecera "yaml":
-
-\footnotesize
-```markdown
-# metodobib -> true: natbib (descomentar: citation_package: natbib) 
-#           -> false: pandoc (comentar: citation_package: natbib)
-metodobib: true
-#natbib: plainnat, abbrvnat, unsrtnat
-biblio-style: "plainnat"
-output: 
-  pdf_document: 
-    citation_package: natbib
-```
-\normalsize
-
-
-
-
-
-
-**Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas en el documento escrito.
-
-También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando `\nocite{}` situado al final del fichero: "tfe_principal.Rmd", como puede verse en el siguiente código:
-
-\footnotesize
-````markdown
-\ifdefined\ifcitapandoc
-
-\else
-
-<!-- \nocite{*} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
-
-\fi 
-
-````
-\normalsize
-
- 
-
-
-En la cabecera "yaml" del fichero "tfe_principal.Rmd" aparece la clave "biblio-style:", que permite presentar la bibliografía siguiendo unas pautas habituales en publicaciones científicas. 
-
-Por defecto se ha elegido el estilo "plainnat":
-
-```yaml
-biblio-style: "plainnat" 
+kable(k2,caption ="Medidas de variables ESTUDIOS e INTPOLITICO", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
 ```
 
-pero se pueden elegir otras variantes de "natbib":
+¿Esto tiene sentido que salga negativo? En el gráfico de correlación salía positivo.
 
-- plainnat, abbrvnat, unsrtnat
+### OPINION - FUTURO2
 
-<!-- - **usa números**: unsrt, siam, plain, ieeetr, acm, abbrv -->
-<!-- - **usa etiquetas**: apalike, alpha -->
+Se estudia ahora si existe relación entre el pensamiento de cómo vivirán las nuevas generaciones y el grado de positividad ante cambios en 10 años. Los datos muestrales se pueden resumir en la tabla:
 
-Para obtener más información sobre este tema consultar el siguiente enlace: [overleaf-Bibtex](https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles)
-y 
-[overleaf-Bibtex-natbib](https://www.overleaf.com/learn/latex/Bibliography_management_with_natbib)
+```{r}
+d3_ <- datos %>%
+group_by(FUTURO2,OPINION) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
 
-<!-- Si se comentan las opciones "csl" de la cabecera "yaml" se puede personalizar por otra vía la presentación de la bibliografía con el comando (ver más información en [overleaf](https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles): -->
-
-
-
-
-**Nota**: además de a través del paquete "natbib" hay otra forma de manejar bibliografías  con el paquete [biblatex](https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex) que posee características adicionales al sistema bibtex, pero necesita la instalación de nuevo software.
-
-[overleaf biblatex](https://www.overleaf.com/learn/latex/Articles/Getting_started_with_BibLaTeX) y [documentación completa biblatex](http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf)
-
-
-<!-- #csl: 3-biotech.csl -->
-<!-- #csl: 3d-research.csl -->
-<!-- #csl: journal-of-chemometrics.csl -->
-<!-- #Método 3 de bibliografía: descomente -->
-<!-- #citation_package: biblatex -->
-<!-- # \usepackage[style=numeric]{biblatex} -->
-<!-- # \usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex} -->
-<!-- # numeric,alphabetic, reading, authoryear -->
-<!-- # \usepackage[style=authoryear,sorting=ynt]{biblatex} -->
-<!-- # nty—sorts entries by name, title, year; -->
-<!-- # nyt—sorts entries by name, year, title; -->
-<!-- # nyvt—sorts entries by name, year, volume, title; -->
-<!-- # anyt—sorts entries by alphabetic label, name, year, title; -->
-<!-- # anyvt—sorts entries by alphabetic label, name, year, volume, title; -->
-<!-- # ynt—sorts entries by year, name, title; -->
-<!-- # ydnt—sorts entries by year (descending order), name, title; -->
-<!-- # none—no sorting. Entries appear in the order they appear in the text. -->
-<!-- #biblio-style: authoryear,sorting=ynt,citestyle=alphabetic,bibstyle=numeric -->
-<!-- #biblio-style: numeric,sorting=ynt,citestyle=alphabetic,bibstyle=numeric -->
-<!-- # -->
-<!-- #biblio-style: authoryear,sorting=ydnt,backend=bibtex,hyperref,backref,backrefstyle=none -->
-<!-- #biblio-style: numeric,sorting=ydnt,backend=bibtex,hyperref,backref,backrefstyle=none -->
-<!-- # -->
-<!-- #biblio-style: authoryear,sorting=ynt  https://stackoverflow.com/questions/49042613/how-to-change-citation-style-in-biblatex-in-r-markdown -->
-<!-- #latex_engine: pdflatex  #pdflatex  # xelatex -->
-<!-- #citation_package: biblatex #natbib -->
-
-
-
-### Estilos bibliográficos con pandoc: método 2 {#bibliografiametodo2}
-
-
-**Importante**. Hay que asegurarse que en el fichero principal: "tfe_principal.Rmd" aparecen sin comentar las siguientes líneas (habría que comentar las del otro método):
-
-- En la cabecera "yaml":
-
-\footnotesize
-```markdown
-# metodobib -> true: natbib (descomentar: citation_package: natbib) 
-#           -> false: pandoc (comentar: citation_package: natbib)
-metodobib: false
-output: 
-  pdf_document: 
-    #citation_package: natbib
-```
-\normalsize
-
-
-<!-- #### Cómo citar y estilos bibliográficos en el método 2 -->
-
-<!-- En el texto se podrán incluir citas a cualquiera de las referencias bibliográficas incluidas en los ficheros de bibliografía ".bib" con ayuda de código como el siguiente: -->
-
-<!-- ```markdown -->
-<!-- Como se indica en las siguientes referencias -->
-<!-- @Luque2017, [@R-base] y @Wickham2017 en págs.3-7,  -->
-<!-- o también se podría ver en [@Luque2017; @Wickham2017]. -->
-<!-- ``` -->
-
-<!-- Produce el siguiente resultado: -->
-
-<!-- Como se indica en las siguientes referencias -->
-<!-- @Luque2017, [@R-base] y @Wickham2017 en págs.3-7,  -->
-<!-- o también se podría ver en [@Luque2017; @Wickham2017]. -->
-
-
-<!-- **Nota**. Hay problemas al usar la referencia sin corchete con el método 1: `@Luque2017`. -->
-
-**Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas, es decir, hayan aparecido en un comando **`@identificador`** en el documento.
-
-
-
-También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando `nocite` situado al inicio del documento R Markdown (en este proyecto al inicio del fichero "tfe_principal.Rmd"), como puede verse en el siguiente código:
-
-````markdown
----
-nocite: | 
-  @Luque2017,@RStudio,@R-base,
-  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2,@Techopedia
-...
-
-````
-
-
-En la cabecera "yaml" del fichero "tfe_principal.Rmd" aparece la clave "csl:", que permite presentar la bibliografía siguiendo las pautas que se exigen en algunas revistas científicas (listado para descargar en [zotero csl](https://www.zotero.org/styles/), también [más información](https://citationstyles.org/publishers/)).
-
-```yaml
-csl: acm-sig-proceedings-long-author-list.csl
-#csl: methods-in-ecology-and-evolution.csl
+kable(d3_,caption ="Variables OPINION y FUTURO2",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
 ```
 
+Los datos de la tabla anterior se simplifican gracias al siguiente gráfico:
 
+```{r echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord3} Gráfico de barras OPINION-FUTURO2",fig.pos="H"}
 
-## Otras cuestiones de interés
-
-### Cómo hacer referencias a otras partes del documento
-
-Se pueden hacer referencias a capítulos, secciones, subsecciones, u otros subniveles. Para ello es conveniente saber cómo insertar identificadores a estas partes. Para incluir un identificador,
-al final de la definición de un apartado se añaden unas llaves entre las que se ha puesto el identificador deseado con el prefijo `#`. 
-
-Para hacer referencia a este identificador se pueden emplear los comandos LaTeX: **`\ref{identificador}`** para referirse a la numeración del apartado o **`\pageref{identificador}`** para referirse a la página en la que se encuentra definido el apartado.
-
-
-En el siguiente ejemplo se ha definido a una sección el identificador "sec:incluirgrafico", 
-```markdown
-## Cómo incluir un gráfico {#sec:incluirgrafico}
+ggplot(data = d3_[-c(1:4),],
+       mapping = aes(x = factor(FUTURO2),y = Porcentaje*100,
+                     fill = factor(OPINION))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Positividad ante cambios en 10 años", y = "Porcentaje", 
+       fill = "Nuevas generaciones") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
 ```
 
-**Nota**. No se pueden definir identificadores iguales a secciones distintas.
+Se obtienen las medidas de asociación:
 
+```{r}
+tabla3_=table(datos$OPINION,datos$FUTURO2)
+tabla3_=tabla1_[-1,-1]
 
+e3=KendallTauA(tabla3_, conf.level = 0.95)
+f3=KendallTauB(tabla3_, conf.level = 0.95)
+g3=StuartTauC(tabla1_, conf.level = 0.95)
+h3=GoodmanKruskalGamma(tabla3_, conf.level = 0.95)
+i3=SomersDelta(tabla3_, direction="column", conf.level = 0.95)
+j3=SomersDelta(tabla3_, direction="row", conf.level = 0.95)
 
-### Colorear texto
+k3=rbind.data.frame(e3,f3,g3,h3,i3,j3)
+rownames(k3)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{OPINION}$ de Sommers","$d_{FURURO2}$ de Sommers")
+colnames(k3)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
 
-El siguiente código
-```
-\textcolor{blue!90!}{Texto azul} y 
-\textcolor{green!10!orange!90!}{texto resaltado}
-```
-produce
-
-\textcolor{blue!90!}{Texto azul} y 
-\textcolor{green!10!orange!90!}{texto resaltado}
-
-
-
-### Colorear texto en cajas
-
-El siguiente código
-```
-\colorlet{Mycolor1}{green!10!orange!90!}
-\colorbox{Mycolor1}{\textcolor{White}{Texto resaltado}}
-```
-produce
-
-\colorlet{Mycolor1}{green!10!orange!90!}
-\colorbox{Mycolor1}{\textcolor{White}{Texto resaltado}}
-
-
-### Colorear párrafos de texto
-
-En el siguiente código se utilizan varios comandos LaTeX para producir cajas coloreadas:
-
-- **`\colorbox{color}{texto}`**
-- **`\begin{minipage}{anchocaja}    \end{minipage}`**
-- **`\textcolor{color}{texto}`**
-- **`\color{color}`**
-
-```
-\noindent\colorbox{blue}{
-\begin{minipage}{0.30\textwidth}
-\color{white}
-Lo que se ve en esta \textcolor{red}{minipágina} 
-tiene un color de fondo azul y
-el texto está escrito en blanco. 
-\end{minipage}}\hspace{0.5cm} 
-\colorbox{yellow}{\begin{minipage}{0.60\textwidth} 
-Lo que se ve en esta \textcolor{red}{minipágina} 
-tiene un color de fondo amarillo y
-el texto está escrito en negro
-\end{minipage}}
+kable(k1,caption ="Medidas de variables OPINION y FUTURO2", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
 ```
 
-produce:
+Igual, ¿por qué sale negativo?
 
-\noindent\colorbox{blue}{
-\begin{minipage}{0.30\textwidth}
-\color{white}
-Lo que se ve en esta \textcolor{red}{minipágina} 
-tiene un color de fondo negro y
-el texto está escrito en blanco. 
-\end{minipage}}\hspace{0.5cm} 
-\colorbox{yellow}{\begin{minipage}{0.60\textwidth} 
-Lo que se ve en esta \textcolor{red}{minipágina} 
-tiene un color de fondo negro y
-el texto está escrito en blanco
-\end{minipage}}
+### CLASESOCIAL - ESTUDIOS
 
-```` ```` 
+En este caso, se analiza la asociación entre la clase social con el nivel de estudios de las personas. Se observa la siguiente tabla y gráfica:
 
+```{r}
+d4_ <- datos %>%
+group_by(ESTUDIOS,CLASESOCIAL) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
 
-### Incluir ficheros pdf externos
-
-
-Es posible incluir un documento pdf externo dentro de nuestro documento con ayuda del comando LaTeX **`\includepdf`** del paquete: "pdfpages" (incluido en este proyecto). 
-
-En el siguiente ejemplo (no se muestra en este documento el resultado) se insertarían en nuestro documento las páginas 8 y 14 del fichero local “xaringanej01_defecto.pdf” con un escalado de 75% (de la 11 a 14, habría que escribir: pages=11-14):
-
-
-```latex
-\includepdf[scale=0.75,pages={8,14}, 
-  pagecommand=\section*{Ejemplo de inserción de un pdf en un documento}, 
-  offset=00 -30]{xaringanej01_defecto.pdf}
+kable(d4_,caption ="Variables CLASE SOCIAL y ESTUDIOS",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)%>%
+column_spec(2,width = "5cm")
 ```
 
+```{r echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord4} Gráfico de barras CLASE SOCIAL-ESTUDIOS",fig.pos="H"}
 
-En el siguiente ejemplo se incluye el fichero pdf (vendría apaisado y puede que sin numerar) pero rotándolo 90 grados para que quede en vertical:
-
-```latex
-\includepdf[scale=0.90,pages=1-,angle=90,pagecommand=,
-offset=00 -20]{chuleta_tabla_kableExtra_apaisada_texrevisado.pdf}
+ggplot(data = d4_[-c(1,2),],
+       mapping = aes(x = factor(ESTUDIOS),y = Porcentaje*100,
+                     fill = factor(CLASESOCIAL))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Nivel alcanzado de estudios", y = "Porcentaje", 
+       fill = "Clase Social") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
 ```
-como puede verse en la siguiente página.
 
-\includepdf[scale=0.90,pages=1-,angle=90,pagecommand=,
-offset=00 -20]{graficos/chuleta_tabla_kableExtra_apaisada.pdf}
+Las medidas que se han calculado son:
 
+```{r}
+tabla4_=table(datos$CLASESOCIAL,datos$ESTUDIOS)
+tabla4_=tabla4_[-1,-1]
 
+e4=KendallTauA(tabla4_, conf.level = 0.95)
+f4=KendallTauB(tabla4_, conf.level = 0.95)
+g4=StuartTauC(tabla4_, conf.level = 0.95)
+h4=GoodmanKruskalGamma(tabla4_, conf.level = 0.95)
+i4=SomersDelta(tabla4_, direction="column", conf.level = 0.95)
+j4=SomersDelta(tabla4_, direction="row", conf.level = 0.95)
+
+k4=rbind.data.frame(e4,f4,g4,h4,i4,j4)
+rownames(k4)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{CLASESOCIAL}$ de Sommers","$d_{ESTUDIOS}$ de Sommers")
+colnames(k4)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(k4,caption ="Medidas de variables CLASESOCIAL y ESTUDIOS", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
+
+Para cada una de las medidas se obtiene que la asociación es significativa, por tanto, conociendo la respuesta sobre el nivel de educación o la clase social, se reduce la incertidumbre en la predicción, al menos, un 15.82%.
+
+### ESCIDEOL - EDAD
+
+Se realiza el mismo procedimiento con las variables Escalón Ideológico y el rango de edad.
+
+```{r}
+d5_ <- datos %>%
+group_by(ESCIDEOL,EDAD) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+
+kable(d5_,caption ="Variables EDAD y ESCIDEOL",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)
+```
+
+```{r echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord5} Gráfico de barras EDAD-ESCIDEOL",fig.pos="H"}
+
+ggplot(data = d5_[-(1:6),],
+       mapping = aes(x = factor(ESCIDEOL),y = Porcentaje*100,
+                     fill = factor(EDAD))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Escalón Ideológico", y = "Porcentaje", 
+       fill = "Eadad") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
+```
+
+Medidas:
+
+```{r}
+tabla5_=table(datos$ESCIDEOL,datos$EDAD)
+tabla5_=tabla5_[-1,]
+
+e5=KendallTauA(tabla5_, conf.level = 0.95)
+f5=KendallTauB(tabla5_, conf.level = 0.95)
+g5=StuartTauC(tabla5_, conf.level = 0.95)
+h5=GoodmanKruskalGamma(tabla5_, conf.level = 0.95)
+i5=SomersDelta(tabla5_, direction="column", conf.level = 0.95)
+j5=SomersDelta(tabla5_, direction="row", conf.level = 0.95)
+  
+k5=rbind.data.frame(e5,f5,g5,h5,i5,j5)
+rownames(k5)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{ESCIDEOL}$ de Sommers","$d_{EDAD}$ de Sommers")
+colnames(k5)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(k5,caption ="Medidas de variables ESCIDEOL y EDAD", 
+      row.names = T,escape = FALSE, digits = rep(4,3)) %>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+                position = "center",full_width = T)
+```
+
+Aunque las medidas resulten sen todas muy bajas, no existen evidencias para concluir que no haya asociación.
+
+### SISTEMAUTOM2 - FUTURO1
+
+Ahora es el turno de ver cómo se afectan mutuamente la variable que mide la cantidas de cambios sociales y económicos de aquí a diez años con el aumento del número de robots y sistemas automáticos usados en las empresas en los próximos diez años.
+
+Un análisis descritivo de los datos:
+
+```{r}
+d7_ <- datos %>%
+group_by(FUTURO1,SISTEMAUTOM2) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=Total/sum(Total))
+
+kable(d7_,caption ="Variables SISTEMAUTOM2 y FUTURO1",longtable=TRUE) %>%
+  row_spec(0, bold=T, background='gray!6',align='c') %>%
+  kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+position = "center",
+repeat_header_text="(contin\\'ua)",
+full_width = FALSE)%>%
+column_spec(1,width = "4cm")
+```
+
+Para facilitar su interpretación, se representa el siguiente gráfico:
+
+```{r echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord7} Gráfico de barras FUTURO1-SISTEMAUTOM2",fig.pos="H"}
+
+ggplot(data = d7_[-(1:6),],
+       mapping = aes(x = factor(FUTURO1),y = Porcentaje*100,
+                     fill = factor(SISTEMAUTOM2))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Cambios en 10 años", y = "Porcentaje", 
+       fill = "Aumento del número de robots 
+       y sistemas automáticos") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
+```
+
+Para estas variables ordinales, se obtienen las medidas de asociación:
+
+```{r}
+tabla7_=table(datos$SISTEMAUTOM2,datos$FUTURO1)
+tabla7_=tabla7_[-1,-1]
+
+e7=KendallTauA(tabla7_, conf.level = 0.95)
+f7=KendallTauB(tabla7_, conf.level = 0.95)
+g7=StuartTauC(tabla7_, conf.level = 0.95)
+h7=GoodmanKruskalGamma(tabla7_, conf.level = 0.95)
+i7=SomersDelta(tabla7_, direction="column", conf.level = 0.95)
+j7=SomersDelta(tabla7_, direction="row", conf.level = 0.95)
+  
+k7=rbind.data.frame(e7,f7,g7,h7,i7,j7)
+rownames(k7)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{SISTEMAUTOM2}$ de Sommers","$d_{FUTURO1}$ de Sommers")
+colnames(k7)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(k7,caption ="Medidas de variables SISTEMAUTOM2 y FUTURO1", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
+
+Como todas las medidas son significativas, se puede concluir que existe asociación entre ambas variables.
+
+### ESCIDEOL - CLASESOCIAL
+
+Por último, se estudia si se produce asociación entre la puntuación que una persona da sobre si su ideología es más de izquierda o derecha (del 1 al 10) y la clase social a la que pertenece. Se obtiene el siguiente gráfico de barras:
+
+```{r}
+d8_ <- datos %>%
+group_by(ESCIDEOL,CLASESOCIAL) %>% # agrupa por variables
+summarise(Total=n()) %>% # resume calculando nuevas variables
+mutate(Porcentaje=round(Total/sum(Total),4))
+
+# kable(d8_,caption ="Variables ESCIDEL e CLASE SOCIAL",longtable=TRUE) %>%
+#   row_spec(0, bold=T, background='gray!6',align='c') %>%
+#   kable_styling(latex_options = c("repeat_header","condensed","hold_position"),
+# position = "center",
+# repeat_header_text="(contin\\'ua)",
+# full_width = FALSE)
+```
+
+```{r echo=FALSE,out.width='15cm',fig.align='center',fig.cap="\\label{fig:ord8} Gráfico de barras ESCIDEOL-CLASESOCIAL",fig.pos="H"}
+
+ggplot(data = d8_[-(1:6),],
+       mapping = aes(x = factor(ESCIDEOL),y = Porcentaje*100,
+                     fill = factor(CLASESOCIAL))) + 
+  geom_bar(position = 'dodge', colour="black", stat = 'identity') +
+  labs(x = "Escalón Ideológico", y = "Porcentaje", 
+       fill = "Clase Social") +
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5))
+```
+
+A través del gráfico y la tabla resumen se contempla, que si hubiera asociación, puede ser debido a que las personas de clase más baja se decantan más hacia ideologías de izquierdas mientras que las clase sociales más altas hacia ideologías más de derechas.
+
+Comprobamos si existe asociación a través de las distintas medidas:
+
+```{r}
+tabla8_=table(datos$ESCIDEOL,datos$CLASESOCIAL)
+tabla8_=tabla8_[,-1]
+
+e8=KendallTauA(tabla8_, conf.level = 0.95)
+f8=KendallTauB(tabla8_, conf.level = 0.95)
+g8=StuartTauC(tabla8_, conf.level = 0.95)
+h8=GoodmanKruskalGamma(tabla8_, conf.level = 0.95)
+i8=SomersDelta(tabla8_, direction="column", conf.level = 0.95)
+j8=SomersDelta(tabla8_, direction="row", conf.level = 0.95)
+  
+k8=rbind.data.frame(e8,f8,g8,h8,i8,j8)
+rownames(k8)=c("$\\tau_a$ de Kendall","$\\tau_b$ de Kendall",
+               "$\\tau_c$ de Stuart","$\\gamma$ de Goodman y Kruskal",
+               "$d_{ESCIDEOL}$ de Sommers","$d_{CLASESOCIAL}$ de Sommers")
+colnames(k8)=c("Estadístico","Límite Inferior IC","Límite Superior IC")
+
+kable(k8,caption ="Medidas de variables ESCIDEOL y CLASESOCIAL", 
+      row.names = T,escape = FALSE, digits = rep(4,3))%>%
+  kable_styling(latex_options = c("striped", "condensed","hold_position"),
+position = "center",
+full_width = T)
+```
+
+Afectivamente, todas las medidas de asociación indican que existe asociación entre ambas variables, aunque , en este caso, la asociación no es demasiado destacable.
+
+Desde un punto de vista general, a partir de todos los ejemplos mostrados, se observa que la medida $\tau_a$ es la menos significativa y la medida $\gamma$ de Goodman y Kruskal la que más.
+
+## Medidas de Asociación Nominal (dicotómica) - Ordinal
+
+Aquí va Cureton y S de Withfield (si la encuentro)
+
+```{r}
+library(irt)
+#cuidado hay que quitar los NS/NC
+biserial(xtfrm(datos$INESTADO), xtfrm(datos$ESCIDEOL), method="rank")
+```
